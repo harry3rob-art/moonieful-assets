@@ -1,19 +1,3 @@
-<style> down to the end of
-     BLOCK 6 (the closing panel).
-  2. Raw HTML element - BLOCK 7, the universal footer, pasted below it.
-  3. Page settings > custom FOOTER slot - the script block at the very
-     bottom (marked FOOTER SCRIPT). Do NOT leave it in the body block.
-
-  CALENDLY SETTING REQUIRED (Miki's action, see next_prompt):
-  Event type > Confirmation page > "Redirect to an external site" >
-  this page's URL, plus "Pass event details to your redirect page"
-  so the date chip and Google Calendar button render. Without the
-  setting the chip stays hidden and the rest of the page still works.
-
-  Systeme renders every raw-HTML block TWICE (desktop + mobile), so
-  the footer script uses querySelectorAll, never getElementById.
-  ============================================================ -->
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
