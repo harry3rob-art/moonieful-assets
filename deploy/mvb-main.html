@@ -1,0 +1,225 @@
+<style> down to the end of
+     BLOCK 6 (the closing panel).
+  2. Raw HTML element - BLOCK 7, the universal footer, pasted below it.
+  3. Page settings > custom FOOTER slot - the script block at the very
+     bottom (marked FOOTER SCRIPT). Do NOT leave it in the body block.
+
+  CALENDLY SETTING REQUIRED (Miki's action, see next_prompt):
+  Event type > Confirmation page > "Redirect to an external site" >
+  this page's URL, plus "Pass event details to your redirect page"
+  so the date chip and Google Calendar button render. Without the
+  setting the chip stays hidden and the rest of the page still works.
+
+  Systeme renders every raw-HTML block TWICE (desktop + mobile), so
+  the footer script uses querySelectorAll, never getElementById.
+  ============================================================ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+.mvb-hero{position:relative;overflow:hidden;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(ellipse at 20% 30%,#1a4f5c 0%,#0d2f38 45%,#1A2E35 100%);}
+.mvb-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:540px;}
+.mvb-hero-copy{padding:72px 48px 72px 56px;display:flex;flex-direction:column;justify-content:center;text-align:left;max-width:620px;justify-self:end;width:100%;box-sizing:border-box;}
+.mvb-hero-photo{position:relative;overflow:hidden;}
+.mvb-hero-photo img.mvb-shot{width:100%;height:100%;object-fit:cover;object-position:68% center;display:block;}
+.mvb-hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,47,56,0.92) 0%,rgba(13,47,56,0.30) 14%,rgba(13,47,56,0) 34%);pointer-events:none;}
+
+/* dynamic date chip - stays hidden unless Calendly passes event params */
+.mvb-when{display:none;margin:0 0 26px;max-width:460px;background:rgba(255,255,255,0.07);border:1px solid rgba(201,169,110,0.45);border-radius:8px;padding:18px 22px;}
+.mvb-when-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C9A96E;margin:0 0 6px;}
+.mvb-when-time{font-family:'Playfair Display',Georgia,serif;font-size:clamp(17px,3vw,22px);color:#fff;line-height:1.35;margin:0 0 14px;}
+.mvb-gcal{display:inline-block;background:#C9A96E;color:#1A2E35;font-family:'DM Sans',system-ui,sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;}
+
+.mvb-cover{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+.mvb-cover-item{flex:1 1 220px;background:#FFFFFF;border:1px solid rgba(26,98,105,0.14);border-radius:10px;padding:16px 18px;font-size:15px;font-weight:600;color:#1A2E35;line-height:1.5;}
+.mvb-cover-item span{display:block;font-size:13px;font-weight:400;color:#3A5A63;margin-top:4px;}
+
+.mvb-detail{display:flex;gap:14px;align-items:flex-start;flex:1 1 400px;}
+.mvb-detail-dot{width:8px;height:8px;border-radius:50%;background:#1A6269;flex-shrink:0;margin-top:8px;}
+
+@media (max-width:900px){
+  .mvb-hero-grid{grid-template-columns:1fr;min-height:0;}
+  .mvb-hero-photo{order:1;height:300px;}
+  .mvb-hero-photo img.mvb-shot{object-position:62% 22%;}
+  .mvb-hero-photo::after{background:linear-gradient(180deg,rgba(13,47,56,0) 45%,rgba(13,47,56,0.55) 100%);}
+  .mvb-hero-copy{order:2;padding:44px 24px 56px;text-align:center;max-width:none;justify-self:stretch;align-items:center;}
+  .mvb-when{margin-left:auto;margin-right:auto;text-align:center;}
+}
+</style>
+
+
+<!-- ===================== BLOCK 1 - HERO ===================== -->
+<div class="mvb-hero">
+  <div class="mvb-hero-grid">
+
+    <div class="mvb-hero-copy">
+      <div>
+        <div style="display:inline-block;background:rgba(210,245,241,0.15);border:1px solid rgba(210,245,241,0.3);color:#D2F5F1;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 18px;border-radius:40px;margin-bottom:20px;">
+          Your MoonieView is booked
+        </div>
+
+        <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,3.8vw,2.8rem);font-weight:700;color:#FFFFFF;line-height:1.16;margin:0 0 16px;">
+          You're booked! Your MoonieView is officially <em style="font-style:italic;color:#D2F5F1;">on the&nbsp;calendar.&nbsp;&#127769;&#10024;</em>
+        </h1>
+
+        <p style="font-size:18px;color:rgba(255,255,255,0.88);line-height:1.65;margin:0 0 28px;">
+          Miki has your session in front of her, and your confirmation email is on its way with your meeting link and your calendar invite.
+        </p>
+      </div>
+
+      <div class="mvb-when">
+        <p class="mvb-when-label">Your session</p>
+        <p class="mvb-when-time"></p>
+        <a class="mvb-gcal" href="#" target="_blank" rel="noopener">Add your session to Google Calendar</a>
+      </div>
+
+      <p style="font-size:14px;color:rgba(255,255,255,0.68);line-height:1.65;margin:0;max-width:520px;">
+        Your receipt is on its way to your inbox too. If anything gets in your way before then, email
+        <a href="mailto:miki@moonieful.com" style="color:#D2F5F1;text-decoration:underline;">miki@moonieful.com</a>
+        and Miki will sort it out.
+      </p>
+    </div>
+
+    <div class="mvb-hero-photo">
+      <img class="mvb-shot"
+           src="https://harry3rob-art.github.io/michelle-roberts-portfolio/img/miki.jpg"
+           alt="Miki Roberts at her desk, ready for a MoonieView session"
+           decoding="async" />
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ===================== BLOCK 2 - WHAT HAPPENS IN YOUR MOONIEVIEW ===================== -->
+<div style="background:#F0FBFA;padding:68px 32px;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;border-top:1px solid rgba(26,98,105,0.12);border-bottom:1px solid rgba(26,98,105,0.12);">
+  <div style="max-width:840px;margin:0 auto;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1A6269;font-weight:600;margin:0 0 10px;">What to expect</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,3vw,2.1rem);color:#1A6269;line-height:1.24;margin:0 0 20px;">
+      60 minutes, one-on-one with Miki
+    </h2>
+    <p style="font-size:17px;color:#3A5A63;line-height:1.7;margin:0 0 18px;">
+      Your MoonieView is a 60-minute brand clarity session, just you and Miki. She'll ask in-depth questions about your business, your process, your products or services, and how you're communicating your value right now.
+    </p>
+    <p style="font-size:17px;color:#3A5A63;line-height:1.7;margin:0 0 34px;">
+      Her goal is to diagnose exactly where Brand Fog is showing up in your business, and to define the clearest next path for you to take.
+    </p>
+
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1A6269;font-weight:600;margin:0 0 16px;">What you'll cover together</p>
+    <div class="mvb-cover">
+      <div class="mvb-cover-item">Your message<span>What you say, and what a stranger hears instead.</span></div>
+      <div class="mvb-cover-item">Your offer<span>What you're selling and how clearly it comes across.</span></div>
+      <div class="mvb-cover-item">Your page and customer experience<span>What it feels like to find you and decide.</span></div>
+      <div class="mvb-cover-item">Your visuals<span>Whether the way your brand looks matches what you charge.</span></div>
+      <div class="mvb-cover-item">Your positioning<span>Why someone would choose your business over another.</span></div>
+      <div class="mvb-cover-item">Where people are getting confused<span>The exact moments buyers hesitate or drop away.</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== BLOCK 3 - NOTHING TO PREPARE ===================== -->
+<div style="background:#FFFFFF;padding:64px 32px;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="max-width:640px;margin:0 auto;text-align:center;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1A6269;font-weight:600;margin:0 0 10px;">Before your session</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.4rem,2.8vw,1.9rem);color:#1A6269;line-height:1.25;margin:0 0 18px;">
+      There's nothing to prepare
+    </h2>
+    <p style="font-size:17px;color:#3A5A63;line-height:1.7;margin:0;">
+      No presentation, no documents, nothing to tidy up first. Come ready to talk openly and answer honestly, because the clearer your conversation is, the more specific your diagnosis will be.
+    </p>
+  </div>
+</div>
+
+
+<!-- ===================== BLOCK 4 - THE FOG LIFTER BLUEPRINT ===================== -->
+<div style="background:radial-gradient(ellipse at 50% 40%,#1a4f5c 0%,#0d2f38 45%,#1A2E35 100%);padding:72px 32px;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="max-width:760px;margin:0 auto;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(210,245,241,0.65);font-weight:600;margin:0 0 10px;">After your session</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,3vw,2.1rem);color:#FFFFFF;line-height:1.24;margin:0 0 20px;">
+      What you'll receive: your <em style="font-style:italic;color:#D2F5F1;">Fog Lifter Blueprint</em>
+    </h2>
+    <p style="font-size:17px;color:rgba(210,245,241,0.88);line-height:1.7;margin:0 0 18px;">
+      MoonieView is your session. Your Fog Lifter Blueprint is the written plan that follows it.
+    </p>
+    <p style="font-size:17px;color:rgba(210,245,241,0.88);line-height:1.7;margin:0 0 34px;">
+      Your Blueprint documents where your Brand Fog is living, names the one signal that needs your attention first, and gives you a clear direction to move in. You'll know what to fix and in what order before you touch a word of your message or a single visual.
+    </p>
+
+    <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(210,245,241,0.18);border-radius:12px;padding:32px 30px;">
+      <p style="font-size:16px;color:#D2F5F1;line-height:1.7;margin:0 0 20px;font-weight:600;">
+        Your Blueprint is built so that, over time, the right people:
+      </p>
+      <ul style="list-style:none;margin:0;padding:0;">
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">understand what you do faster</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">recognize why your business is different</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">feel more confident your offer is right for them</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">trust your business sooner</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">know what next step to take</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin:0;"><span style="color:#C9A96E;font-size:17px;line-height:1.6;">&#10003;</span><span style="font-size:16px;color:rgba(210,245,241,0.88);line-height:1.6;">have fewer questions before they decide</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== BLOCK 5 - SESSION DETAILS ===================== -->
+<div style="background:#FAF9F7;padding:68px 32px;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="max-width:840px;margin:0 auto;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1A6269;font-weight:600;margin:0 0 10px;">The practical part</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.4rem,2.8vw,1.9rem);color:#1A6269;line-height:1.25;margin:0 0 34px;">
+      Your session details
+    </h2>
+    <div style="display:flex;flex-wrap:wrap;gap:26px;">
+
+      <div class="mvb-detail">
+        <div class="mvb-detail-dot"></div>
+        <div>
+          <h3 style="font-size:15px;font-weight:700;color:#1A2E35;margin:0 0 6px;line-height:1.4;">Your session is recorded</h3>
+          <p style="font-size:15px;color:#3A5A63;line-height:1.7;margin:0;">Miki records every MoonieView for internal review and analysis, so nothing you say in your 60 minutes gets lost before your Blueprint is written.</p>
+        </div>
+      </div>
+
+      <div class="mvb-detail">
+        <div class="mvb-detail-dot"></div>
+        <div>
+          <h3 style="font-size:15px;font-weight:700;color:#1A2E35;margin:0 0 6px;line-height:1.4;">Calendly sends your reminders</h3>
+          <p style="font-size:15px;color:#3A5A63;line-height:1.7;margin:0;">Reminder emails arrive before your session, so the date stays where you can see it and nothing sneaks up on you.</p>
+        </div>
+      </div>
+
+      <div class="mvb-detail">
+        <div class="mvb-detail-dot"></div>
+        <div>
+          <h3 style="font-size:15px;font-weight:700;color:#1A2E35;margin:0 0 6px;line-height:1.4;">If you need to move your time</h3>
+          <p style="font-size:15px;color:#3A5A63;line-height:1.7;margin:0;">Use the reschedule link in your Calendly confirmation email, and give Miki at least 24 hours' notice where you can.</p>
+        </div>
+      </div>
+
+      <div class="mvb-detail">
+        <div class="mvb-detail-dot"></div>
+        <div>
+          <h3 style="font-size:15px;font-weight:700;color:#1A2E35;margin:0 0 6px;line-height:1.4;">If you need a hand with any of it</h3>
+          <p style="font-size:15px;color:#3A5A63;line-height:1.7;margin:0;">Email <a href="mailto:miki@moonieful.com" style="color:#1A6269;text-decoration:underline;">miki@moonieful.com</a> and Miki will help you cancel or reschedule.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== BLOCK 6 - CLOSING ===================== -->
+<div style="background:#F0FBFA;padding:68px 32px;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;border-top:1px solid rgba(26,98,105,0.12);">
+  <div style="max-width:640px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.4rem,2.8vw,1.9rem);color:#1A6269;line-height:1.25;margin:0 0 18px;">
+      Miki is looking forward to this
+    </h2>
+    <p style="font-size:17px;color:#3A5A63;line-height:1.7;margin:0 0 16px;">
+      She's excited to help you get clearer on your brand, and to show you what has been hard to spot from inside your own business.
+    </p>
+    <p style="font-size:17px;color:#3A5A63;line-height:1.7;margin:0;">
+      Your MoonieView gives you a clearer foundation to keep building on, one that holds up well past any single page or handful of&nbsp;words.&nbsp;&#127769;&#10024;
+    </p>
+  </div>
+</div>
