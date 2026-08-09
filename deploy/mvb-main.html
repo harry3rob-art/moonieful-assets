@@ -19,9 +19,9 @@
 
 .mvb-hero{position:relative;overflow:hidden;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(ellipse at 20% 30%,#1a4f5c 0%,#0d2f38 45%,#1A2E35 100%);}
 .mvb-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:540px;}
-.mvb-hero-copy{padding:72px 48px 72px 56px;display:flex;flex-direction:column;justify-content:center;text-align:left;max-width:620px;justify-self:end;width:100%;box-sizing:border-box;}
-.mvb-hero-photo{position:relative;overflow:hidden;}
-.mvb-hero-photo img.mvb-shot{width:100%;height:100%;object-fit:cover;object-position:68% center;display:block;}
+.mvb-hero-copy{padding:72px 48px 72px 56px;display:flex;flex-direction:column;justify-content:center;text-align:left;max-width:620px;justify-self:end;width:100%;box-sizing:border-box;min-width:0;}
+.mvb-hero-photo{position:relative;overflow:hidden;min-width:0;}
+.mvb-hero-photo img.mvb-shot{width:100%;max-width:100%;height:100%;object-fit:cover;object-position:68% center;display:block;}
 .mvb-hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,47,56,0.92) 0%,rgba(13,47,56,0.30) 14%,rgba(13,47,56,0) 34%);pointer-events:none;}
 
 /* dynamic date chip - stays hidden unless Calendly passes event params */
