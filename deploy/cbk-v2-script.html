@@ -1,0 +1,39 @@
+<script>
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var startRaw = params.get('event_start_time');
+    if (!startRaw) return;
+    var start = new Date(startRaw);
+    if (isNaN(start.getTime())) return;
+    var endRaw = params.get('event_end_time');
+    var end = endRaw ? new Date(endRaw) : new Date(start.getTime() + 15 * 60000);
+    if (isNaN(end.getTime())) end = new Date(start.getTime() + 15 * 60000);
+
+    // querySelectorAll + loops (not getElementById): Systeme renders each raw
+    // HTML block twice (desktop + mobile containers), so every element exists
+    // twice and both copies must be updated.
+    var timeEls = document.querySelectorAll('#cbk .when-time, .when-time');
+    var chips = document.querySelectorAll('#cbk .when-chip, .when-chip');
+    var gcals = document.querySelectorAll('#cbk .gcal-btn, .gcal-btn');
+    if (!timeEls.length || !chips.length || !gcals.length) return;
+
+    var dateOpts = { weekday: 'long', month: 'long', day: 'numeric' };
+    var timeOpts = { hour: 'numeric', minute: '2-digit' };
+    var whenText = start.toLocaleDateString(undefined, dateOpts) + ' at ' + start.toLocaleTimeString(undefined, timeOpts);
+
+    function gcalStamp(d) {
+      return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    }
+    var gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent('Fit call with Miki (Moonieful)')
+      + '&dates=' + gcalStamp(start) + '/' + gcalStamp(end)
+      + '&details=' + encodeURIComponent('Your meeting link is in your Calendly confirmation email.');
+
+    var i;
+    for (i = 0; i < timeEls.length; i++) { timeEls[i].textContent = whenText; }
+    for (i = 0; i < gcals.length; i++) { gcals[i].setAttribute('href', gcalUrl); }
+    for (i = 0; i < chips.length; i++) { chips[i].style.display = 'block'; }
+  } catch (e) { /* chip stays hidden */ }
+})();
+</script>
