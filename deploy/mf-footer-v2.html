@@ -1,0 +1,35 @@
+<!-- ============================================================
+     UNIVERSAL FOOTER v2 -- Moonieful
+     ------------------------------------------------------------
+     Created 2026-08-10 alongside moonieful-systeme-styles-v2.html.
+
+     WHAT CHANGED from universal-footer.html, and why:
+     1. Background was #1A6269, which the token file lists as RETIRED. Now #0E6B6B,
+        Miki's deep teal.
+     2. The fine print was rgba(210,245,241,0.5), which composites to roughly 2.6:1
+        against the old background and fails AA at 13px. It is now solid #BFE2E1,
+        measured 4.55:1 on #0E6B6B, which is the smallest lift that clears the 4.5
+        body minimum. Links are white at 6.30:1.
+     3. Font is Arimo rather than a bare sans-serif stack, matching the new type system.
+        Arial is the fallback because Arimo is metrically compatible with it.
+
+     Paste as its own Raw HTML element at the very bottom of the page, below the main
+     content block. Self-contained: every style is inline, so it does NOT depend on any
+     page CSS and survives Systeme's Text-block class stripping.
+
+     Maintenance:
+     - Update the copyright YEAR here once, then re-paste on each page.
+     - Terms:   https://clarity.moonieful.com/terms
+     - Privacy: https://moonieful.com/privacy-policy
+     ============================================================ -->
+<div style="padding:32px 24px;background:#0E6B6B;text-align:center;">
+  <p style="font-family:Arimo,Arial,Helvetica,sans-serif;font-size:13px;color:#BFE2E1;line-height:1.6;margin:0;">&copy; 2026 Moonieful Designs LLC. All rights reserved.</p>
+  <!-- color is set on the paragraph itself, not just its links. Without it the element
+       inherits the page's dark body colour onto the teal band, measuring 2.06:1, so any
+       bare text added between the links later would be effectively invisible. -->
+  <p style="font-family:Arimo,Arial,Helvetica,sans-serif;font-size:13px;margin:6px 0 0 0;color:#BFE2E1;">
+    <a href="https://clarity.moonieful.com/terms" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:0.18em;">Terms &amp; Conditions</a>
+    <span style="color:#BFE2E1;"> | </span>
+    <a href="https://moonieful.com/privacy-policy" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:0.18em;">Privacy Policy</a>
+  </p>
+</div>
