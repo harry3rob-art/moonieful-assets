@@ -1,0 +1,338 @@
+<!-- MOONIEFUL SYSTEME -- SHARED STYLESHEET v2 (LIGHT-FIRST)
+     Created 2026-08-10. Replaces moonieful-systeme-styles.html, which is now stale:
+     it carried the retired dark palette (--bfc-deep:#091e24, despite a comment claiming
+     otherwise), Playfair Display and DM Sans.
+
+     WHY THIS EXISTS
+     The new homepage (claude-workspace/projects/moonieful-website-v2/index.html) settled the
+     open question in design-tokens.md section 3. Miki's six contain no dark background colour,
+     and the homepage answered that by going WHITE-first with teal bands as the contrast device
+     rather than near-black sections. Harry, 2026-08-10: match the rest of the funnel to it.
+     Every token below is copied from that homepage, not re-derived, so the two cannot drift.
+
+     WHERE IT GOES ON A REAL PAGE
+     Either at the TOP of the FIRST Raw HTML block, or in Page settings > Edit header code.
+     Both work (confirmed on /checkout, 2026-07-19). When editing a live page, check BOTH
+     locations before concluding the stylesheet is missing.
+
+     THREE SYSTEME RULES THAT BITE
+     1. Systeme renders each raw-HTML block TWICE, desktop and mobile. Any script must use
+        querySelectorAll, never getElementById.
+     2. Systeme's parent wrappers centre text. The alignment block below sets Miki's direction
+        deliberately rather than fighting it.
+     3. Each CLICK on a sidebar element appends a block, so a double-click appends two. The
+        editor API shows only SAVED state, so reload before saving to discard accidents.
+
+     CONTRAST RULES ARE MEASURED, NOT PREFERENCES. Do not improvise around them.
+     - Gold #D4AF37 is NEVER a word. 2.10 on white, 1.87 on cream. Divider, border, icon only.
+     - #1583B3 is large-text only (4.26 on white, 24px+) and NEVER on teal, where it hits 1.48.
+     - Small text on a teal band uses --on-teal #BFE2E1 (4.55), never --aqua-light (3.99, fails).
+     - Anything inside .band--teal needing its own colour MUST use a compound selector
+       (.band--teal .your-class). ".band--teal p" is (0,1,1) and beats any single-class rule.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root{
+  /* Miki's six, from her Character Sheet */
+  --mf-teal-deep:#0E6B6B;   /* headings context, solid buttons, links, eyebrows, focus ring */
+  --mf-accent:#1583B3;      /* large text 24px+, icons, borders only */
+  --mf-aqua-light:#A6D7D5;  /* decoration only, fails as text everywhere */
+  --mf-cream:#F6F1E7;       /* kept as an occasional panel, no longer the page */
+  --mf-aqua-pale:#E7F3F1;   /* alternate section background */
+  --mf-gold:#D4AF37;        /* decorative only, never a word */
+  --mf-white:#FFFFFF;
+
+  /* Page. White per Miki 2026-08-09. Cream measured at hue 40deg, which made it a
+     desaturated tint of the gold accent rather than a neutral, fighting the six cool colours. */
+  --mf-page:#FFFFFF;
+
+  /* Derived neutrals, the same category as --on-teal. Not Miki's brand colours. */
+  --mf-ink:#243434;         /* body text, 13.00 on white */
+  --mf-ink-soft:#3A4A4A;    /* secondary text, 9.30 on white */
+  --mf-on-teal:#BFE2E1;     /* small text on a teal band, 4.55. Aqua-light mixed 28% to white. */
+
+  --mf-line:rgba(14,107,107,.22);
+  --mf-radius:14px;
+  --mf-measure:65ch;
+  --mf-wrap:1120px;
+
+  /* Aura, not drop shadow. Tight contact shadow grounds the card, wide low-alpha halo
+     tinted to teal rather than grey. Grey reads as lift; a tinted halo reads as glow. */
+  --mf-shadow:0 1px 2px rgba(36,52,52,.06), 0 4px 40px rgba(14,107,107,.13);
+  --mf-shadow-lift:0 2px 6px rgba(36,52,52,.07), 0 8px 56px rgba(14,107,107,.20);
+}
+
+/* Systeme sets its own body background. !important is required here and only here.
+
+   overflow-x is NOT cosmetic. The full-bleed .band below uses calc(50% - 50vw), and
+   100vw counts the vertical scrollbar while the content box does not. On a 1440px
+   window with a 15px scrollbar the band renders 1440px inside a 1425px viewport and
+   pushes a horizontal scrollbar onto every page. Measured, not theorised.
+   `clip` rather than `hidden` because hidden makes body a scroll container, which
+   would break any future sticky positioning. hidden is the fallback for older browsers. */
+html{overflow-x:hidden;overflow-x:clip}
+body{
+  overflow-x:hidden;
+  overflow-x:clip;
+  background:var(--mf-page) !important;
+  color:var(--mf-ink);
+  font-family:Arimo,Arial,Helvetica,sans-serif;
+  font-size:18px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.mf *,.mf *::before,.mf *::after{box-sizing:border-box}
+
+/* -- Type ------------------------------------------------------------------
+   Headings sit on --ink, not --teal-deep. Measured, the two are only seven points
+   apart on lightness, so using both as text colours gives the page no hierarchy.
+   Teal-deep is reserved for action and labels: buttons, links, eyebrows, focus rings. */
+.mf h1,.mf h2,.mf h3,.mf h4{
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;
+  font-weight:700;
+  color:var(--mf-ink);
+  line-height:1.18;
+  margin:0 0 .6em;
+  text-wrap:balance;
+}
+.mf h1{font-size:clamp(1.9rem,4.6vw,3rem)}
+.mf h2{font-size:clamp(1.5rem,3.2vw,2.2rem)}
+.mf h3{font-size:clamp(1.05rem,1.7vw,1.28rem)}
+.mf p{margin:0 auto 1.1em;max-width:var(--mf-measure)}
+.mf strong{font-weight:700;color:var(--mf-ink)}
+.mf a{color:var(--mf-teal-deep);text-underline-offset:.18em}
+.mf a:hover{text-decoration-thickness:2px}
+
+/* Eyebrow. Was gold; gold measures 1.87 on white and fails as text at any size. */
+.mf .mf-eyebrow{
+  display:block;
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;
+  font-size:16px;
+  color:var(--mf-teal-deep);
+  letter-spacing:.03em;
+  margin:0 0 12px;
+}
+.mf .mf-lede{font-size:1.12rem;color:var(--mf-ink-soft)}
+.mf .mf-note{font-size:.94rem;color:var(--mf-ink-soft)}
+
+/* -- Alignment, Miki's direction 2026-08-09 --------------------------------
+   Every section reads centred except the hero and About Miki. Set once with two
+   opt-outs, never a text-align on thirty component rules. p carries a measure cap,
+   so a centred paragraph narrower than its container needs auto side margins or it
+   still sits hard left. */
+.mf{text-align:center}
+.mf .mf-hero-inner,.mf .mf-about{text-align:left}
+.mf .mf-hero-inner p,.mf .mf-about p{margin-left:0;margin-right:0}
+
+/* Bullets are ALWAYS left justified, including inside a centred card (Harry's rule).
+   The card heading and prose centre; the list underneath does not. Never "fix" a ragged
+   centred list by deleting its markers. */
+.mf ul,.mf ol{text-align:left;max-width:var(--mf-measure);margin:0 auto 1.1em;padding-left:1.3em}
+.mf li{margin:0 0 .55em}
+.mf li::marker{color:var(--mf-teal-deep)}
+
+/* -- Shell -----------------------------------------------------------------
+   Systeme pages are narrower than the homepage: a wide headline over a 600-700px
+   reading column, per the layout standard. */
+.mf{max-width:var(--mf-wrap);margin:0 auto;padding:56px 24px 80px;position:relative}
+.mf-section{padding-top:52px;margin-top:52px}
+.mf-narrow{max-width:700px;margin-inline:auto}
+
+/* -- .secbreak, the accent divider -----------------------------------------
+   Gold crescent and two sparkles between two tapering rules, drawn from the icon row
+   on Miki's Character Sheet. Inline SVG data URI, so it costs no request.
+   Legitimate gold use: a rule, not a word. */
+.mf .mf-secbreak{
+  border:0;height:22px;margin:0 auto 44px;width:min(420px,80%);
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='22' viewBox='0 0 60 22'><path d='M32 4a7 7 0 1 0 0 14 8.6 8.6 0 0 1 0-14z' fill='%23D4AF37'/><path d='M17 8l1.1 2.6L20.7 12l-2.6 1.1L17 15.7l-1.1-2.6L13.3 12l2.6-1.1z' fill='%23D4AF37'/><path d='M45 9l.8 1.9 1.9.8-1.9.8L45 14.4l-.8-1.9-1.9-.8 1.9-.8z' fill='%23D4AF37'/></svg>") center/60px 22px no-repeat,
+    linear-gradient(90deg,transparent,rgba(212,175,55,.55) 30%,transparent 42%),
+    linear-gradient(90deg,transparent 58%,rgba(212,175,55,.55) 70%,transparent);
+}
+/* On teal, run the gold at .8 rather than .55; at .55 it sits too close to #0E6B6B
+   in value to register at all. */
+.mf .band--teal .mf-secbreak{
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='22' viewBox='0 0 60 22'><path d='M32 4a7 7 0 1 0 0 14 8.6 8.6 0 0 1 0-14z' fill='%23D4AF37'/><path d='M17 8l1.1 2.6L20.7 12l-2.6 1.1L17 15.7l-1.1-2.6L13.3 12l2.6-1.1z' fill='%23D4AF37'/><path d='M45 9l.8 1.9 1.9.8-1.9.8L45 14.4l-.8-1.9-1.9-.8 1.9-.8z' fill='%23D4AF37'/></svg>") center/60px 22px no-repeat,
+    linear-gradient(90deg,transparent,rgba(212,175,55,.8) 30%,transparent 42%),
+    linear-gradient(90deg,transparent 58%,rgba(212,175,55,.8) 70%,transparent);
+}
+
+/* -- Bands -----------------------------------------------------------------
+   Full-bleed inside a centred wrapper. The teal band is the contrast device that
+   replaces the retired near-black sections. */
+.mf .band{
+  margin:64px calc(50% - 50vw);
+  padding:56px calc(50vw - 50% + 24px);
+}
+.mf .band--pale{background:var(--mf-aqua-pale)}
+.mf .band--cream{background:var(--mf-cream)}
+.mf .band--teal{background:var(--mf-teal-deep);color:var(--mf-white)}
+
+/* EVERY rule below is compound on purpose. ".band--teal p" is (0,1,1) and silently
+   beats any single-class rule, which is how a near-white label ended up on a pale
+   aqua pill at 1.51 on moonieful.com. */
+.mf .band--teal h1,.mf .band--teal h2,.mf .band--teal h3{color:var(--mf-white)}
+.mf .band--teal p{color:var(--mf-on-teal)}
+.mf .band--teal .mf-eyebrow{color:var(--mf-on-teal)}
+.mf .band--teal .mf-note{color:var(--mf-on-teal)}
+.mf .band--teal li{color:var(--mf-on-teal)}
+.mf .band--teal li::marker{color:var(--mf-aqua-light)}
+.mf .band--teal a{color:var(--mf-white)}
+.mf .band--teal .mf-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}
+.mf .band--teal .mf-card p{color:var(--mf-on-teal)}
+
+/* -- Buttons ---------------------------------------------------------------
+   44px minimum target, per the accessibility pass on the homepage. */
+.mf .mf-btn{
+  display:inline-block;
+  background:var(--mf-teal-deep);
+  color:var(--mf-white);
+  font-family:Arimo,Arial,sans-serif;
+  font-weight:700;
+  font-size:1.02rem;
+  line-height:1.3;
+  text-decoration:none;
+  padding:16px 30px;
+  min-height:44px;
+  border-radius:999px;
+  border:2px solid var(--mf-teal-deep);
+  box-shadow:var(--mf-shadow);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.mf .mf-btn:hover{transform:translateY(-1px);box-shadow:var(--mf-shadow-lift)}
+.mf .mf-btn--ghost{background:transparent;color:var(--mf-teal-deep);box-shadow:none}
+/* On teal, the solid teal button would vanish, so it inverts. */
+.mf .band--teal .mf-btn{background:var(--mf-white);color:var(--mf-teal-deep);border-color:var(--mf-white)}
+.mf .band--teal .mf-btn--ghost{background:transparent;color:var(--mf-white);border-color:var(--mf-white)}
+.mf a:focus-visible,.mf button:focus-visible{
+  outline:3px solid var(--mf-teal-deep);outline-offset:3px;border-radius:4px;
+}
+.mf .band--teal a:focus-visible{outline-color:var(--mf-white)}
+
+/* -- Cards -----------------------------------------------------------------
+   Card surfaces match the page now that it is white, so the edge carries the
+   separation. Border and shadow are a step stronger than the cream build was. */
+.mf .mf-card{
+  background:var(--mf-white);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  box-shadow:var(--mf-shadow);
+  padding:28px 26px;
+  text-align:center;
+}
+.mf .mf-card h3{margin-bottom:.45em}
+.mf .mf-card p:last-child{margin-bottom:0}
+.mf .mf-grid{display:grid;gap:22px;margin:0 auto;max-width:var(--mf-wrap)}
+@media (min-width:760px){
+  .mf .mf-grid--2{grid-template-columns:repeat(2,1fr)}
+  .mf .mf-grid--3{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Definition box, for naming Brand Fog or the Blueprint */
+.mf .mf-define{
+  background:var(--mf-aqua-pale);
+  border-left:4px solid var(--mf-gold);
+  border-radius:var(--mf-radius);
+  padding:24px 26px;
+  max-width:760px;margin:0 auto 28px;
+}
+
+/* Signal chips */
+.mf .mf-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0;margin:0 auto 24px;list-style:none;max-width:760px}
+.mf .mf-chip{
+  background:var(--mf-aqua-pale);
+  color:var(--mf-teal-deep);
+  border:1px solid var(--mf-line);
+  border-radius:999px;
+  font-size:.94rem;font-weight:700;
+  padding:8px 16px;
+}
+.mf .band--teal .mf-chip{background:rgba(255,255,255,.12);color:var(--mf-white);border-color:rgba(255,255,255,.28)}
+
+/* Price block */
+.mf .mf-price{font-family:'Shantell Sans','Trebuchet MS',sans-serif;font-weight:700;font-size:clamp(2.1rem,5vw,3rem);color:var(--mf-ink);line-height:1.05;margin:0 0 .2em}
+.mf .mf-price-qual{font-size:1rem;color:var(--mf-ink-soft);max-width:52ch;margin:0 auto 1.2em}
+
+/* Testimonial */
+.mf .mf-quote{
+  background:var(--mf-white);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  box-shadow:var(--mf-shadow);
+  padding:28px 26px;max-width:720px;margin:0 auto 22px;
+}
+.mf .mf-quote blockquote{margin:0 0 14px;font-size:1.06rem}
+.mf .mf-quote cite{font-style:normal;font-weight:700;color:var(--mf-teal-deep);font-size:.95rem}
+
+/* Guarantee */
+.mf .mf-guarantee{
+  background:var(--mf-cream);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  padding:28px 26px;max-width:760px;margin:0 auto;
+}
+
+/* FAQ. Native <details> so it survives JavaScript being off. */
+.mf .mf-faq{max-width:760px;margin:0 auto;text-align:left}
+.mf .mf-faq details{border-bottom:1px solid var(--mf-line);padding:4px 0}
+.mf .mf-faq summary{
+  cursor:pointer;list-style:none;
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;font-weight:700;
+  color:var(--mf-ink);font-size:1.05rem;
+  padding:16px 34px 16px 0;min-height:44px;position:relative;
+}
+.mf .mf-faq summary::-webkit-details-marker{display:none}
+.mf .mf-faq summary::after{content:'+';position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--mf-teal-deep);font-size:1.4rem;line-height:1}
+.mf .mf-faq details[open] summary::after{content:'\2013'}
+.mf .mf-faq details p{margin-left:0;margin-right:0;padding-bottom:14px}
+
+/* Images */
+.mf img{max-width:100%;height:auto;display:block}
+.mf .mf-figure{border-radius:var(--mf-radius);overflow:hidden;box-shadow:var(--mf-shadow);margin:0 auto 24px;max-width:760px}
+
+/* -- Hero split ------------------------------------------------------------
+   Confirmation copy one side, video the other, so BOTH sit in the fold. Harry,
+   2026-08-10: the confirmation belongs above the fold, and left justification makes
+   sense once the two can sit side by side. That is the whole rule. A centred hero is
+   correct when it stands alone; the moment it shares the fold with a second element,
+   centring makes the pair read as two unrelated things.
+
+   On narrow screens the grid collapses to one column in DOM order, so the confirmation
+   still comes first and the video follows it. */
+.mf .mf-herosplit{display:grid;gap:28px;align-items:center;max-width:var(--mf-wrap);margin:0 auto}
+.mf .mf-herosplit__copy{text-align:left}
+.mf .mf-herosplit__copy p,.mf .mf-herosplit__copy ul{margin-left:0;margin-right:0}
+.mf .mf-herosplit__media{text-align:left}
+.mf .mf-herosplit__media p{margin-left:0;margin-right:0}
+@media (min-width:880px){
+  .mf .mf-herosplit{grid-template-columns:1.02fr 1fr;gap:48px}
+}
+
+/* Two-column split. Copy on a solid brand panel one side, photograph the other, and
+   text NEVER overlaid on the photo, so legibility holds whatever the image does.
+   Narrow screens stack photo-then-copy, so the image reads as a banner rather than
+   shrinking back into an orphan product shot. */
+.mf .mf-split{display:grid;gap:0;border-radius:var(--mf-radius);overflow:hidden;box-shadow:var(--mf-shadow);margin:0 auto 32px;max-width:var(--mf-wrap)}
+.mf .mf-split__copy{background:var(--mf-teal-deep);color:var(--mf-white);padding:40px 32px;text-align:left;order:2}
+.mf .mf-split__copy h1,.mf .mf-split__copy h2{color:var(--mf-white)}
+.mf .mf-split__copy p{color:var(--mf-on-teal);margin-left:0;margin-right:0}
+.mf .mf-split__img{order:1}
+.mf .mf-split__img img{width:100%;height:100%;object-fit:cover}
+@media (min-width:860px){
+  .mf .mf-split{grid-template-columns:1fr 1fr}
+  .mf .mf-split__copy{order:1;padding:56px 44px}
+  .mf .mf-split__img{order:2}
+}
+
+@media (max-width:600px){
+  .mf{padding:40px 20px 64px}
+  .mf-section{padding-top:40px;margin-top:40px}
+  .mf .band{padding:44px calc(50vw - 50% + 20px);margin:48px calc(50% - 50vw)}
+  .mf .mf-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .mf *,.mf *::before,.mf *::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
