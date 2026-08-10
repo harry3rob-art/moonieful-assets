@@ -1,0 +1,125 @@
+<!-- ============================================================
+     MOONIEVIEW -- FIT CALL BOOKED PAGE v2 (post-Calendly redirect)
+     Live at: clarity.moonieful.com/call-booked
+     ------------------------------------------------------------
+     REPAINT, 2026-08-10. One deliberate removal, noted at the hero. Every line of visible copy is carried over verbatim
+     from the live page. Nothing was rewritten, added or cut. What changed is the
+     visual system, brought into line with the new homepage
+     (claude-workspace/projects/moonieful-website-v2/index.html):
+
+       - White page instead of the near-black teal gradient
+       - Miki's six brand colours instead of the retired #091e24 / #069494 family
+       - Shantell Sans headings and Arimo body instead of DM Serif Display and DM Sans
+       - The teal band is now the contrast device, replacing dark sections
+       - Universal footer v2, which fixes fine print that measured 2.76:1 and failed AA
+
+     PRESERVED EXACTLY, do not refactor:
+       - The footer script, verbatim. It reads Calendly's event_start_time, fills the
+         date chip and builds the Google Calendar link, and stays hidden when the params
+         are absent so the page is safe without them.
+       - The class hooks the script targets: .when-time, .when-chip, .gcal-btn
+       - The three testimonial images and the Instagram link
+
+     PASTE ORDER IN SYSTEME
+       1. Stylesheet: moonieful-systeme-styles-v2.html, into Page settings > Edit header
+          code, OR at the top of the first Raw HTML block.
+       2. This file, as the main Raw HTML block.
+       3. universal-footer-v2.html, as its own Raw HTML block at the very bottom.
+       4. The final script block in this file goes in the page custom-footer slot.
+          (Deliberately not spelling that tag out here: a build-note comment containing
+          the literal tag is what let a splitter slice from the wrong offset once before
+          and ship a block that opened mid-comment. Keep tag names out of comments.)
+
+     Systeme renders every raw-HTML block TWICE, desktop and mobile, so the script
+     uses querySelectorAll and loops over every match. Never getElementById here.
+     ============================================================ -->
+
+<div class="mf" id="cbk">
+
+  <!-- -- Hero -------------------------------------------------
+       Centred and standalone, per Harry 2026-08-10. The VSL that used to sit on this
+       page has been REMOVED, not moved: this confirms a FREE 15-minute call, and a free
+       call does not need a lot. The side-by-side hero built for this page now lives on
+       /moonieview-booked, where a paid $650 booking earns the extra weight.
+
+       Centring is correct precisely because the confirmation now stands alone. The
+       .mf-herosplit rule in the stylesheet carries the other half of that rule: the
+       moment a hero shares the fold with a second element, it goes left. -->
+  <div class="mf-narrow">
+    <span class="mf-eyebrow">Your fit call is booked</span>
+    <h1>You just did the thing most owners put off for months.</h1>
+    <p class="mf-lede">You asked for an outside read instead of guessing again. Your confirmation email is on the way with your meeting link and calendar invite, and Miki&rsquo;s part starts before you ever join the call.</p>
+
+    <!-- Date chip. Hidden until the footer script finds the Calendly params. -->
+    <div class="when-chip" style="display:none;margin:22px auto 18px;">
+      <div class="mf-card" style="text-align:left;padding:18px 20px;display:inline-block;">
+        <span class="mf-eyebrow" style="margin-bottom:4px;">Your call</span>
+        <strong class="when-time" style="font-size:1.1rem;"></strong>
+      </div>
+    </div>
+
+    <p style="margin-top:8px;">
+      <a class="mf-btn gcal-btn" href="#" target="_blank" rel="noopener">Add your call to Google Calendar</a>
+    </p>
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- -- What happens next ---------------------------------- -->
+  <div class="mf-section">
+    <h2>What happens between now and your call</h2>
+    <div class="mf-grid mf-grid--3" style="margin-top:34px;">
+
+      <div class="mf-card">
+        <span class="mf-eyebrow">1</span>
+        <h3>Miki reads your page first</h3>
+        <p>Before the call starts, Miki has already looked at your website the way a stranger would, so your 15 minutes go to answers instead of background questions.</p>
+      </div>
+
+      <div class="mf-card">
+        <span class="mf-eyebrow">2</span>
+        <h3>Reply with your one question</h3>
+        <p>Reply to your confirmation email with the one thing you most want a clear answer on. Your pricing page, the line at the top of your homepage, why enquiries went quiet. One sentence is plenty, and your question gets answered first on the call.</p>
+      </div>
+
+      <div class="mf-card">
+        <span class="mf-eyebrow">3</span>
+        <h3>Come as you are</h3>
+        <p>There&rsquo;s nothing to prepare and nothing to tidy up before we talk. The fog is the point, and Miki can only clear what she can see.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- -- Instagram ------------------------------------------ -->
+  <div class="mf-section">
+    <h2>Put a face to the voice on your call</h2>
+    <p>Miki shares brand teardowns and fixes on Instagram. Following along before your call is the fastest way to see how she thinks about brands like yours.</p>
+    <p style="margin-top:22px;">
+      <a class="mf-btn mf-btn--ghost" href="https://instagram.com/moonieful" target="_blank" rel="noopener">Follow Miki on Instagram</a>
+    </p>
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- -- Proof ---------------------------------------------- -->
+  <div class="mf-section">
+    <h2>Owners who started with one conversation</h2>
+    <div class="mf-grid mf-grid--3" style="margin-top:30px;">
+      <div class="mf-figure" style="margin:0;"><img loading="lazy" width="600" height="400" src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/01-suzi-strickland.png" alt="Five-star review from Suzi Strickland"></div>
+      <div class="mf-figure" style="margin:0;"><img loading="lazy" width="600" height="400" src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/05-christine-smith.png" alt="Five-star review from Christine Smith"></div>
+      <div class="mf-figure" style="margin:0;"><img loading="lazy" width="600" height="400" src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/07-allan-babas.png" alt="Five-star review from Allan Babas"></div>
+    </div>
+  </div>
+
+  <!-- -- Reschedule note ------------------------------------ -->
+  <div class="mf-section">
+    <p class="mf-note">If your time stops working, use the reschedule link in your confirmation email rather than missing the call. Life happens, and rebooking takes one click.</p>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE CUSTOM-FOOTER SLOT -- paste this block there, not inline.
+     Carried over verbatim from v1. Do not rewrite.
+     ============================================================ -->
