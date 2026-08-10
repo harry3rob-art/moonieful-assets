@@ -1,6 +1,6 @@
-<!-- MOONIEFUL SYSTEME -- SHARED STYLESHEET v2 (LIGHT-FIRST)
+<!-- MOONIEFUL SYSTEME - SHARED STYLESHEET v2 (LIGHT-FIRST)
      Created 2026-08-10. Replaces moonieful-systeme-styles.html, which is now stale:
-     it carried the retired dark palette (--bfc-deep:#091e24, despite a comment claiming
+     it carried the retired dark palette (-bfc-deep:#091e24, despite a comment claiming
      otherwise), Playfair Display and DM Sans.
 
      WHY THIS EXISTS
@@ -26,9 +26,9 @@
      CONTRAST RULES ARE MEASURED, NOT PREFERENCES. Do not improvise around them.
      - Gold #D4AF37 is NEVER a word. 2.10 on white, 1.87 on cream. Divider, border, icon only.
      - #1583B3 is large-text only (4.26 on white, 24px+) and NEVER on teal, where it hits 1.48.
-     - Small text on a teal band uses --on-teal #BFE2E1 (4.55), never --aqua-light (3.99, fails).
-     - Anything inside .band--teal needing its own colour MUST use a compound selector
-       (.band--teal .your-class). ".band--teal p" is (0,1,1) and beats any single-class rule.
+     - Small text on a teal band uses -on-teal #BFE2E1 (4.55), never -aqua-light (3.99, fails).
+     - Anything inside .band-teal needing its own colour MUST use a compound selector
+       (.band-teal .your-class). ".band-teal p" is (0,1,1) and beats any single-class rule.
 -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
@@ -84,7 +84,7 @@ body{
 }
 .mf *,.mf *::before,.mf *::after{box-sizing:border-box}
 
-/* -- Type ------------------------------------------------------------------
+/* - Type -
    Headings sit on --ink, not --teal-deep. Measured, the two are only seven points
    apart on lightness, so using both as text colours gives the page no hierarchy.
    Teal-deep is reserved for action and labels: buttons, links, eyebrows, focus rings. */
@@ -116,7 +116,7 @@ body{
 .mf .mf-lede{font-size:1.12rem;color:var(--mf-ink-soft)}
 .mf .mf-note{font-size:.94rem;color:var(--mf-ink-soft)}
 
-/* -- Alignment, Miki's direction 2026-08-09 --------------------------------
+/* - Alignment, Miki's direction 2026-08-09 -
    Every section reads centred except the hero and About Miki. Set once with two
    opt-outs, never a text-align on thirty component rules. p carries a measure cap,
    so a centred paragraph narrower than its container needs auto side margins or it
@@ -132,14 +132,14 @@ body{
 .mf li{margin:0 0 .55em}
 .mf li::marker{color:var(--mf-teal-deep)}
 
-/* -- Shell -----------------------------------------------------------------
+/* - Shell -
    Systeme pages are narrower than the homepage: a wide headline over a 600-700px
    reading column, per the layout standard. */
 .mf{max-width:var(--mf-wrap);margin:0 auto;padding:56px 24px 80px;position:relative}
 .mf-section{padding-top:52px;margin-top:52px}
 .mf-narrow{max-width:700px;margin-inline:auto}
 
-/* -- .secbreak, the accent divider -----------------------------------------
+/* - .secbreak, the accent divider -
    Gold crescent and two sparkles between two tapering rules, drawn from the icon row
    on Miki's Character Sheet. Inline SVG data URI, so it costs no request.
    Legitimate gold use: a rule, not a word. */
@@ -159,7 +159,7 @@ body{
     linear-gradient(90deg,transparent 58%,rgba(212,175,55,.8) 70%,transparent);
 }
 
-/* -- Bands -----------------------------------------------------------------
+/* - Bands -
    Full-bleed inside a centred wrapper. The teal band is the contrast device that
    replaces the retired near-black sections. */
 .mf .band{
@@ -183,7 +183,7 @@ body{
 .mf .band--teal .mf-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}
 .mf .band--teal .mf-card p{color:var(--mf-on-teal)}
 
-/* -- Buttons ---------------------------------------------------------------
+/* - Buttons -
    44px minimum target, per the accessibility pass on the homepage. */
 .mf .mf-btn{
   display:inline-block;
@@ -211,7 +211,7 @@ body{
 }
 .mf .band--teal a:focus-visible{outline-color:var(--mf-white)}
 
-/* -- Cards -----------------------------------------------------------------
+/* - Cards -
    Card surfaces match the page now that it is white, so the edge carries the
    separation. Border and shadow are a step stronger than the cream build was. */
 .mf .mf-card{
@@ -292,7 +292,7 @@ body{
 .mf img{max-width:100%;height:auto;display:block}
 .mf .mf-figure{border-radius:var(--mf-radius);overflow:hidden;box-shadow:var(--mf-shadow);margin:0 auto 24px;max-width:760px}
 
-/* -- Hero split ------------------------------------------------------------
+/* - Hero split -
    Confirmation copy one side, video the other, so BOTH sit in the fold. Harry,
    2026-08-10: the confirmation belongs above the fold, and left justification makes
    sense once the two can sit side by side. That is the whole rule. A centred hero is
