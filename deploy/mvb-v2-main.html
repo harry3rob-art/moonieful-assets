@@ -1,0 +1,155 @@
+<!-- ============================================================
+     MOONIEVIEW BOOKED -- PAID $650 CONFIRMATION v2
+     Live at: clarity.moonieful.com/moonieview-booked  (page 43438848, step 25028188)
+     ------------------------------------------------------------
+     REPAINT, 2026-08-10. Every line of visible copy is carried over verbatim from the
+     live page, including Miki's two moon-and-sparkles emoji pairs. Nothing rewritten.
+     What changed is the visual system, matched to the new homepage:
+
+       - White page instead of near-black teal, and Miki's six brand colours
+       - Shantell Sans headings, Arimo body
+       - Teal band as the contrast device, replacing dark sections
+       - Side-by-side hero, per Harry 2026-08-10: the confirmation and Miki's portrait
+         share the fold, so the copy goes left. A paid $650 booking earns that weight.
+         The free fit-call page deliberately does NOT get it.
+
+     PRESERVED EXACTLY, do not refactor:
+       - The final script block, verbatim, including its 60-minute default duration
+       - Its class hooks: .mvb-when, .mvb-when-time, .mvb-gcal
+       - Miki's portrait URL and both miki@moonieful.com contact lines
+
+     PASTE ORDER: stylesheet (moonieful-systeme-styles-v2.html) into header code or the
+     top of the first block, this file as the main Raw HTML block, universal-footer-v2.html
+     as its own block at the bottom, and the final script into the page custom-footer slot.
+
+     Systeme renders every raw-HTML block TWICE, so the script uses querySelectorAll.
+     ============================================================ -->
+
+<div class="mf" id="mvb">
+
+  <!-- -- Hero: confirmation left, Miki right, both in the fold -- -->
+  <div class="mf-herosplit">
+
+    <div class="mf-herosplit__copy">
+      <span class="mf-eyebrow">Your MoonieView is booked</span>
+      <h1>You&rsquo;re booked! Your MoonieView is officially on the calendar. &#127769;&#10024;</h1>
+      <p class="mf-lede">Miki has your session in front of her, and your confirmation email is on its way with your meeting link and your calendar invite.</p>
+
+      <!-- Date chip. Hidden until the script finds Calendly's params, which is what made
+           it safe to publish this page before the redirect existed. -->
+      <div class="mvb-when" style="display:none;margin:22px 0 18px;">
+        <div class="mf-card" style="text-align:left;padding:18px 20px;display:inline-block;">
+          <span class="mf-eyebrow" style="margin-bottom:4px;">Your session</span>
+          <strong class="mvb-when-time" style="font-size:1.1rem;"></strong>
+        </div>
+      </div>
+
+      <p style="margin-top:8px;">
+        <a class="mf-btn mvb-gcal" href="#" target="_blank" rel="noopener">Add your session to Google Calendar</a>
+      </p>
+
+      <p class="mf-note" style="margin-top:18px;">Your receipt is on its way to your inbox too. If anything gets in your way before then, email <a href="mailto:miki@moonieful.com">miki@moonieful.com</a> and Miki will sort it out.</p>
+    </div>
+
+    <div class="mf-herosplit__media">
+      <!-- Video rather than Miki's portrait, per Harry 2026-08-10. This is the VSL that
+           used to sit mid-page on the free fit-call confirmation; the paid page is where
+           it earns its place. Facade pattern: no iframe loads until someone clicks, so
+           the page stays fast and YouTube sets no cookie for anyone who never watches. -->
+      <div class="vsl-wrap" style="border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(36,52,52,.07),0 8px 56px rgba(14,107,107,.20);">
+        <button type="button"
+          style="display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative;line-height:0;"
+          aria-label="Play the video"
+          onclick="var w=this.parentNode;var f=w.querySelector('iframe');f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&amp;rel=0';f.style.display='block';this.style.display='none';">
+          <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
+               alt="Miki explains what she looks for on your page"
+               width="1280" height="720" style="width:100%;height:auto;display:block;">
+          <span style="position:absolute;inset:0;display:grid;place-items:center;">
+            <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M66.5 7.7a8.6 8.6 0 0 0-6-6.1C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6.1A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6.1C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6.1A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z" fill="#0E6B6B"/>
+              <path d="M27 34l18-10-18-10z" fill="#FFFFFF"/>
+            </svg>
+          </span>
+        </button>
+        <iframe style="display:none;width:100%;aspect-ratio:16/9;border:0;"
+          title="Miki explains what she looks for on your page"
+          src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- -- What to expect ------------------------------------- -->
+  <div class="mf-section">
+    <span class="mf-eyebrow">What to expect</span>
+    <h2>60 minutes, one-on-one with Miki</h2>
+    <p>Your MoonieView is a 60-minute brand clarity session, just you and Miki. She&rsquo;ll ask in-depth questions about your business, your process, your products or services, and how you&rsquo;re communicating your value right now.</p>
+    <p>Her goal is to diagnose exactly where Brand Fog is showing up in your business, and to define the clearest next path for you to take.</p>
+
+    <h3 style="margin-top:36px;">What you&rsquo;ll cover together</h3>
+    <div class="mf-grid mf-grid--3" style="margin-top:24px;">
+      <div class="mf-card"><h3>Your message</h3><p>What you say, and what a stranger hears instead.</p></div>
+      <div class="mf-card"><h3>Your offer</h3><p>What you&rsquo;re selling and how clearly it comes across.</p></div>
+      <div class="mf-card"><h3>Your page and customer experience</h3><p>What it feels like to find you and decide.</p></div>
+      <div class="mf-card"><h3>Your visuals</h3><p>Whether the way your brand looks matches what you charge.</p></div>
+      <div class="mf-card"><h3>Your positioning</h3><p>Why someone would choose your business over another.</p></div>
+      <div class="mf-card"><h3>Where people are getting confused</h3><p>The exact moments buyers hesitate or drop away.</p></div>
+    </div>
+  </div>
+
+  <!-- -- Nothing to prepare --------------------------------- -->
+  <div class="mf-section">
+    <span class="mf-eyebrow">Before your session</span>
+    <h2>There&rsquo;s nothing to prepare</h2>
+    <p>No presentation, no documents, nothing to tidy up first. Come ready to talk openly and answer honestly, because the clearer your conversation is, the more specific your diagnosis will be.</p>
+  </div>
+
+  <!-- -- The Blueprint, on the teal band -------------------- -->
+  <div class="band band--teal">
+    <span class="mf-eyebrow">After your session</span>
+    <h2>What you&rsquo;ll receive: your Fog Lifter Blueprint</h2>
+    <p>MoonieView is your session. Your Fog Lifter Blueprint is the written plan that follows it, and it reaches you within 48 hours.</p>
+    <p>Your Blueprint documents where your Brand Fog is living, names the one signal that needs your attention first, and gives you a clear direction to move in. You&rsquo;ll know what to fix and in what order before you touch a word of your message or a single visual.</p>
+
+    <!-- .mf-card inside .band--teal already inverts via a compound selector in the
+         stylesheet. The <strong> needs its own colour because .band--teal p sets the
+         paragraph to --on-teal and strong would otherwise inherit it. -->
+    <div class="mf-card" style="max-width:640px;margin:28px auto 0;text-align:left;">
+      <p style="margin-bottom:.8em;"><strong style="color:#FFFFFF;">Your Blueprint is built so that, over time, the right people:</strong></p>
+      <ul>
+        <li>understand what you do faster</li>
+        <li>recognize why your business is different</li>
+        <li>feel more confident your offer is right for them</li>
+        <li>trust your business sooner</li>
+        <li>know what next step to take</li>
+        <li>have fewer questions before they decide</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- -- Practical details ---------------------------------- -->
+  <div class="mf-section">
+    <span class="mf-eyebrow">The practical part</span>
+    <h2>Your session details</h2>
+    <div class="mf-grid mf-grid--2" style="margin-top:28px;">
+      <div class="mf-card"><h3>Your session is recorded</h3><p>Miki records every MoonieView for internal review and analysis, so nothing you say in your 60 minutes gets lost before your Blueprint is written.</p></div>
+      <div class="mf-card"><h3>Calendly sends your reminders</h3><p>Reminder emails arrive before your session, so the date stays where you can see it and nothing sneaks up on you.</p></div>
+      <div class="mf-card"><h3>If you need to move your time</h3><p>Use the reschedule link in your Calendly confirmation email, and give Miki at least 24 hours&rsquo; notice where you can.</p></div>
+      <div class="mf-card"><h3>If you need a hand with any of it</h3><p>Email <a href="mailto:miki@moonieful.com">miki@moonieful.com</a> and Miki will help you cancel or reschedule.</p></div>
+    </div>
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- -- Miki's close --------------------------------------- -->
+  <div class="mf-section">
+    <h2>Miki is looking forward to this</h2>
+    <p>She&rsquo;s excited to help you get clearer on your brand, and to show you what has been hard to spot from inside your own business.</p>
+    <p>Your MoonieView gives you a clearer foundation to keep building on, one that holds up well past any single page or handful of words. &#127769;&#10024;</p>
+  </div>
+
+</div>
