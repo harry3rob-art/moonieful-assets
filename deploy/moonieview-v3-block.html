@@ -1,0 +1,445 @@
+<!--
+  MOONIEVIEW, BOOK A CALL PAGE (Nabeel structure).
+  Light system repaint plus fit call claim correction, 2026 08 12.
+  The free fit call decides FIT. The paid MoonieView carries the findings.
+  Do not put "what to fix first" back on this page as a free promise.
+  Pure ASCII by design: delivered through atob(), which is latin 1.
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+#bac {
+  --ink: #243434;
+  --body: #3A4A4A;
+  --muted: #4A5C5C;
+  --cream: #F6F1E7;
+  --white: #FFFFFF;
+  --teal: #0E6B6B;
+  --teal-dark: #0E6B6B;
+  --teal-light: #E7F3F1;
+  --accent: #D4AF37;
+  --on-teal: #BFE2E1;
+  --border: #CFE0DE;
+  --serif: 'Shantell Sans', 'Comic Sans MS', cursive;
+  --sans: Arimo, Arial, sans-serif;
+
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--body);
+  background: var(--white);
+  width: 100%;
+}
+
+#bac *, #bac *::before, #bac *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bac .wrap {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/*  HERO  */
+#bac .hero {
+  background: var(--teal-dark);
+  padding: 72px 24px 64px;
+  text-align: center;
+}
+
+#bac .hero .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--on-teal);
+  margin-bottom: 20px;
+}
+
+#bac .hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+#bac .hero .hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--on-teal);
+  line-height: 1.7;
+}
+
+/*  TRUST STRIP  */
+#bac .trust-strip {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+
+#bac .trust-strip .wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+#bac .trust-strip .ts-stars { color: var(--teal); letter-spacing: 2px; }
+#bac .trust-strip .ts-div { color: var(--muted); }
+
+@media (max-width: 520px) {
+  #bac .trust-strip .ts-div { display: none; }
+  #bac .trust-strip .wrap { gap: 6px; flex-direction: column; }
+}
+
+/*  VSL  */
+#bac .vsl-section {
+  background: #111;
+  padding: 40px 0;
+}
+
+#bac .vsl-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+#bac .vsl-wrap iframe,
+#bac .vsl-wrap .vsl-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/*  BOOKING  */
+#bac .booking-section {
+  padding: 64px 24px;
+  background: var(--teal-light);
+  text-align: center;
+}
+
+#bac .booking-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+#bac .booking-section .sub {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+#bac .calendly-placeholder {
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 48px 24px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/*  FEATURED QUOTE  */
+#bac .fq-section {
+  padding: 56px 24px;
+  background: var(--teal-dark);
+}
+
+#bac .fq-card {
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#bac .fq-stars {
+  color: var(--on-teal);
+  font-size: 18px;
+  letter-spacing: 5px;
+  margin-bottom: 24px;
+}
+
+#bac .fq-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 27px);
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: normal;
+}
+
+#bac .fq-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--on-teal);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-style: normal;
+}
+
+/*  TESTIMONIAL GRIDS  */
+#bac .testimonials {
+  padding: 56px 24px;
+  background: var(--cream);
+}
+
+#bac .testimonials h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#bac .tgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+#bac .tgrid .t-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+#bac .tgrid .t-item img {
+  width: 100%;
+  display: block;
+}
+
+
+/*  BRIEF SECTIONS (offer + how we work)  */
+#bac .brief {
+  padding: 64px 24px;
+  background: var(--white);
+}
+
+#bac .brief h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+#bac .brief p {
+  color: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/*  FINAL CTA  */
+#bac .cta-final {
+  padding: 72px 24px;
+  background: var(--teal-dark);
+  text-align: center;
+}
+
+#bac .cta-final h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 40px);
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+#bac .cta-final .sub {
+  color: var(--on-teal);
+  font-size: 17px;
+  margin-bottom: 36px;
+}
+
+#bac .btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+#bac .btn:hover { opacity: 0.9; }
+
+@media (max-width: 520px) {
+  #bac .wrap { padding: 0 20px; }
+  #bac .hero { padding: 48px 20px 40px; }
+  #bac .tgrid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div id="bac">
+
+  <!-- 1. HEADLINE -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>I help business owners whose brand makes total sense in person but loses people the second a stranger opens their website.</h1>
+      <p class="hero-sub">In one free 15-minute call, I'll tell you whether Brand Fog is what's costing you work. If it is, I'll offer you my paid MoonieView, which is where I show you exactly where your fog sits and what to fix first.</p>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="wrap">
+      <span class="ts-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>5.0 on Google</span>
+      <span class="ts-div">&middot;</span>
+      <span>50+ clients helped across 200+ projects</span>
+      <span class="ts-div">&middot;</span>
+      <span>A straight yes or no in 15 minutes</span>
+    </div>
+  </div>
+
+  <!-- 2. VSL
+       REPLACE the .vsl-placeholder div with an iframe when the video is ready.
+       YouTube embed format:
+       iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
+               frameborder="0" allowfullscreen/iframe
+  -->
+  <section class="vsl-section">
+    <div class="vsl-wrap">
+      <div class="vsl-thumb" id="vsl-thumb" onclick="
+        document.getElementById('vsl-thumb').style.display='none';
+        var f=document.getElementById('vsl-frame');
+        f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&rel=0';
+        f.style.display='block';
+      " style="cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
+             alt="Watch the MoonieView video"
+             style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;">
+          <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/>
+            <path d="M45 24 27 14v20" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+      <iframe id="vsl-frame"
+        style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- 4. BOOKING
+       REPLACE .calendly-placeholder with your Calendly inline embed or Typeform embed.
+       Calendly inline embed format:
+       div class="calendly-inline-widget"
+            data-url="https://calendly.com/moonieful/moonieful-connection-call-clone"
+            style="min-width:320px;height:700px;"/div
+       script src="https://assets.calendly.com/assets/external/widget.js" async/script
+       NOTE: Calendly does not publish SRI hashes for this script, integrity attribute
+       cannot be added. This is a known limitation of their embed approach.
+  -->
+  <section class="booking-section" id="booking">
+    <div class="wrap">
+      <h2>Book your free fit call</h2>
+      <p class="sub">Pick a time below. I read your brand before you arrive, so all 15 minutes go to whether we're a fit rather than to background questions.</p>
+      <p style="font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 8px;">Free &middot; 15 minutes &middot; no payment required</p>
+      <iframe src="https://calendly.com/moonieful/moonieful-connection-call-clone" width="100%" height="700" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <!-- 3. FEATURED QUOTE -->
+  <section class="fq-section">
+    <div class="fq-card">
+      <div class="fq-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote class="fq-text">"What an incredible experience! Miki dove head first into my ideas, tackled all of the obstacles with modern solutions, and came up with a step by step plan."</blockquote>
+      <cite class="fq-name">Allan Babas</cite>
+    </div>
+  </section>
+
+  <!-- 5. TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <h3>What clients say</h3>
+      <div class="tgrid">
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/01-suzi-strickland.png" alt="Suzi Strickland review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/02-matt-steinruck.png" alt="Matt Steinruck review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/03-elena-austin.png" alt="Elena Austin review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/04-rulonda-green.png" alt="Rulonda Green review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/05-christine-smith.png" alt="Christine Smith review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/06-jacob-theel.png" alt="Jacob Theel review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/07-allan-babas.png" alt="Allan Babas review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/08-victoria-lopez.png" alt="Victoria Lopez review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/09-iriana-vega.png" alt="Iriana Vega review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/10-rochelle-suggs.png" alt="Rochelle Suggs review"></div>
+        <div class="t-item"><img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/11-dd.png" alt="D D review"></div>
+      </div>
+    </div>
+  </section>
+
+      <!-- A. INDUSTRY STRIP -->
+  <section class="brief" style="background: var(--teal-light);">
+    <div class="wrap">
+      <h3 style="text-align: center; margin-bottom: 10px;">Recent Brand Reviews</h3>
+      <p style="text-align: center; font-weight: 600;">Commercial cleaning &nbsp;&bull;&nbsp; Handmade products &nbsp;&bull;&nbsp; Private catering &nbsp;&bull;&nbsp; Education consulting</p>
+      <p style="text-align: center;">Four businesses with nothing in common except the problem. In each one, a stranger had to choose, and couldn't see what made them the obvious answer.</p>
+    </div>
+  </section>
+
+  <!-- B. WRITTEN SUMMARY (for people who don't watch the video) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Rather read than watch?</h2>
+      <p style="margin-top: 4px;"><strong>What it is.</strong> A free 15-minute call with me, Miki Roberts, founder of Moonieful.</p>
+      <p style="margin-top: 12px;"><strong>What happens.</strong> I ask you a handful of questions about your business. Wherever you can't answer in one clean sentence, your page can't either. That tells us both whether Brand Fog is your problem.</p>
+      <p style="margin-top: 12px;"><strong>What you prepare.</strong> Book a time and answer three quick questions. I read your brand before we meet, so all 15 minutes go to your answer instead of your background.</p>
+      <p style="margin-top: 12px;"><strong>What you leave with.</strong> A straight answer on whether Brand Fog is costing you work. If it is, I'll offer you the paid MoonieView, which is where I show you exactly where your fog sits and what to fix first. If your brand already reads clearly to strangers, I'll tell you that and we'll leave it there.</p>
+      <p style="margin-top: 12px;"><strong>What it costs.</strong> Your call is free and stays free. The MoonieView is $650, and if the fit is there I'll offer it to you before you hang up. That's the only thing I sell on this call, and you'll know whether it fits before anyone asks you to decide.</p>
+      <p style="margin-top: 26px; text-align: center;"><a href="#booking" class="btn">Book My Free 15-Minute Call</a></p>
+    </div>
+  </section>
+
+
+  <!-- 6. BRIEF OFFER DESCRIPTION -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>What happens on the call</h2>
+      <p>Your call is a live 15-minute conversation about fit. I ask a few quick questions about your brand and your goals, then tell you honestly whether Brand Fog is what's holding your work back. Where your fog sits and what to fix first is what the paid MoonieView covers, and if the fit is there I'll offer you that session before you hang up.</p>
+      <p style="margin-top: 16px;">Step one, you book a time and answer three quick questions about your business. Step two, I read your brand before your call, so we start with me already knowing your page and your message. Step three, we talk live for 15 minutes and decide whether Brand Fog is your problem. Step four, if the MoonieView fits your situation, I'll offer it and tell you what the session covers, and if it doesn't fit, you'll hear that too.</p>
+    </div>
+  </section>
+
+  <!-- 8. WHERE THE CALL CAN LEAD (transparency: pre-handles the "free call = sales ambush" worry) -->
+  <section class="brief" style="background: var(--teal-light);">
+    <div class="wrap">
+      <h2>Where the call can lead</h2>
+      <p>Your call costs nothing. If the fit is there, I'll offer you the MoonieView before you hang up, and that's the only thing I sell. If Brand Fog is real for you and you want expert eyes on your whole brand, your next step is the MoonieView, a live 60-minute session where I find exactly where your fog lives and what to fix first. The MoonieView is $650, and you'll know whether it fits before anyone asks you to decide.</p>
+      <p style="margin-top: 16px;">The MoonieView is more than the session. I read your whole brand before we meet, you keep a recording of everything I walk you through, and 14 days later you send me what you changed and I tell you what cleared and what still needs a push. And if your free call shows your brand is already clear, I'll tell you that too, and you'll leave with a free answer and your afternoon back.</p>
+    </div>
+  </section>
+
+  <!-- 9. BEFORE YOU BOOK (Analytic/Driver FAQ, added 2026-07-19) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Before you book</h2>
+      <p><strong>Is the call really free, or is there a pitch waiting at the end?</strong></p>
+      <p>Both, and I'd rather say so. Your call costs nothing and it stays that way whatever you decide. If I think the paid MoonieView would help you, I'll offer it before you hang up. You get my honest read on whether Brand Fog is your problem either way, so those 15 minutes are worth having even when my answer is no.</p>
+      <p style="margin-top: 16px;"><strong>What if my brand doesn't need work?</strong></p>
+      <p>Then I tell you so on the call. Some owners leave with confirmation that their message already works, and that confirmation is free too.</p>
+    </div>
+  </section>
+
+  <!-- 10. FINAL CTA, scrolls to #booking -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Your call is 15 minutes. You leave knowing whether Brand Fog is your problem, and whether the MoonieView is worth booking.</h2>
+      <p class="sub">Book a free 15-minute call. If a full MoonieView is the right next move, you'll hear that, and if your brand is already clear, you'll hear that too.</p>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+    </div>
+  </section>
+
+</div>
