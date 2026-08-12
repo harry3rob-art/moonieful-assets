@@ -1,34 +1,37 @@
 <!-- ============================================================
-     QUIZ RESULT PAGE  -  v3 LIGHT SYSTEM  (NOT YET DEPLOYED)
+     QUIZ RESULT PAGE, v3 LIGHT SYSTEM
      Systeme page 41163584, step 24135341, funnel 7255533.
-     Built 2026-08-11. Ships TOGETHER with brandfog-quiz-v3-block.html:
-     the quiz redirects here, so one light and one dark breaks the journey.
+     Built and deployed 2026-08-11, together with the quiz that feeds it.
 
-     Same nine-token remap as the quiz (this page scopes to #bfr-root, the
-     quiz to #bfd-root). Both ran the superseded Website Audit palette.
+     NOTE ON THIS COMMENT: no double hyphen and no arrow glyphs appear
+     below. Both are illegal inside an HTML comment and Systeme's validator
+     DISABLES Save when it finds one. It runs asynchronously, so a fast
+     script can beat it and ship a block Systeme considers invalid.
 
-     FOUR THINGS THE TOKEN REMAP ALONE DID NOT CATCH
-     1. #bfr-root hardcoded background: radial-gradient(... #1a4f5c, #0d2f38,
-        #1A2E35), which OVERRIDES var(--deep). Left alone, the page stays dark
-        no matter what the token says. Now background: var(--deep).
-     2. #bfr-root sets the default text colour to var(--white), invisible on a
-        white page. Now var(--ink).
-     3. TWO blurred decorative orbs, one teal and one gold, part of the dark
-        shell. On white they render as coloured smudges. The gold one only
-        showed up in a screenshot, not in any colour audit. Both display:none.
-     4. The STARFIELD canvas. Stars only work on a dark ground. The canvas is
-        HIDDEN rather than deleted, so the Starfield() call still finds its
-        element and the script stays byte-identical.
+     Same nine variable remap as the quiz. This page scopes to bfr root,
+     the quiz to bfd root. Both ran the superseded Website Audit palette.
 
-     Gold is never a word here either: #D4AF37 measures 2.10 on white and fails
-     even as large text, so .result-reveal, .result-score-number (56px) and
-     .result-opening moved to deep teal. The score bar was a teal-to-gold
-     gradient; a progress bar is meaningful non-text content needing 3:1, and
-     the gold end failed, so it is now teal to #1583B3 (4.26 on white).
-     'Caveat' on .brand-mark was also retired; now Shantell Sans.
+     FOUR THINGS THE REMAP ALONE DID NOT CATCH
+     1. The root hardcoded its own dark radial gradient, which OVERRIDES
+        the deep variable. Left alone the page stays dark whatever the
+        variable says.
+     2. The root default text colour was white, invisible on a white page.
+     3. TWO blurred decorative orbs, one teal and one gold, part of the
+        dark shell. On white they render as coloured smudges. The gold one
+        only showed up in a screenshot, never in a colour audit.
+     4. The starfield canvas. Stars only work on a dark ground. It is
+        HIDDEN rather than deleted, so the Starfield call still finds its
+        element and the script stays byte identical.
+
+     Gold is never a word here: #D4AF37 measures 2.10 on white and fails
+     even as large text, so the reveal line, the 56px score number and the
+     opening all moved to deep teal. The score bar was a teal to gold
+     gradient, and a progress bar is meaningful non text content needing
+     3:1, so it is now teal to #1583B3 at 4.26 on white.
+     Caveat on the brand mark was retired too, now Shantell Sans.
 
      Verified on all five type params (tb, ie, sm, bv, nr) at 1512 and 390:
-     zero DOM contrast failures, no horizontal scroll. Script BYTE-IDENTICAL.
+     zero DOM contrast failures, no horizontal scroll. Script BYTE IDENTICAL.
      ============================================================ -->
 ﻿<style>
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
