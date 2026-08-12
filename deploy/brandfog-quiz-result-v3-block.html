@@ -33,7 +33,7 @@
      Verified on all five type params (tb, ie, sm, bv, nr) at 1512 and 390:
      zero DOM contrast failures, no horizontal scroll. Script BYTE IDENTICAL.
      ============================================================ -->
-﻿<style>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
 #bfr-root *, #bfr-root *::before, #bfr-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -264,7 +264,7 @@
 
     <div id="bfr-loading" class="result-loading" aria-live="polite">
       <div class="result-loading-bar"><span id="bfr-loading-fill"></span></div>
-      <p class="result-loading-text" id="bfr-loading-text">Reading your answers…</p>
+      <p class="result-loading-text" id="bfr-loading-text">Reading your answers&hellip;</p>
     </div>
 
     <div id="bfr-content" style="display:none;">
@@ -315,7 +315,7 @@
       typeName: "the Scattered Magnet",
       strengthFallback: "You're visible and magnetic. You show up, and people are drawn to you. That pull is real, and most founders never build it.",
       patternFallback: "That same reach is why the signal gets crowded. Because you're for everyone, the right clients can't tell your offer is for them, and the enquiries that come in match the version of you that undersells your work. You fill your calendar with whoever found you first, not whoever fits best.",
-      moveFallback: "Point your visibility at one kind of client and one kind of result. Concentrating the magnet makes the right people feel “this is for me” and clears the crowd, without dimming any of the reach you already have.",
+      moveFallback: "Point your visibility at one kind of client and one kind of result. Concentrating the magnet makes the right people feel \u201Cthis is for me\u201D and clears the crowd, without dimming any of the reach you already have.",
       nameLine: "There's a name for this pattern. I think of it as the Scattered Magnet.",
       bookBridge: "I call what you just saw in the mirror Brand Fog, and there's a whole pattern behind why the fog forms and what the fog is costing you. The book walks through that pattern for the exact reflection you got. Short read, $17."
     },
@@ -353,9 +353,9 @@
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var LOADING_LABELS = [
-      "Reading your answers…",
-      "Finding what makes you stand out…",
-      "Almost there…"
+      "Reading your answers\u2026",
+      "Finding what makes you stand out\u2026",
+      "Almost there\u2026"
     ];
     var loadingLabelTimers = [];
 
