@@ -1,37 +1,47 @@
 <!-- ============================================================
-     BRAND REFLECTION QUIZ  -  v3 LIGHT SYSTEM  (NOT YET DEPLOYED)
-     Systeme page 41162056, step 24134712, funnel 7255533 (Brand Reflection Quiz).
-     Built 2026-08-11. Awaiting Harry's approval before deploy, per the
-     preview-first rule for risky visual changes on a live funnel page.
+     BRAND REFLECTION QUIZ, v3 LIGHT SYSTEM
+     Systeme page 41162056, step 24134712, funnel 7255533.
+     Built and deployed 2026-08-11. Supersedes the dark original.
 
-     The old page was fully dark and used the SUPERSEDED Website Audit palette
-     (--mid #03989E, --light #D2F5F1), not Miki's Character Sheet. Every colour
-     resolved through nine tokens, which is what made the inversion tractable.
+     NOTE ON THIS COMMENT: no double hyphen and no arrow glyphs appear
+     anywhere below. Both are illegal inside an HTML comment, and Systeme's
+     raw HTML validator DISABLES the Save button when it finds one. The
+     validator runs asynchronously, so a fast script can click Save before
+     it finishes and ship a block Systeme considers invalid. Keep this
+     comment free of double hyphens.
 
-     TOKEN REMAP
-       --deep  #1A2E35 -> #FFFFFF     page background
-       --dark  #0d2f38 -> #FFFFFF
-       --card  #133843 -> #FFFFFF     form fields (answers overridden, see below)
-       --mid   #03989E -> #0E6B6B     accent: progress fill, borders, slider
-       --light #D2F5F1 -> #243434     was body-on-dark, now ink
-       --gold  #c9a44a -> #D4AF37     decoration only, never a word
-       --muted rgba(210,245,241,.65) -> #3A4A4A
-       --border rgba(3,152,158,.25)  -> rgba(14,107,107,.22)
-     Added --ink #243434 and --accent-ink #0E6B6B, because --white was also
-     carrying the button label and the slider thumb and could not be remapped.
+     The old page was fully dark on the SUPERSEDED Website Audit palette
+     (mid #03989E, light #D2F5F1), not Miki's Character Sheet. Every colour
+     resolved through nine CSS variables, which made the inversion tractable.
 
-     TWO THINGS THAT WOULD HAVE BROKEN SILENTLY
-     1. #bfd-root sets the default text colour to var(--white). On a white page
-        that renders every unstyled string invisible. It now resolves to --ink.
-     2. .answer used var(--card), which after the remap put white cards on a
-        white page, readable only by a hairline border. Answers now sit on pale
-        aqua #E7F3F1, hover #DCEDEB, selected #CFE6E4 with an inset teal ring
-        so the selected weight does not shift layout.
+     TOKEN REMAP (old value becomes new value)
+       deep   #1A2E35 becomes #FFFFFF, the page background
+       dark   #0d2f38 becomes #FFFFFF
+       card   #133843 becomes #FFFFFF for form fields
+       mid    #03989E becomes #0E6B6B, the accent
+       light  #D2F5F1 becomes #243434, now ink
+       gold   #c9a44a becomes #D4AF37, decoration only, never a word
+       muted  rgba(210,245,241,.65) becomes #3A4A4A
+       border rgba(3,152,158,.25) becomes rgba(14,107,107,.22)
+     Two variables were added, ink #243434 and accent ink #0E6B6B, because
+     the white variable also carried the button label and the slider thumb
+     and so could not be remapped.
 
-     Gold is a border on .seed-card and never a word anywhere. All 30 colour
-     pairs measured; every one clears WCAG AA at its rendered size.
+     THREE THINGS A TOKEN SWAP ALONE DOES NOT CATCH
+     1. The root sets its default text colour to the white variable. On a
+        white page that renders every unstyled string invisible.
+     2. The answer cards used the card variable, which after the remap put
+        white cards on a white page, readable only by a hairline border.
+        Answers now sit on pale aqua #E7F3F1, hover #DCEDEB, selected
+        #CFE6E4 with an inset teal ring so selecting does not shift layout.
+     3. Three strong elements on the returning visitor screen carried an
+        inline white colour and measured 1.14:1 once the page went white.
+        A local walkthrough never reaches that screen, because clearing
+        storage always lands you on the intro. Sweep the WHOLE file for
+        inline colour variables, not just the screens you can click to.
 
-     The 20KB quiz script is BYTE-IDENTICAL to the live version. No logic touched.
+     All 30 colour pairs measured and clearing AA. The quiz script is
+     BYTE IDENTICAL to the original. No quiz logic was touched.
      ============================================================ -->
 ﻿<style>
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
