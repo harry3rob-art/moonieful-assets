@@ -1,0 +1,656 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  #bfb-page {
+    --ink: #1A2E35;
+    --body: #3A3A4A;
+    --muted: #6B6B7B;
+    --cream: #FAF9F7;
+    --white: #FFFFFF;
+    --teal: #1A6269;
+    --teal-dark: #163f4a;
+    --teal-light: #E8F4F4;
+    --accent: #C9A96E;
+    --accent-light: #F5EFE3;
+    --border: #E5E2DC;
+    --shadow-sm: 0 1px 3px rgba(26,46,53,0.06);
+    --shadow-md: 0 4px 16px rgba(26,46,53,0.08);
+    --shadow-lg: 0 8px 32px rgba(26,46,53,0.10);
+    --radius: 12px;
+    --radius-lg: 20px;
+    --serif: 'Shantell Sans', 'Trebuchet MS', sans-serif;
+    --sans: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --max-w: 1000px;
+
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--body);
+    background: var(--white);
+    width: 100%;
+  }
+
+  #bfb-page, #bfb-page *, #bfb-page *::before, #bfb-page *::after {
+    box-sizing: border-box;
+  }
+
+  #bfb-page * { margin: 0; padding: 0; }
+
+  #bfb-page .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  #bfb-page .section { padding: 80px 24px; }
+  #bfb-page .section-alt { background: var(--cream); }
+  #bfb-page .text-center { text-align: center; }
+
+  #bfb-page h1, #bfb-page h2, #bfb-page h3 {
+    font-family: var(--serif);
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  #bfb-page h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.5px; }
+  #bfb-page h2 { font-size: clamp(24px, 4vw, 34px); letter-spacing: -0.3px; margin-bottom: 20px; }
+  #bfb-page h3 { font-size: clamp(18px, 3vw, 22px); }
+  #bfb-page p { margin-bottom: 16px; }
+  #bfb-page p:last-child { margin-bottom: 0; }
+
+  #bfb-page .eyebrow {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  #bfb-page .subhead {
+    font-family: var(--sans);
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 560px;
+    margin-top: 20px;
+  }
+
+  #bfb-page .highlight { color: var(--ink); font-weight: 600; }
+  #bfb-page .emphasis { color: var(--teal); font-weight: 600; }
+
+  #bfb-page .cta-btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--teal);
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    letter-spacing: 0.3px;
+  }
+
+  #bfb-page .cta-btn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  #bfb-page .cta-note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  /* HERO */
+  #bfb-page .hero {
+    padding: 110px 24px 96px;
+    position: relative;
+    overflow: hidden;
+    background-color: #0d2f38;
+    background-image:
+      linear-gradient(90deg, rgba(10,30,40,0.92) 0%, rgba(10,30,40,0.84) 40%, rgba(10,30,40,0.45) 62%, rgba(10,30,40,0) 80%),
+      url('https://d1yei2z3i6k35z.cloudfront.net/16796469/6a5f89320de823.27405675_BrandFogHero_V8_scene_final.png');
+    background-size: cover;
+    background-position: 65% center;
+  }
+
+  #bfb-page .hero-content { max-width: 540px; text-align: left; }
+  #bfb-page .hero .container { position: relative; z-index: 2; }
+  #bfb-page .hero .eyebrow { color: var(--accent); }
+  #bfb-page .hero h1 { color: var(--white); margin-bottom: 0; }
+  #bfb-page .hero .subhead { color: rgba(255,255,255,0.85); margin-left: 0; margin-right: 0; max-width: 480px; }
+  #bfb-page .hero .cta-note { color: rgba(255,255,255,0.65); }
+  #bfb-page .hero .cta-btn {
+    background: #D2F5F1;
+    color: #163f4a;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+  }
+  #bfb-page .hero .cta-btn:hover {
+    background: #ffffff;
+    color: #163f4a;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  }
+
+  #bfb-page .hero-cta-row { margin-top: 36px; }
+
+  #bfb-page .hero-mobile-photo { display: none; }
+
+  @media (max-width: 1200px) {
+    #bfb-page .hero { background-position: 78% center; }
+    #bfb-page .hero-content { max-width: 460px; }
+  }
+
+  @media (max-width: 900px) {
+    #bfb-page .hero { background-position: center center; }
+    #bfb-page .hero-content { max-width: 540px; }
+  }
+
+  /* SIGNAL LIST */
+  #bfb-page .signal-list {
+    list-style: none;
+    margin: 28px 0 0;
+  }
+
+  #bfb-page .signal-list li {
+    padding: 18px 0 18px 58px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  #bfb-page .signal-list li:last-child { border-bottom: none; }
+
+  #bfb-page .signal-list .signal-label {
+    display: block;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  #bfb-page .signal-list .signal-desc {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  #bfb-page .signal-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    border: 2px solid rgba(26,98,105,0.25);
+  }
+
+  #bfb-page .signal-num {
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-family: var(--serif);
+    font-size: 21px;
+    color: var(--teal);
+    font-weight: 700;
+    line-height: 40px;
+    width: 40px;
+    text-align: center;
+  }
+
+  #bfb-page .dark-section .signal-num { color: #BFE2E1; }
+
+  #bfb-page .eyebrow-xl {
+    font-size: clamp(18px, 2.5vw, 24px);
+    letter-spacing: 4px;
+  }
+
+  /* CHAPTER LIST */
+  #bfb-page .chapter-list {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  #bfb-page .chapter-list li {
+    padding: 16px 20px 16px 44px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    font-size: 16px;
+    color: var(--body);
+    box-shadow: var(--shadow-sm);
+  }
+
+  #bfb-page .chapter-list li::before {
+    content: '\2192';
+    position: absolute;
+    left: 16px;
+    top: 17px;
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* QUOTE */
+  #bfb-page .quote-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+  }
+
+  #bfb-page .quote-card p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  #bfb-page .attribution {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    font-style: normal;
+  }
+
+  /* FIT CARDS */
+  #bfb-page .fit-card {
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+
+  #bfb-page .fit-card.good { background: var(--teal-light); border-color: rgba(26,98,105,0.2); }
+  #bfb-page .fit-card.not-good { background: var(--cream); }
+  #bfb-page .fit-card h3 { font-size: 18px; margin-bottom: 14px; }
+  #bfb-page .fit-card ul { list-style: none; }
+
+  #bfb-page .fit-card ul li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 16px;
+  }
+
+  #bfb-page .fit-card.good ul li::before {
+    content: '\2713';
+    position: absolute; left: 0;
+    color: var(--teal); font-weight: 700;
+  }
+
+  #bfb-page .fit-card.not-good ul li::before {
+    content: '\2192';
+    position: absolute; left: 0;
+    color: var(--muted);
+  }
+
+  /* PRICING */
+  #bfb-page .pricing-block {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 36px;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-md);
+  }
+
+  #bfb-page .pricing-block .price {
+    font-family: var(--serif);
+    font-size: 52px;
+    color: var(--ink);
+    margin: 12px 0 4px;
+  }
+
+  #bfb-page .pricing-block .price-label {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  #bfb-page .pricing-includes {
+    text-align: left;
+    margin: 24px 0 32px;
+    list-style: none;
+  }
+
+  #bfb-page .pricing-includes li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    font-size: 15px;
+    color: var(--body);
+    border-bottom: 1px solid var(--border);
+  }
+
+  #bfb-page .pricing-includes li:last-child { border-bottom: none; }
+
+  #bfb-page .pricing-includes li::before {
+    content: '\2713';
+    position: absolute; left: 0;
+    color: var(--teal); font-weight: 700;
+  }
+
+  #bfb-page .audiobook-note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  /* FAQ */
+  #bfb-page .faq-list {
+    max-width: 680px;
+    margin: 32px auto 0;
+    text-align: left;
+  }
+  #bfb-page .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  #bfb-page .faq-item:last-child { border-bottom: none; }
+  #bfb-page .faq-q {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  #bfb-page .faq-a {
+    font-size: 16px;
+    color: var(--body);
+    margin-bottom: 0;
+  }
+
+  /* DARK SECTION */
+  #bfb-page .dark-section {
+    background: #1A6269;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #bfb-page .dark-section .container { position: relative; z-index: 2; }
+  #bfb-page .dark-section .eyebrow { color: #BFE2E1; }
+  #bfb-page .dark-section h2, #bfb-page .dark-section h3 { color: #ffffff; }
+  #bfb-page .dark-section p { color: rgba(255,255,255,0.82); }
+  #bfb-page .dark-section .highlight { color: #ffffff; }
+  #bfb-page .dark-section .emphasis { color: #D2F5F1; }
+
+  /* CTA CLOSE */
+  #bfb-page .cta-close {
+    padding: 80px 24px;
+    text-align: center;
+    background: #1A6269;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #bfb-page .cta-close .container { position: relative; z-index: 2; }
+  #bfb-page .cta-close h2 { color: #ffffff; }
+  #bfb-page .cta-close .subhead { color: rgba(255,255,255,0.80); max-width: 500px; margin: 16px auto 0; }
+  #bfb-page .cta-close .cta-note { color: rgba(255,255,255,0.80); }
+  #bfb-page .cta-close .cta-btn { background: #D2F5F1; color: #163f4a; box-shadow: 0 4px 18px rgba(3,152,158,0.25); }
+  #bfb-page .cta-close .cta-btn:hover { background: #ffffff; color: #163f4a; box-shadow: 0 8px 28px rgba(3,152,158,0.30); }
+
+  /* PS */
+  #bfb-page .ps-section {
+    padding: 40px 24px 60px;
+    border-top: 1px solid rgba(26,46,53,0.10);
+    background: var(--cream);
+  }
+
+  #bfb-page .ps-section p { font-size: 16px; color: var(--body); }
+  #bfb-page .ps-section strong { color: var(--ink); }
+  #bfb-page .ps-section a { color: var(--teal); }
+
+  @media (max-width: 640px) {
+    #bfb-page .section, #bfb-page .cta-close { padding-left: 20px; padding-right: 20px; }
+    #bfb-page .hero { padding: 56px 20px 64px; background-image: none; }
+    #bfb-page .hero-mobile-photo { display: block; margin-top: 32px; }
+    #bfb-page .hero-mobile-photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: 72% center;
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.4);
+    }
+#bfb-page .pricing-block { padding: 36px 24px; }
+  }
+</style>
+
+<div id="bfb-page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none;z-index:1;" xmlns="http://www.w3.org/2000/svg"><filter id="bfb-grain"><feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#bfb-grain)"/></svg>
+    <div class="container">
+      <div class="hero-content">
+        <p class="eyebrow">The Brand Fog Book</p>
+        <h1>A stranger found your page, decided in 10 seconds, and chose someone else. This book shows you why.</h1>
+        <p class="subhead">Your work is good, and a stranger scrolling your page for 10 seconds takes in only a fraction of it before deciding. Brand Fog is that thinner version of your business, the one strangers meet before you ever get to speak. The Brand Fog Book names the three signals every visitor checks in the first scroll, shows you where your fog is thickest, and gives you one clear thing to fix first. Finding your fog takes one afternoon of reading, not another redesign, another rewrite, or another month of guessing.</p>
+        <div class="hero-cta-row">
+          <a href="https://clarity.moonieful.com/checkout" class="cta-btn">Get the Brand Fog Book ($17)</a>
+          <p class="cta-note" style="color: rgba(255,255,255,0.65); margin-top: 14px;">88 pages. Instant PDF download. Read it in an afternoon.</p>
+        </div>
+      </div>
+      <div class="hero-mobile-photo">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6a5f89320de823.27405675_BrandFogHero_V8_scene_final.png" alt="The Brand Fog book standing upright against a dark studio backdrop" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The real problem</p>
+      <h2>You've already tried the obvious fixes.</h2>
+
+      <p>You rewrote your homepage. Maybe more than once. You updated your photos, tightened your offer page, started posting more consistently.</p>
+
+      <p>The right clients are still finding your page and leaving. And the fixes didn't fail because you did them wrong. Redesigns, templates, and AI copy are what the market sells because they're easy to sell, not because they find what's actually in the way.</p>
+
+      <p>Here's the tell. You can explain what you do in person, and the person across the table gets it every time. Your page can't give a stranger that same in-person explanation yet. <strong class="highlight">Somewhere between how good you are and what a stranger reads in that first scroll, your value is getting lost in translation, and every lost translation is a client who picked someone else.</strong></p>
+    </div>
+  </section>
+
+  <!-- WHAT BRAND FOG IS -->
+  <section class="section dark-section">
+    <canvas id="bfb-stars" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.04;pointer-events:none;z-index:1;" xmlns="http://www.w3.org/2000/svg"><filter id="bfb-grain2"><feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#bfb-grain2)"/></svg>
+    <div class="container">
+      <p class="eyebrow eyebrow-xl">Brand Fog</p>
+      <h2>The haze a stranger sees before they ever meet you.</h2>
+
+      <p>When someone opens your page, they take in a fraction of what you actually do, and they decide on that fraction. Your business is real. Your results are real. But your signal reaches a stranger clouded.</p>
+
+      <p>Brand Fog lives in three places. Every visitor reads all three in the first scroll, whether they know they're doing it or not.</p>
+
+      <ul class="signal-list" style="margin-top: 28px;">
+        <li>
+          <span class="signal-num">1</span>
+          <span class="signal-label" style="color:#fff;">Message</span>
+          <p class="signal-desc" style="color:rgba(255,255,255,0.70);">What you say you do and who you say you help. When your message is foggy, a visitor can't tell if you're speaking to them, and a visitor who can't tell assumes you're not.</p>
+        </li>
+        <li>
+          <span class="signal-num">2</span>
+          <span class="signal-label" style="color:#fff;">Visuals</span>
+          <p class="signal-desc" style="color:rgba(255,255,255,0.70);">How your brand looks and feels. When visuals are mismatched or generic, your work behind them looks less valuable than it is.</p>
+        </li>
+        <li>
+          <span class="signal-num">3</span>
+          <span class="signal-label" style="color:#fff;">Positioning</span>
+          <p class="signal-desc" style="color:rgba(255,255,255,0.70);">How clearly you stand apart from everyone else in your category. When your positioning is foggy, a visitor has no reason to choose you over someone cheaper.</p>
+        </li>
+      </ul>
+
+      <p style="margin-top: 28px;">The Brand Fog Book shows you how to read all three signals from the outside, the way a stranger reads them, so you can see your own brand clearly for the first time.</p>
+    </div>
+    <script>(function(){var c=document.getElementById('bfb-stars');if(!c)return;var ctx=c.getContext('2d'),stars=[];function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}function init(){stars=[];for(var i=0;i<90;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+0.3,o:Math.random()*0.45+0.08,s:Math.random()*0.25+0.04});}}function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.o+=s.s;if(s.o>0.6||s.o<0.08)s.s*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(210,245,241,'+s.o+')';ctx.fill();});requestAnimationFrame(draw);}window.addEventListener('resize',function(){resize();init();});resize();init();draw();})();</script>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="eyebrow">Inside the book</p>
+      <h2>What the Brand Fog Book covers</h2>
+
+      <p>The book gives you the outside read your own brand can't give you, because you've been inside it too long.</p>
+
+      <ul class="chapter-list" style="margin-top: 28px;">
+        <li>Where Brand Fog comes from and why skilled business owners stay stuck inside it</li>
+        <li>The three signals every visitor reads in that first scroll on your page</li>
+        <li>How to read each signal the way a stranger reads it, not from the inside out</li>
+        <li>The fog types, and which one is most likely sitting in front of your real asset</li>
+        <li>How to find which signal is costing you clients right now</li>
+        <li>What to fix first, and why fixing the wrong thing first makes the fog worse</li>
+        <li>Where to go once you know what's actually in the way</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Is this book for you?</p>
+      <h2>Who the Brand Fog Book is built for</h2>
+
+      <div class="fit-card good">
+        <h3>The right read if:</h3>
+        <ul>
+          <li>You've been in business long enough to have real results, but your brand still feels like a work in progress</li>
+          <li>You've rewritten your homepage or updated your photos and the right clients are still choosing someone else</li>
+          <li>You know something's off in your brand, but you can't see what it is from where you're standing</li>
+          <li>You want to understand the real problem before spending money on another fix</li>
+        </ul>
+      </div>
+
+      <div class="fit-card not-good">
+        <h3>Not the right read if:</h3>
+        <ul>
+          <li>You're still figuring out what you sell or who you serve. That work needs to come first.</li>
+          <li>You want done-for-you implementation. The book gives you direction, not delivery.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL STRIP -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="quote-card" style="max-width: 620px; margin: 0 auto;">
+        <p>"Miki dove head first into my ideas, tackled all of the obstacles with modern solutions, and came up with a step by step plan. This woman does her research, and is a true out of the box thinker."</p>
+        <span class="attribution">Allan Babas, from my Google reviews</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE BLOCK -->
+  <section class="section">
+    <div class="container text-center">
+      <p class="eyebrow">The investment</p>
+      <h2>One afternoon. One honest read of your brand.</h2>
+
+      <div class="pricing-block" style="margin-top: 32px;">
+        <p class="eyebrow" style="margin-bottom: 6px;">The Brand Fog Book</p>
+        <div class="price">$17</div>
+        <p class="price-label">One-time purchase. Instant digital access.</p>
+
+        <ul class="pricing-includes">
+          <li>The full Brand Fog Book: 88 pages, PDF format</li>
+          <li>Instant download after purchase</li>
+          <li>Read at your own pace, with no course portal and no login required</li>
+          <li>The Fog-Found Guarantee: if the book doesn't show you where your fog is, email me at miki@moonieful.com. I read every guarantee email myself, and you get your $17 back</li>
+        </ul>
+
+        <p class="audiobook-note">Prefer to listen? You can add the full Brand Fog audiobook at checkout for $7 and hear it on your next drive.</p>
+
+        <a href="https://clarity.moonieful.com/checkout" class="cta-btn">Get the Brand Fog Book ($17)</a>
+        <p class="cta-note" style="margin-top: 16px;">Secure checkout. Instant access. Backed by the Fog-Found Guarantee.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (objection handling near the offer) -->
+  <section class="section section-alt">
+    <div class="container text-center">
+      <p class="eyebrow">Fair questions</p>
+      <h2>Five questions, answered straight</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <p class="faq-q">How is a $17 book different from the courses and templates I've already tried?</p>
+          <p class="faq-a">Courses hand you more to do. Templates hand you someone else's words. The Brand Fog Book hands you a diagnosis: you read your own brand the way a stranger does, find where the fog is thickest, and leave with one thing to fix first. Direction you can act on this week.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What if my real problem is traffic, not clarity?</p>
+          <p class="faq-a">More traffic into a foggy page just means more strangers leaving faster. If people who already know your work hire you and strangers don't, more visitors won't help. What those visitors read when they arrive is what decides it.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Couldn't AI write my page instead?</p>
+          <p class="faq-a">AI can rewrite your page in seconds, and it'll sound like everyone else's page written in seconds. The book works upstream of the words: it finds what your message is failing to carry. Once you know that, every tool works better, including AI.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What if I read the book and still can't see what's wrong?</p>
+          <p class="faq-a">Some owners are too close to their own work to catch the fog alone, and the miss isn't a reading problem. If that's you, the book still does its job: you'll know the three signals, you'll know what to bring, and a MoonieView session can find the rest with you.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Is this book just a long pitch for your services?</p>
+          <p class="faq-a">The book is the complete self-audit, not a teaser chapter for something bigger. Everything you need to find your fog and choose your first fix is in the 88 pages. If you'd rather have my eyes on your brand with you, MoonieView exists for exactly that second set of eyes, and the session is a separate choice you can make later or never.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA CLOSE -->
+  <section class="cta-close">
+    <canvas id="bfb-stars2" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.04;pointer-events:none;z-index:1;" xmlns="http://www.w3.org/2000/svg"><filter id="bfb-grain3"><feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#bfb-grain3)"/></svg>
+    <div class="container">
+      <h2>Ready to see what a stranger sees?</h2>
+      <p class="subhead">The Brand Fog Book gives you the outside read your business has needed. One afternoon and you'll know exactly where to start. And the week after you fix the right thing first, a stranger reads your page and understands you the way the person across the table always has.</p>
+      <div style="margin-top: 32px;">
+        <a href="https://clarity.moonieful.com/checkout" class="cta-btn">Get the Brand Fog Book ($17)</a>
+        <p class="cta-note">Instant download. No account required.</p>
+      </div>
+    </div>
+    <script>(function(){var c=document.getElementById('bfb-stars2');if(!c)return;var ctx=c.getContext('2d'),stars=[];function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}function init(){stars=[];for(var i=0;i<90;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+0.3,o:Math.random()*0.45+0.08,s:Math.random()*0.25+0.04});}}function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.o+=s.s;if(s.o>0.6||s.o<0.08)s.s*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(210,245,241,'+s.o+')';ctx.fill();});requestAnimationFrame(draw);}window.addEventListener('resize',function(){resize();init();});resize();init();draw();})();</script>
+  </section>
+
+  <!-- P.S. -->
+  <section class="ps-section">
+    <div class="container">
+      <p><strong>P.S.</strong> The book shows you where your fog is. If you'd rather have me find it with you, that's what MoonieView is for: a live 60-minute session where I read your brand the way a stranger does and hand you a written plan you can act on the same week. MoonieView starts with a free 15-minute fit call, so you'll know the session is the right next step before you spend anything. <a href="https://clarity.moonieful.com/moonieview">clarity.moonieful.com/moonieview</a></p>
+    </div>
+  </section>
+
+</div>
+
+<!-- Universal footer (P1 compliance 2026-07-19) -->
+<div style="padding:32px 24px;background:#1A2E35;text-align:center;border-top:1px solid rgba(201,164,74,0.25);">
+  <p style="font-family:sans-serif;font-size:13px;color:rgba(210,245,241,0.5);line-height:1.6;margin:0;">&copy; 2026 Moonieful Designs LLC. All rights reserved.</p>
+  <p style="font-family:sans-serif;font-size:13px;margin:6px 0 0 0;">
+    <a href="https://clarity.moonieful.com/terms" style="color:rgba(210,245,241,0.65);text-decoration:underline;">Terms &amp; Conditions</a>
+    <span style="color:rgba(210,245,241,0.35);"> | </span>
+    <a href="https://moonieful.com/privacy-policy" style="color:rgba(210,245,241,0.65);text-decoration:underline;">Privacy Policy</a>
+  </p>
+</div>
