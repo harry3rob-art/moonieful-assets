@@ -1,0 +1,305 @@
+<!-- ============================================================
+     /brandfog-thankyou  -  v3  (LIGHT SYSTEM)
+     Systeme page 41679415, single Raw HTML block #rawhtml-82cd1c87.
+     Supersedes brandfog-thankyou-v2.html (2026-08-04), which carried
+     Playfair Display, DM Sans, the retired #1A6269 teal, the retired
+     #D2F5F1 aqua from the superseded Website Audit brief, and two
+     pure-CSS-gradient dark bands.
+
+     WHAT CHANGED IN v3
+     1. Type: Shantell Sans (headings) + Arimo (body).
+     2. Palette moved onto Miki's six. #1A6269 -> #0E6B6B, #F0FBFA ->
+        #E7F3F1, #3A5A63 -> #3A4A4A, #D2F5F1 -> #BFE2E1 (measured 4.55
+        on deep teal; #D2F5F1 was never a Character Sheet colour).
+     3. The two dark radial-gradient bands became deep-teal bands. The
+        HERO PHOTO STAYS, per the standing background direction: real
+        photography with an overlay is approved, CSS gradients are not.
+        The two-column split also stays, because a small book shot
+        floating between an H1 and a CTA reads as an orphan.
+     4. Step numerals were teal at 25-35% opacity on pale aqua, which
+        composites to roughly 1.6:1. They are now solid #4A8080, measured
+        3.94:1 on #E7F3F1 and 4.48:1 on white, clearing the 3:1 large-text
+        minimum at the 2rem size they render at.
+     5. TRANSLUCENT WHITE FILLS COST CONTRAST, and this bit the hero twice.
+        A rgba(255,255,255,.12) badge fill lifts #0E6B6B to #2b7d7d, which
+        drops #BFE2E1 text from 4.55 to 3.50, a fail. Same story on the
+        secondary button at .08 alpha (3.82). Both now use white text,
+        measured 4.85 and 5.29 on the COMPOSITED background. Always measure
+        against the composite, never the declared colour underneath.
+     6. Copy: first person throughout, contractions throughout, two
+        negative-parallelism constructions removed, the banned stand-in
+        noun "distance" restructured out, and pronoun-only headings
+        ("How to read it", "Three things that make this work") given
+        their nouns back.
+
+     NOT CHANGED, deliberately: the section order set on 2026-08-04.
+     See the session notes; the two MoonieView asks are flagged to Harry
+     as a separate judgement call rather than decided here.
+
+     The variant script uses querySelectorAll because Systeme renders
+     every block twice, desktop and mobile.
+     ============================================================ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+.bft{
+  --bft-teal:#0E6B6B;
+  --bft-pale:#E7F3F1;
+  --bft-aqua:#A6D7D5;
+  --bft-on-teal:#BFE2E1;
+  --bft-ink:#243434;
+  --bft-ink-soft:#3A4A4A;
+  --bft-numeral:#4A8080;
+  --bft-white:#FFFFFF;
+  font-family:Arimo,Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.bft h1,.bft h2,.bft h3,.bft h4{font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-weight:700;}
+
+/* - HERO - */
+.bft-hero{position:relative;overflow:hidden;background:#0E6B6B;}
+.bft-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:520px;}
+.bft-hero-copy{padding:72px 48px 72px 56px;display:flex;flex-direction:column;justify-content:center;text-align:left;max-width:620px;justify-self:end;width:100%;box-sizing:border-box;}
+.bft-hero-photo{position:relative;overflow:hidden;}
+.bft-hero-photo img.bft-shot{width:100%;height:100%;object-fit:cover;object-position:58% center;display:block;}
+.bft-hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,107,107,0.92) 0%,rgba(14,107,107,0.30) 14%,rgba(14,107,107,0) 34%);pointer-events:none;}
+.bft-hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:20px;}
+@media (max-width:900px){
+  .bft-hero-grid{grid-template-columns:1fr;min-height:0;}
+  .bft-hero-photo{order:1;height:300px;}
+  .bft-hero-photo::after{background:linear-gradient(180deg,rgba(14,107,107,0) 45%,rgba(14,107,107,0.55) 100%);}
+  .bft-hero-copy{order:2;padding:44px 24px 56px;text-align:center;max-width:none;justify-self:stretch;align-items:center;}
+  .bft-hero-ctas{justify-content:center;}
+}
+</style>
+
+<div class="bft">
+
+<!-- ===================== HERO ===================== -->
+<div class="bft-hero">
+  <div class="bft-hero-grid">
+
+    <div class="bft-hero-copy">
+      <div>
+        <div class="bft-badge" style="display:inline-block;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.34);color:#FFFFFF;font-family:Arimo,Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:7px 18px;border-radius:40px;margin-bottom:20px;">
+          Your order is confirmed
+        </div>
+
+        <h1 class="bft-h1" style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(2.1rem,4vw,2.9rem);font-weight:700;color:#FFFFFF;line-height:1.16;margin-bottom:16px;">
+          The Brand Fog book is <em style="font-style:italic;color:#BFE2E1;">yours.</em>
+        </h1>
+
+        <p class="bft-sub" style="font-family:Arimo,Arial,sans-serif;font-size:18px;color:#BFE2E1;line-height:1.65;margin:0 0 30px;">
+          Your copy is in your members area now. Read it in an afternoon, then go and look at your own brand with new eyes.
+        </p>
+      </div>
+
+      <div class="bft-hero-ctas">
+        <a href="https://clarity.moonieful.com/school/course/brand-fog-book"
+           style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#FFFFFF;color:#0E6B6B;font-family:Arimo,Arial,sans-serif;font-size:16px;font-weight:700;padding:17px 30px;border-radius:8px;text-decoration:none;min-height:44px;box-sizing:border-box;max-width:100%;">
+          Open your members area &#8594;
+        </a>
+        <a href="https://drive.google.com/file/d/1mcO-cseFpDVDSFdlPFDPu9E87Zm8OtSp/view?usp=sharing"
+           style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,0.08);color:#FFFFFF;font-family:Arimo,Arial,sans-serif;font-size:16px;font-weight:700;padding:16px 34px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.65);min-height:44px;box-sizing:border-box;max-width:100%;">
+          Download the PDF
+        </a>
+      </div>
+
+      <p style="font-family:Arimo,Arial,sans-serif;font-size:14px;color:#BFE2E1;line-height:1.65;margin:0;max-width:520px;">
+        Your receipt is on its way to your inbox. If anything gets in your way, email me at
+        <a href="mailto:miki@moonieful.com" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:0.18em;">miki@moonieful.com</a>
+        and I&#8217;ll sort it out.
+      </p>
+    </div>
+
+    <div class="bft-hero-photo">
+      <img class="bft-shot"
+           src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/images/brandfog-ty-hero-reading.jpg"
+           alt="A business owner reading the Brand Fog book at her desk in morning light"
+           decoding="async" />
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ===================== MOONIEVIEW INVITE (book-only, shown by default) ===================== -->
+<div class="bft-moonieview" style="background:#E7F3F1;padding:68px 32px;border-top:1px solid rgba(14,107,107,0.14);border-bottom:1px solid rgba(14,107,107,0.14);">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <div style="display:inline-block;background:rgba(14,107,107,0.08);border:1px solid rgba(14,107,107,0.22);color:#0E6B6B;font-family:Arimo,Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:7px 18px;border-radius:40px;margin-bottom:18px;">
+      When your book raises more questions than it answers
+    </div>
+    <h2 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(1.6rem,3.5vw,2.3rem);color:#0E6B6B;line-height:1.22;margin-bottom:20px;text-align:center;">
+      Your book shows you where your fog is. MoonieView tells you <em style="font-style:italic;">exactly how to clear it.</em>
+    </h2>
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:17px;color:#3A4A4A;line-height:1.7;margin-bottom:24px;text-align:center;">
+      Brand Fog shows you which of your three signals is leaking. MoonieView is what you do when you know the answer and still can&#8217;t see the fix yourself. You&#8217;re too close to your own brand to read it the way a stranger does, and that closeness is the whole reason an outside pass works.
+    </p>
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:17px;color:#3A4A4A;line-height:1.7;margin-bottom:34px;text-align:center;">
+      A focused brand review and a custom Fog Lifter Blueprint, built for service businesses that are already working but aren&#8217;t yet visible enough to leave the nine-to-five behind.
+    </p>
+    <a href="https://clarity.moonieful.com/moonieview"
+       style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#0E6B6B;color:#FFFFFF;font-family:Arimo,Arial,sans-serif;font-size:16px;font-weight:700;padding:18px 40px;border-radius:8px;text-decoration:none;min-width:280px;min-height:44px;max-width:100%;box-sizing:border-box;">
+      See what happens in a MoonieView &#8594;
+    </a>
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:13px;color:#3A4A4A;margin-top:16px;text-align:center;">
+      That page walks through what a MoonieView covers, what you leave with, and what it costs, so you can decide in your own time.
+    </p>
+  </div>
+</div>
+
+
+<!-- ===================== START HERE (OTO only, hidden by default) ===================== -->
+<div class="bft-starthere" style="display:none;background:#E7F3F1;padding:68px 32px;border-top:1px solid rgba(14,107,107,0.14);border-bottom:1px solid rgba(14,107,107,0.14);">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#0E6B6B;font-weight:700;margin-bottom:10px;">Where to begin</p>
+    <h2 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(1.6rem,3.5vw,2.3rem);color:#0E6B6B;line-height:1.22;margin-bottom:20px;text-align:center;">
+      Read first, then watch, because that order is what makes both of them work.
+    </h2>
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:17px;color:#3A4A4A;line-height:1.7;margin-bottom:34px;max-width:560px;margin-left:auto;margin-right:auto;text-align:center;">
+      Brand Fog maps your three signals and names where clarity breaks down in each one. Clear the Fog walks you through the repair, one signal at a time.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;">
+      <div style="flex:1;min-width:260px;max-width:320px;background:#FFFFFF;border:1.5px solid rgba(14,107,107,0.18);border-radius:12px;padding:28px 24px;text-align:left;">
+        <div style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:1.8rem;color:#4A8080;line-height:1;margin-bottom:12px;">01</div>
+        <h3 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#243434;margin-bottom:10px;line-height:1.4;">Read Brand Fog</h3>
+        <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#3A4A4A;line-height:1.7;margin:0;">Work through your book in order and do the reflection exercises as you go, because the exercises are where you find out which signal is doing the most damage.</p>
+      </div>
+      <div style="flex:1;min-width:260px;max-width:320px;background:#FFFFFF;border:1.5px solid rgba(14,107,107,0.18);border-radius:12px;padding:28px 24px;text-align:left;">
+        <div style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:1.8rem;color:#4A8080;line-height:1;margin-bottom:12px;">02</div>
+        <h3 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#243434;margin-bottom:10px;line-height:1.4;">Work through Clear the Fog</h3>
+        <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#3A4A4A;line-height:1.7;margin:0;">Five modules, each one on a different layer of your fog. Once your book names the leaking signal, the modules walk you through what to fix in your own brand.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== HOW TO READ YOUR BOOK ===================== -->
+<div style="background:#FFFFFF;padding:68px 32px;">
+  <div style="max-width:960px;margin:0 auto;">
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#0E6B6B;font-weight:700;margin-bottom:10px;text-align:center;">How to read your book</p>
+    <h2 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(1.5rem,3vw,2rem);color:#0E6B6B;line-height:1.25;margin-bottom:40px;text-align:center;">Three things that make your reading time count</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;">
+
+      <div style="flex:1;min-width:220px;background:#E7F3F1;border:1px solid rgba(14,107,107,0.12);border-radius:12px;padding:28px 24px;">
+        <div style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:2rem;color:#4A8080;line-height:1;margin-bottom:14px;">01</div>
+        <h3 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#243434;margin-bottom:10px;line-height:1.4;">Read your book in order</h3>
+        <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#3A4A4A;line-height:1.7;margin:0;">Part one gives you your diagnosis, and every chapter after it only works once you have that diagnosis in hand.</p>
+      </div>
+
+      <div style="flex:1;min-width:220px;background:#E7F3F1;border:1px solid rgba(14,107,107,0.12);border-radius:12px;padding:28px 24px;">
+        <div style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:2rem;color:#4A8080;line-height:1;margin-bottom:14px;">02</div>
+        <h3 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#243434;margin-bottom:10px;line-height:1.4;">Do your work sessions</h3>
+        <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#3A4A4A;line-height:1.7;margin:0;">Every chapter has one. The shift happens in the writing rather than in the reading.</p>
+      </div>
+
+      <div style="flex:1;min-width:220px;background:#E7F3F1;border:1px solid rgba(14,107,107,0.12);border-radius:12px;padding:28px 24px;">
+        <div style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:2rem;color:#4A8080;line-height:1;margin-bottom:14px;">03</div>
+        <h3 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#243434;margin-bottom:10px;line-height:1.4;">Notice where you get stuck</h3>
+        <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#3A4A4A;line-height:1.7;margin:0;">Resistance is information, and the question that stops you is pointing straight at your fog.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== WHAT SHIFTS (teal band) ===================== -->
+<div style="background:#0E6B6B;padding:68px 32px;">
+  <div style="max-width:960px;margin:0 auto;">
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#BFE2E1;font-weight:700;margin-bottom:10px;text-align:center;">On the other side of the work</p>
+    <h2 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(1.5rem,3vw,2rem);color:#FFFFFF;line-height:1.25;margin-bottom:40px;text-align:center;">What shifts when your fog clears</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:28px;">
+
+      <div style="flex:1 1 380px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#A6D7D5;flex-shrink:0;margin-top:7px;"></div>
+        <div>
+          <h4 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:6px;line-height:1.4;text-align:left;">Strangers get your work as fast as your clients do</h4>
+          <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#BFE2E1;line-height:1.7;text-align:left;margin:0;">Your clients already know why you&#8217;re worth the price. When your message signal clears, strangers see it too, fast enough that they stay.</p>
+        </div>
+      </div>
+
+      <div style="flex:1 1 380px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#A6D7D5;flex-shrink:0;margin-top:7px;"></div>
+        <div>
+          <h4 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:6px;line-height:1.4;text-align:left;">Your brand starts matching what you charge</h4>
+          <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#BFE2E1;line-height:1.7;text-align:left;margin:0;">Doubt shows up before anyone reads a word, and it shows up in the visuals. Clean those up and the way your brand looks starts backing the number you name.</p>
+        </div>
+      </div>
+
+      <div style="flex:1 1 380px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#A6D7D5;flex-shrink:0;margin-top:7px;"></div>
+        <div>
+          <h4 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:6px;line-height:1.4;text-align:left;">Referrals arrive warm and stay warm</h4>
+          <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#BFE2E1;line-height:1.7;text-align:left;margin:0;">Someone your client sent lands on your page and can&#8217;t match it to what she was told, so she cools off before she ever writes to you. Fix your positioning and your page starts saying what your clients already say about you.</p>
+        </div>
+      </div>
+
+      <div style="flex:1 1 380px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#A6D7D5;flex-shrink:0;margin-top:7px;"></div>
+        <div>
+          <h4 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:6px;line-height:1.4;text-align:left;">Your business gets closer to what you built it for</h4>
+          <p style="font-family:Arimo,Arial,sans-serif;font-size:15px;color:#BFE2E1;line-height:1.7;text-align:left;margin:0;">Brand Fog costs you more than revenue. It costs you the clarity to see that what you&#8217;ve built is worth continuing to build, and that clarity is the part that comes back first.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== SOFT MOONIEVIEW CTA ===================== -->
+<div style="background:#FFFFFF;padding:64px 32px;">
+  <div style="max-width:600px;margin:0 auto;text-align:center;">
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#0E6B6B;font-weight:700;margin-bottom:10px;">When you&#8217;re ready for more</p>
+    <h2 style="font-family:'Shantell Sans',Arimo,Arial,sans-serif;font-size:clamp(1.4rem,2.8vw,1.9rem);color:#0E6B6B;line-height:1.25;margin-bottom:18px;text-align:center;">
+      Some clarity you build alone. Some needs outside eyes.
+    </h2>
+    <p style="font-family:Arimo,Arial,sans-serif;font-size:16px;color:#3A4A4A;line-height:1.7;margin-bottom:30px;text-align:center;">
+      Work through your book first. If you finish it knowing exactly which signal is leaking but still can&#8217;t see the fix, that&#8217;s the moment MoonieView is built for. There&#8217;s no rush, and your book stands on its own.
+    </p>
+    <a href="https://clarity.moonieful.com/moonieview"
+       style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#FFFFFF;color:#0E6B6B;font-family:Arimo,Arial,sans-serif;font-size:15px;font-weight:700;padding:15px 34px;border-radius:8px;text-decoration:none;border:1.5px solid #0E6B6B;min-height:44px;box-sizing:border-box;">
+      See what happens in a MoonieView &#8594;
+    </a>
+  </div>
+</div>
+
+</div>
+
+
+<!-- ===================== UNIVERSAL FOOTER v2 ===================== -->
+<div style="padding:32px 24px;background:#0E6B6B;text-align:center;">
+  <p style="font-family:Arimo,Arial,Helvetica,sans-serif;font-size:13px;color:#BFE2E1;line-height:1.6;margin:0;">&copy; 2026 Moonieful Designs LLC. All rights reserved.</p>
+  <p style="font-family:Arimo,Arial,Helvetica,sans-serif;font-size:13px;margin:6px 0 0 0;color:#BFE2E1;">
+    <a href="https://clarity.moonieful.com/terms" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:0.18em;">Terms &amp; Conditions</a>
+    <span style="color:#BFE2E1;"> | </span>
+    <a href="https://moonieful.com/privacy-policy" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:0.18em;">Privacy Policy</a>
+  </p>
+</div>
+
+
+<!-- Variant detection: ?plan=full means the buyer also took the Clear the Fog upsell.
+     Uses querySelectorAll because Systeme renders each block twice (desktop + mobile). -->
+<script>
+(function() {
+  var isOTO = (new URLSearchParams(window.location.search)).get('plan') === 'full';
+  if (!isOTO) return;
+
+  var setAll = function(sel, fn) {
+    var els = document.querySelectorAll(sel);
+    for (var i = 0; i < els.length; i++) { fn(els[i]); }
+  };
+
+  setAll('.bft-badge', function(el) { el.textContent = 'Both are confirmed'; });
+  setAll('.bft-h1', function(el) {
+    el.innerHTML = 'The Brand Fog book is yours.<br>So is <em style="font-style:italic;color:#BFE2E1;">Clear the Fog.</em>';
+  });
+  setAll('.bft-sub', function(el) {
+    el.textContent = 'Both are in your members area. Read your book first, then start the course.';
+  });
+  setAll('.bft-moonieview', function(el) { el.style.display = 'none'; });
+  setAll('.bft-starthere', function(el) { el.style.display = 'block'; });
+})();
+</script>
