@@ -1,0 +1,62 @@
+<!--
+  OPT IN PAGE EMBED, Your Brand Reflected funnel.
+  Light system repaint 2026 08 12. Identical on all four opt in pages
+  (tb, ie, sm, bv). What differs per page lives in Systeme settings:
+  the form's post submit redirect and the automation rule applying that
+  page's tag. Nothing in this block changes between the four.
+  Pure ASCII by design: this block is delivered through atob(), which is
+  latin 1, so any character above U+007F ships as mojibake.
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+#bfo-root *, #bfo-root *::before, #bfo-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bfo-root {
+  --ground: #E7F3F1;
+  --ink:    #243434;
+  --muted:  #3A4A4A;
+  --teal:   #0E6B6B;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: Arimo, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+  padding: 48px 24px 32px;
+}
+
+#bfo-root .inner { width: 100%; max-width: 640px; margin: 0 auto; text-align: left; }
+#bfo-root .optin-eyebrow { font-family: Arimo, Arial, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+#bfo-root .optin-heading { font-family: 'Shantell Sans', 'Comic Sans MS', cursive; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.35; margin-bottom: 20px; color: var(--ink); }
+#bfo-root .optin-sentence { font-family: 'Shantell Sans', 'Comic Sans MS', cursive; font-style: italic; font-weight: 400; color: var(--teal); }
+#bfo-root .optin-sub { color: var(--muted); font-size: 18px; }
+</style>
+
+<div id="bfo-root">
+  <div class="inner">
+    <p class="optin-eyebrow">Your reflection is ready</p>
+    <h1 class="optin-heading">Your answers already told me plenty.</h1>
+    <p class="optin-sub">I'll show you exactly why strangers miss what you actually do, and which part of your message to fix first. Where should I send your reflection?</p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    // params.get() already URL decodes. Decoding a second time throws
+    // URIError on any sentence holding a literal percent sign.
+    var sentence = (params.get('reflection') || '').trim();
+    if (!sentence) { return; }
+    // querySelectorAll, never getElementById: a raw HTML block can render
+    // twice on a live page (desktop container plus mobile container).
+    var heads = document.querySelectorAll('#bfo-root .optin-heading');
+    for (var i = 0; i < heads.length; i++) {
+      heads[i].textContent = "Here's what you told me: ";
+      var quoted = document.createElement('span');
+      quoted.className = 'optin-sentence';
+      quoted.textContent = '"' + sentence + '"';
+      heads[i].appendChild(quoted);
+    }
+  })();
+</script>
