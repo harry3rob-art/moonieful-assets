@@ -1,0 +1,468 @@
+<!-- ============================================================
+     QUIZ RESULT PAGE  -  v3 LIGHT SYSTEM  (NOT YET DEPLOYED)
+     Systeme page 41163584, step 24135341, funnel 7255533.
+     Built 2026-08-11. Ships TOGETHER with brandfog-quiz-v3-block.html:
+     the quiz redirects here, so one light and one dark breaks the journey.
+
+     Same nine-token remap as the quiz (this page scopes to #bfr-root, the
+     quiz to #bfd-root). Both ran the superseded Website Audit palette.
+
+     FOUR THINGS THE TOKEN REMAP ALONE DID NOT CATCH
+     1. #bfr-root hardcoded background: radial-gradient(... #1a4f5c, #0d2f38,
+        #1A2E35), which OVERRIDES var(--deep). Left alone, the page stays dark
+        no matter what the token says. Now background: var(--deep).
+     2. #bfr-root sets the default text colour to var(--white), invisible on a
+        white page. Now var(--ink).
+     3. TWO blurred decorative orbs, one teal and one gold, part of the dark
+        shell. On white they render as coloured smudges. The gold one only
+        showed up in a screenshot, not in any colour audit. Both display:none.
+     4. The STARFIELD canvas. Stars only work on a dark ground. The canvas is
+        HIDDEN rather than deleted, so the Starfield() call still finds its
+        element and the script stays byte-identical.
+
+     Gold is never a word here either: #D4AF37 measures 2.10 on white and fails
+     even as large text, so .result-reveal, .result-score-number (56px) and
+     .result-opening moved to deep teal. The score bar was a teal-to-gold
+     gradient; a progress bar is meaningful non-text content needing 3:1, and
+     the gold end failed, so it is now teal to #1583B3 (4.26 on white).
+     'Caveat' on .brand-mark was also retired; now Shantell Sans.
+
+     Verified on all five type params (tb, ie, sm, bv, nr) at 1512 and 390:
+     zero DOM contrast failures, no horizontal scroll. Script BYTE-IDENTICAL.
+     ============================================================ -->
+﻿<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+#bfr-root *, #bfr-root *::before, #bfr-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bfr-root {
+  --deep:   #FFFFFF;
+  --dark:   #FFFFFF;
+  --card:   #FFFFFF;
+  --mid:    #0E6B6B;
+  --light:  #243434;
+  --gold:   #D4AF37;
+  --white:  #ffffff;
+  --ink:    #243434;
+  --accent-ink: #0E6B6B;
+  --muted:  #3A4A4A;
+  --border: rgba(14,107,107,0.22);
+  min-height: 100vh;
+  background: var(--deep);
+  color: var(--ink);
+  font-family: Arimo, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+  position: relative;
+  overflow: hidden;
+}
+
+#bfr-root .page {
+  min-height: 100vh;
+  padding: 64px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: bfrFadeIn 0.6s ease;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes bfrFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#bfr-root .inner { width: 100%; max-width: 620px; text-align: left; }
+
+#bfr-root .result-eyebrow {
+  font-size: 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+#bfr-root .result-type {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-size: clamp(32px, 5.5vw, 52px);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+#bfr-root .result-reveal {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--accent-ink);
+  margin-bottom: 32px;
+  line-height: 1.4;
+}
+#bfr-root .result-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 32px;
+}
+#bfr-root .result-description p {
+  color: var(--light);
+  font-size: 20px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+  max-width: 560px;
+}
+#bfr-root .result-cost {
+  background: #E7F3F1;
+  border-left: 3px solid var(--mid);
+  padding: 16px 20px;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 17px;
+  margin: 28px 0 48px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+#bfr-root .result-score {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+  margin-bottom: 40px;
+  max-width: 560px;
+}
+#bfr-root .result-score-heading {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+#bfr-root .result-score-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+#bfr-root .result-score-number {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--accent-ink);
+}
+#bfr-root .result-score-outof { font-size: 17px; color: var(--muted); }
+#bfr-root .result-score-track {
+  height: 8px; border-radius: 4px;
+  background: rgba(14,107,107,0.18);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+#bfr-root .result-score-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #0E6B6B, #1583B3);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #bfr-root .result-score-fill { transition: none; }
+}
+#bfr-root .result-score-note { color: var(--muted); font-size: 17px; line-height: 1.65; margin-bottom: 10px; }
+
+#bfr-root .result-bridge {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+  max-width: 560px;
+}
+#bfr-root .result-bridge-heading {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+#bfr-root .result-bridge-body {
+  color: var(--muted);
+  font-size: 18px;
+  margin-bottom: 24px;
+  line-height: 1.65;
+}
+#bfr-root .result-opening {
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--accent-ink);
+  margin-bottom: 32px;
+  line-height: 1.45;
+  max-width: 560px;
+}
+#bfr-root .result-nameline {
+  color: var(--light);
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 40px;
+  max-width: 560px;
+}
+#bfr-root .result-loading { max-width: 560px; padding: 24px 0 8px; }
+#bfr-root .result-loading-bar {
+  height: 2px; width: 100%; background: var(--border);
+  border-radius: 2px; overflow: hidden; margin-bottom: 16px;
+}
+#bfr-root .result-loading-bar span {
+  display: block; height: 100%; width: 100%; background: var(--mid);
+  border-radius: 2px; transform-origin: left; transform: scaleX(0);
+  transition: transform 2200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #bfr-root .result-loading-bar span { transition: none; }
+}
+#bfr-root .result-loading-text {
+  font-family: 'Shantell Sans', Arimo, sans-serif; font-style: italic;
+  color: var(--muted); font-size: 18px;
+  transition: opacity 250ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  #bfr-root .result-loading-text { transition: none; }
+}
+#bfr-root .result-identity {
+  border-top: 1px solid var(--border);
+  padding-top: 32px; margin-bottom: 40px; max-width: 560px;
+}
+#bfr-root .result-identity p {
+  color: var(--light); font-size: 19px; line-height: 1.75;
+}
+#bfr-root .btn-primary {
+  display: inline-block;
+  background: #0E6B6B;
+  color: var(--white);
+  font-family: Arimo, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 14px 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+#bfr-root .btn-primary:hover { background: #0A5555; transform: translateY(-1px); }
+
+#bfr-root .brand-mark {
+  margin-top: 64px;
+  font-family: 'Shantell Sans', Arimo, sans-serif;
+  font-size: 18px;
+  color: #3A4A4A;
+  text-align: center;
+}
+</style>
+
+<div id="bfr-root">
+
+<canvas id="bfr-canvas" style="display:none;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+<svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.06;pointer-events:none;z-index:0;" xmlns="http://www.w3.org/2000/svg"><filter id="bfr-grain"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#bfr-grain)"/></svg>
+<div style="display:none;position:absolute;top:-120px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(3,152,158,0.45) 0%,rgba(3,152,158,0) 65%);filter:blur(28px);pointer-events:none;z-index:0;"></div>
+<div style="display:none;position:absolute;bottom:10%;left:-90px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(201,164,74,0.28) 0%,rgba(201,164,74,0) 65%);filter:blur(24px);pointer-events:none;z-index:0;"></div>
+
+<div class="page">
+  <div class="inner">
+    <p class="result-eyebrow">Your reflection</p>
+
+    <div id="bfr-loading" class="result-loading" aria-live="polite">
+      <div class="result-loading-bar"><span id="bfr-loading-fill"></span></div>
+      <p class="result-loading-text" id="bfr-loading-text">Reading your answers…</p>
+    </div>
+
+    <div id="bfr-content" style="display:none;">
+      <!-- VIDEO REVEAL SLOT: when the four per-type reveal videos exist, drop the embed
+           here and key it off fogKey (ie / sm / tb / bv). Keep the text beats below as
+           the fallback for slow connections and for nr. Until the videos exist this
+           container stays empty and hidden. -->
+      <div id="bfr-video-slot" style="display:none;"></div>
+      <p class="result-opening" id="bfr-result-opening"></p>
+      <p class="result-nameline" id="bfr-result-nameline"></p>
+      <div class="result-divider"></div>
+      <div class="result-description" id="bfr-result-description"></div>
+      <blockquote class="result-cost" id="bfr-result-move"></blockquote>
+      <!-- Brand Clarity Score REMOVED (Harry, 2026-07-18): the quiz's questions are too
+           light to justify a numeric score, and a free score cannibalizes the MoonieView
+           outside-read. The diagnosis moment belongs to the fit call, not the quiz. -->
+      <div class="result-identity" id="bfr-result-identity">
+        <p id="bfr-identity-body"></p>
+      </div>
+      <div class="result-bridge" id="bfr-result-bridge">
+        <h3 class="result-bridge-heading">What you just saw has a name.</h3>
+        <p class="result-bridge-body" id="bfr-bridge-body"></p>
+        <a class="btn-primary" href="https://clarity.moonieful.com/checkout">Get the Brand Fog book, $17</a>
+      </div>
+    </div>
+  </div>
+  <p class="brand-mark">Moonieful</p>
+</div>
+</div><!-- end #bfr-root -->
+
+<script>
+  // Shared fixed identity-bridge copy (beat 5). Same for all four generating types.
+  // Additive, evidence-based, gender-neutral. Hidden for nr.
+  var IDENTITY_BRIDGE = "You didn't scroll past this page. You stopped, you looked, and you put words to what you want your work to say, and that says something about you: you act on what you notice instead of sitting on it. You're allowed to want a business that works as well as you do, and you're allowed to get help seeing the part of it you can't see alone.";
+
+  // Per-type STATIC FALLBACK for beats 2 and 3 (used only when generation fails/times out).
+  // Beat 1 (mirror) falls back to the sentence template in the render code below.
+  var bfrReflectionTypes = {
+    ie: {
+      typeName: "the Invisible Expert",
+      strengthFallback: "The work you do is the real thing. The people who have felt it know exactly what you take off their plate, and they rave about you for it.",
+      patternFallback: "That same depth is why a stranger can't see it yet. You're so far inside doing the work well that a cold reader gets a list of what you do, not a feel for what it saves them. Your best clients arrive already convinced. Everyone who hasn't seen your work yet still needs you to convince them, in person, one referral at a time.",
+      moveFallback: "Put the outcome your best clients rave about where a stranger sees it first, before the craft. Being visible and being seen become the same act. Lead with what your work does for people, and the depth stops hiding behind it.",
+      nameLine: "There's a name for this pattern. I think of it as the Invisible Expert.",
+      bookBridge: "I call what you just saw in the mirror Brand Fog, and there's a whole pattern behind why the fog forms and what the fog is costing you. The book walks through that pattern for the exact reflection you got. Short read, $17."
+    },
+    sm: {
+      typeName: "the Scattered Magnet",
+      strengthFallback: "You're visible and magnetic. You show up, and people are drawn to you. That pull is real, and most founders never build it.",
+      patternFallback: "That same reach is why the signal gets crowded. Because you're for everyone, the right clients can't tell your offer is for them, and the enquiries that come in match the version of you that undersells your work. You fill your calendar with whoever found you first, not whoever fits best.",
+      moveFallback: "Point your visibility at one kind of client and one kind of result. Concentrating the magnet makes the right people feel “this is for me” and clears the crowd, without dimming any of the reach you already have.",
+      nameLine: "There's a name for this pattern. I think of it as the Scattered Magnet.",
+      bookBridge: "I call what you just saw in the mirror Brand Fog, and there's a whole pattern behind why the fog forms and what the fog is costing you. The book walks through that pattern for the exact reflection you got. Short read, $17."
+    },
+    tb: {
+      typeName: "the Trapped Builder",
+      strengthFallback: "You built a real thing, and people trust you personally to carry it. That trust is earned, and it's a strength most founders never reach.",
+      patternFallback: "That same trust is why your message quietly says hire me and I'll handle it. Because you're the engine, nothing pre-sells before you arrive, so every new client still gets the full explanation from you, live. The calls stack onto your week, and stepping away for a few days costs more than it should.",
+      moveFallback: "Put the part of your work that runs without you, the method and the repeatable result, where strangers see it. Standing out as more than just you is what unhooks the trap, so your brand pre-sells before you're in the room.",
+      nameLine: "There's a name for this pattern. I think of it as the Trapped Builder.",
+      bookBridge: "I call what you just saw in the mirror Brand Fog, and there's a whole pattern behind why the fog forms and what the fog is costing you. The book walks through that pattern for the exact reflection you got. Short read, $17."
+    },
+    bv: {
+      typeName: "the Blurred Visionary",
+      strengthFallback: "You hold a big, clear, original vision. You see the whole picture, and that kind of sight is rare.",
+      patternFallback: "That same completeness is why you under-explain what you offer. Your vision is so whole inside your head that a few brilliant people get it instantly and most give a polite, blank look. The right people are out there half-seeing something that would click if it arrived whole.",
+      moveFallback: "Name the one outcome of your vision a stranger can picture immediately, and put it before the full vision. The narrow doorway is what makes you stand out and clears the blur, without shrinking anything you can see.",
+      nameLine: "There's a name for this pattern. I think of it as the Blurred Visionary.",
+      bookBridge: "I call what you just saw in the mirror Brand Fog, and there's a whole pattern behind why the fog forms and what the fog is costing you. The book walks through that pattern for the exact reflection you got. Short read, $17."
+    },
+    nr: {
+      typeName: "",
+      strengthFallback: "Your strength is already reaching strangers. The people who find you can see your work clearly, and the right clients are saying yes without you having to convince them.",
+      patternFallback: "There's no fog between you and them right now. You're getting the right clients, charging what your work is worth, and moving in the direction you planned.",
+      moveFallback: "This reflection is for the moment when you sense something's off but can't name it yet. If that's not where you are today, this isn't the right read for you right now. If something shifts, come back and look again.",
+      nameLine: "",
+      bookBridge: ""
+    }
+  };
+
+  (function () {
+    // AI-generated reflection REMOVED (Harry, 2026-07-18): the live generation added a
+    // dependency and ~14s of wait for a page that already carries strong per-type copy.
+    // The reflection now always renders from the static per-type text below.
+    var MIN_LOADING_MS = 2200;   // intentional "the mirror is looking at you" minimum
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var LOADING_LABELS = [
+      "Reading your answers…",
+      "Finding what makes you stand out…",
+      "Almost there…"
+    ];
+    var loadingLabelTimers = [];
+
+    function startLoadingAnimation() {
+      var fill = document.getElementById('bfr-loading-fill');
+      var text = document.getElementById('bfr-loading-text');
+      // Phase 1: fill toward 88% over the MIN_LOADING_MS window.
+      requestAnimationFrame(function () { fill.style.transform = 'scaleX(0.88)'; });
+
+      // Rotate labels with a short opacity crossfade; last label holds if generation runs long.
+      var scheduleLabel = function (label, delay) {
+        var id = setTimeout(function () {
+          text.style.opacity = '0';
+          setTimeout(function () {
+            text.textContent = label;
+            text.style.opacity = '1';
+          }, 250);
+        }, delay);
+        loadingLabelTimers.push(id);
+      };
+      scheduleLabel(LOADING_LABELS[1], 900);
+      scheduleLabel(LOADING_LABELS[2], 1800);
+
+      // Phase 2: if still waiting past MIN_LOADING_MS, creep further toward 96% slowly.
+      var creepId = setTimeout(function () {
+        if (!prefersReducedMotion) {
+          fill.style.transition = 'transform 6000ms cubic-bezier(0.16, 1, 0.3, 1)';
+        }
+        fill.style.transform = 'scaleX(0.96)';
+      }, MIN_LOADING_MS);
+      loadingLabelTimers.push(creepId);
+    }
+
+    function finishLoadingAnimation() {
+      loadingLabelTimers.forEach(clearTimeout);
+      loadingLabelTimers = [];
+      var fill = document.getElementById('bfr-loading-fill');
+      if (!prefersReducedMotion) {
+        fill.style.transition = 'transform 200ms ease-out';
+      }
+      fill.style.transform = 'scaleX(1)';
+    }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var rawType = urlParams.get('type') || localStorage.getItem('fogResult');
+    var fogKey = rawType || 'ie';
+    if (rawType && fogKey !== 'nr') localStorage.setItem('fogResult', fogKey);
+    if (rawType && fogKey !== 'nr') localStorage.setItem('reflectionDone', 'true');
+    var sentence = urlParams.get('reflection') || localStorage.getItem('reflectionSentence') || '';
+    var answers = readAnswers(urlParams);
+    var t = Object.prototype.hasOwnProperty.call(bfrReflectionTypes, fogKey) ? bfrReflectionTypes[fogKey] : bfrReflectionTypes.ie;
+    var started = Date.now();
+    startLoadingAnimation();
+
+    function readAnswers(p) {
+      var raw = p.get('answers') || localStorage.getItem('reflectionAnswers') || '';
+      if (!raw) return [];
+      try {
+        var a = JSON.parse(raw);
+        return Array.isArray(a) ? a.filter(function (x) { return typeof x === 'string'; }) : [];
+      } catch (e) { return []; }
+    }
+
+    function strengthOpening(mirror) {
+      if (mirror) return mirror;
+      return t.strengthFallback || '';
+    }
+
+    function renderBeats(mirror, pattern, move) {
+      document.getElementById('bfr-result-opening').textContent = strengthOpening(mirror);
+
+      var nameEl = document.getElementById('bfr-result-nameline');
+      if (t.nameLine) { nameEl.textContent = t.nameLine; } else { nameEl.style.display = 'none'; }
+
+      var descEl = document.getElementById('bfr-result-description');
+      descEl.textContent = '';
+      var p = document.createElement('p');
+      p.textContent = pattern;
+      descEl.appendChild(p);
+
+      document.getElementById('bfr-result-move').textContent = move;
+
+      var identityEl = document.getElementById('bfr-result-identity');
+      if (fogKey === 'nr') { identityEl.style.display = 'none'; }
+      else { document.getElementById('bfr-identity-body').textContent = IDENTITY_BRIDGE; }
+
+      if (fogKey === 'nr' || !t.bookBridge) {
+        document.getElementById('bfr-result-bridge').style.display = 'none';
+      } else {
+        document.getElementById('bfr-bridge-body').textContent = t.bookBridge;
+      }
+
+      finishLoadingAnimation();
+      document.getElementById('bfr-loading').style.display = 'none';
+      document.getElementById('bfr-content').style.display = 'block';
+    }
+
+    function renderFallback() { renderBeats(t.strengthFallback, t.patternFallback, t.moveFallback); }
+
+    function afterMin(fn) {
+      var wait = Math.max(0, MIN_LOADING_MS - (Date.now() - started));
+      setTimeout(fn, wait);
+    }
+
+    // All types render the static per-type reflection. No network dependency.
+    afterMin(renderFallback);
+  })();
+
+  (function(){
+    function Starfield(canvas,count,speed){var ctx=canvas.getContext('2d'),stars=[];function resize(){var p=canvas.parentElement;canvas.width=p.offsetWidth;canvas.height=p.offsetHeight;}function init(){resize();stars=[];for(var i=0;i<count;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.4+0.3,t:Math.random()*Math.PI*2,ts:(Math.random()*0.015+0.005)*speed});}}function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<stars.length;i++){var s=stars[i];s.t+=s.ts;var op=0.25+Math.abs(Math.sin(s.t))*0.75;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+op+')';ctx.fill();if(s.r>1.1){var arm=s.r*3,sp=(op-0.3)*0.5;if(sp>0){ctx.strokeStyle='rgba(210,245,241,'+sp+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(s.x-arm,s.y);ctx.lineTo(s.x+arm,s.y);ctx.moveTo(s.x,s.y-arm);ctx.lineTo(s.x,s.y+arm);ctx.stroke();}}}requestAnimationFrame(draw);}window.addEventListener('resize',init);init();draw();}
+    var c=document.getElementById('bfr-canvas');if(c)Starfield(c,100,0.9);
+  })();
+</script>
