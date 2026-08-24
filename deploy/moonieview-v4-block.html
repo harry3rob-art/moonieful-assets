@@ -1,0 +1,800 @@
+<!--
+  MOONIEVIEW, BOOK A CALL PAGE (Nabeel structure).
+  Light system repaint plus fit call claim correction, 2026 08 12.
+  The free fit call decides FIT. The paid MoonieView carries the findings.
+  Do not put "what to fix first" back on this page as a free promise.
+  Pure ASCII by design: delivered through atob(), which is latin 1.
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+#bac {
+  --ink: #243434;
+  --body: #3A4A4A;
+  --muted: #4A5C5C;
+  --cream: #F6F1E7;
+  --white: #FFFFFF;
+  --teal: #0E6B6B;
+  --teal-dark: #0E6B6B;
+  --teal-light: #E7F3F1;
+  --accent: #D4AF37;
+  --on-teal: #BFE2E1;
+  --border: #CFE0DE;
+  --serif: 'Shantell Sans', 'Comic Sans MS', cursive;
+  --sans: Arimo, Arial, sans-serif;
+
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--body);
+  background: var(--white);
+  width: 100%;
+}
+
+#bac *, #bac *::before, #bac *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bac .wrap {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/*  HERO  */
+#bac .hero {
+  background: var(--teal-dark);
+  padding: 72px 24px 64px;
+  text-align: center;
+}
+
+#bac .hero .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--on-teal);
+  margin-bottom: 20px;
+}
+
+#bac .hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+#bac .hero .hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--on-teal);
+  line-height: 1.7;
+}
+
+/*  TRUST STRIP  */
+#bac .trust-strip {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+
+#bac .trust-strip .wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+#bac .trust-strip .ts-stars { color: var(--teal); letter-spacing: 2px; }
+#bac .trust-strip .ts-div { color: var(--muted); }
+
+@media (max-width: 520px) {
+  #bac .trust-strip .ts-div { display: none; }
+  #bac .trust-strip .wrap { gap: 6px; flex-direction: column; }
+}
+
+/*  VSL  */
+#bac .vsl-section {
+  background: #111;
+  padding: 40px 0;
+}
+
+#bac .vsl-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+#bac .vsl-wrap iframe,
+#bac .vsl-wrap .vsl-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/*  BOOKING  */
+#bac .booking-section {
+  padding: 64px 24px;
+  background: var(--teal-light);
+  text-align: center;
+}
+
+#bac .booking-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+#bac .booking-section .sub {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+#bac .calendly-placeholder {
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 48px 24px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/*  FEATURED QUOTE  */
+#bac .fq-section {
+  padding: 56px 24px;
+  background: var(--teal-dark);
+}
+
+#bac .fq-card {
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#bac .fq-stars {
+  color: var(--on-teal);
+  font-size: 18px;
+  letter-spacing: 5px;
+  margin-bottom: 24px;
+}
+
+#bac .fq-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 27px);
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: normal;
+}
+
+#bac .fq-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--on-teal);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-style: normal;
+}
+
+/*  TESTIMONIAL GRIDS  */
+#bac .testimonials {
+  padding: 56px 24px;
+  background: var(--cream);
+}
+
+#bac .testimonials h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#bac .tgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+#bac .tgrid .t-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+#bac .tgrid .t-item img {
+  width: 100%;
+  display: block;
+}
+
+
+/*  BRIEF SECTIONS (offer + how we work)  */
+#bac .brief {
+  padding: 64px 24px;
+  background: var(--white);
+}
+
+#bac .brief h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+#bac .brief p {
+  color: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/*  FINAL CTA  */
+#bac .cta-final {
+  padding: 72px 24px;
+  background: var(--teal-dark);
+  text-align: center;
+}
+
+#bac .cta-final h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 40px);
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+#bac .cta-final .sub {
+  color: var(--on-teal);
+  font-size: 17px;
+  margin-bottom: 36px;
+}
+
+#bac .btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+#bac .btn:hover { opacity: 0.9; }
+
+@media (max-width: 520px) {
+  #bac .wrap { padding: 0 20px; }
+  #bac .hero { padding: 48px 20px 40px; }
+  #bac .tgrid { grid-template-columns: 1fr; }
+}
+
+/* ===== THREE-STEP PROCESS (added 2026-08-24) ===== */
+/* ===== THREE-STEP PROCESS ===== */
+#bac .steps-open {
+  padding: 64px 24px 48px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .step {
+  padding: 56px 24px;
+  background: var(--white);
+  text-align: center;
+}
+#bac .step--alt { background: var(--cream); }
+#bac .step-eyebrow,
+#bac .steps-open .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+#bac .steps-open h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+#bac .step h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+#bac .steps-open p,
+#bac .step .step-lead {
+  color: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 62ch;
+  margin: 0 auto 1.1em;
+}
+/* Bullets stay LEFT justified inside the centred block (Harry's rule). */
+#bac .step ul {
+  list-style: none;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: left;
+  padding: 0;
+}
+#bac .step li {
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 18px;
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+}
+#bac .step li:last-child { margin-bottom: 0; }
+#bac .step li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--teal);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+#bac .step-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 16px auto 0;
+}
+@media (max-width: 520px) {
+  #bac .steps-open { padding: 48px 20px 36px; }
+  #bac .step { padding: 44px 20px; }
+  #bac .step li { padding-left: 28px; font-size: 16px; }
+}
+
+/* ===== PROOF REBUILD (added 2026-08-24) ===== */
+/* ===== VIDEO REVIEWS ===== */
+#bac .vreviews {
+  padding: 64px 24px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .vreviews .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+#bac .vreviews h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 auto 18px;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+#bac .vreviews .vlead {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 60ch;
+  margin: 0 auto 40px;
+}
+#bac .vgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+#bac .vcard { text-align: left; }
+#bac .vframe {
+  position: relative;
+  padding-bottom: 177.78%; /* 9:16 vertical */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #000;
+  cursor: pointer;
+}
+#bac .vframe img,
+#bac .vframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+#bac .vplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+#bac .vplay::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 20px solid #0E6B6B;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+#bac .vname {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 16px;
+}
+#bac .vbiz {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 2px;
+}
+#bac .vquote {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* ===== TEXT REVIEWS, FOUR ===== */
+#bac .treviews {
+  padding: 64px 24px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .treviews h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+#bac .treviews .tlead {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 0 auto 36px;
+}
+#bac .t4 {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+#bac .t4 img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+#bac .treviews .tclose {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 36px auto 0;
+}
+
+@media (max-width: 900px) {
+  #bac .vgrid { grid-template-columns: 1fr; max-width: 380px; gap: 36px; }
+}
+@media (max-width: 620px) {
+  #bac .t4 { grid-template-columns: 1fr; max-width: 460px; }
+  #bac .vreviews, #bac .treviews { padding: 48px 20px; }
+}
+</style>
+
+<div id="bac">
+
+  <!-- 1. HEADLINE -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>I help business owners whose brand makes total sense in person but loses people the second a stranger opens their website.</h1>
+      <p class="hero-sub" style="margin-bottom: 12px; font-weight: 600;">Your clients and referrals love the work you do and instantly recognize the transformation. Strangers aren't seeing that when they find your brand.</p>
+      <p class="hero-sub">In one free 15-minute call, I'll tell you whether Brand Fog is what's costing you work. If it is, I'll offer you my paid MoonieView, which is where I show you exactly where your fog sits and what to fix first.</p>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="wrap">
+      <span class="ts-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>5.0 on Google</span>
+      <span class="ts-div">&middot;</span>
+      <span>50+ clients helped across 200+ projects</span>
+      <span class="ts-div">&middot;</span>
+      <span>A straight yes or no in 15 minutes</span>
+    </div>
+  </div>
+
+  <!-- 2. VSL
+       REPLACE the .vsl-placeholder div with an iframe when the video is ready.
+       YouTube embed format:
+       iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
+               frameborder="0" allowfullscreen/iframe
+  -->
+  <section class="vsl-section">
+    <div class="vsl-wrap">
+      <div class="vsl-thumb" id="vsl-thumb" onclick="
+        document.getElementById('vsl-thumb').style.display='none';
+        var f=document.getElementById('vsl-frame');
+        f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&amp;rel=0';
+        f.style.display='block';
+      " style="cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
+             alt="Watch the MoonieView video"
+             style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;">
+          <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/>
+            <path d="M45 24 27 14v20" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+      <iframe id="vsl-frame"
+        style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- 4. BOOKING
+       REPLACE .calendly-placeholder with your Calendly inline embed or Typeform embed.
+       Calendly inline embed format:
+       div class="calendly-inline-widget"
+            data-url="https://calendly.com/moonieful/moonieful-connection-call-clone"
+            style="min-width:320px;height:700px;"/div
+       script src="https://assets.calendly.com/assets/external/widget.js" async/script
+       NOTE: Calendly does not publish SRI hashes for this script, integrity attribute
+       cannot be added. This is a known limitation of their embed approach.
+  -->
+  <section class="booking-section" id="booking">
+    <div class="wrap">
+      <h2>Book your free fit call</h2>
+      <p class="sub">Pick a time below. I read your brand before you arrive, so all 15 minutes go to whether we're a fit rather than to background questions.</p>
+      <p style="font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 8px;">Free &middot; 15 minutes &middot; no payment required</p>
+      <iframe src="https://calendly.com/moonieful/moonieful-connection-call-clone" width="100%" height="700" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <!-- 3. FEATURED QUOTE -->
+  <section class="fq-section">
+    <div class="fq-card">
+      <div class="fq-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote class="fq-text">"What an incredible experience! Miki dove head first into my ideas, tackled all of the obstacles with modern solutions, and came up with a step by step plan."</blockquote>
+      <cite class="fq-name">Allan Babas</cite>
+    </div>
+  </section>
+
+  <!-- ===== A. VIDEO REVIEWS ===== -->
+  <section class="vreviews">
+    <div class="wrap">
+      <p class="eyebrow">Filmed at Launch SA, 19 August</p>
+      <h2>Three business owners, minutes after they heard me speak</h2>
+      <p class="vlead">I presented to a room in San Antonio. Nobody there had hired me, nobody was reading from anything, and these three picked up a phone afterward on their own.</p>
+
+      <div class="vgrid">
+        <div class="vcard">
+          <div class="vframe" data-yt="4qyKEaePWys">
+            <img src="https://img.youtube.com/vi/4qyKEaePWys/maxresdefault.jpg" alt="Play the review from Sarisla Toy McKiness">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Sarisla Toy McKiness</p>
+          <p class="vbiz">Chef and interior designer, 15 years in business</p>
+          <p class="vquote">"I realized during her presentation that I am the blurry visionary."</p>
+        </div>
+
+        <div class="vcard">
+          <div class="vframe" data-yt="Un3jbzsUakA">
+            <img src="https://img.youtube.com/vi/Un3jbzsUakA/maxresdefault.jpg" alt="Play the review from Zach at Argus Labs">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Zach</p>
+          <p class="vbiz">Founder and CEO, Argus Labs</p>
+          <p class="vquote">"Removing that brand fog we might have as founders, so our customers understand exactly where we fit."</p>
+        </div>
+
+        <div class="vcard">
+          <div class="vframe" data-yt="704SDrrnXtY">
+            <img src="https://img.youtube.com/vi/704SDrrnXtY/maxresdefault.jpg" alt="Play the review from Audrey Trent at Calorico">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Audrey Trent</p>
+          <p class="vbiz">Owner of Calorico, a marketing agency</p>
+          <p class="vquote">"Even though I'm in marketing, I got something out of it."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- B. WRITTEN SUMMARY (for people who don't watch the video) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Rather read than watch?</h2>
+      <p style="margin-top: 4px;"><strong>What it is.</strong> A free 15-minute call with me, Miki Roberts, founder of Moonieful.</p>
+      <p style="margin-top: 12px;"><strong>What happens.</strong> I ask you a handful of questions about your business. Wherever you can't answer in one clean sentence, your page can't either. That tells us both whether Brand Fog is your problem.</p>
+      <p style="margin-top: 12px;"><strong>What you prepare.</strong> Book a time and answer three quick questions. I read your brand before we meet, so all 15 minutes go to your answer instead of your background.</p>
+      <p style="margin-top: 12px;"><strong>What you leave with.</strong> A straight answer on whether Brand Fog is costing you work. If it is, I'll offer you the paid MoonieView, which is where I show you exactly where your fog sits and what to fix first. If your brand already reads clearly to strangers, I'll tell you that and we'll leave it there.</p>
+      <p style="margin-top: 12px;"><strong>What it costs.</strong> Your call is free and stays free. The MoonieView is $650, and if the fit is there I'll offer it to you before you hang up. That's the only thing I sell on this call, and you'll know whether it fits before anyone asks you to decide.</p>
+      <p style="margin-top: 26px; text-align: center;"><a href="#booking" class="btn">Book My Free 15-Minute Call</a></p>
+    </div>
+  </section>
+
+
+  <!-- 7. WHAT BRAND FOG IS (preserved 2026-08-24 from the retired "Where your call
+       can lead" section, which otherwise took the diagnosis off the page with it) -->
+  <section class="brief" style="background: var(--teal-light);">
+    <div class="wrap">
+      <h2>What Brand Fog is</h2>
+      <p>Strangers meet a blurrier version of your business than the one you know. I call that Brand Fog: it's what happens when a stranger takes in only a fraction of how good your work is before they decide. Your free call tells you whether that's happening to you. A MoonieView is where it gets named and mapped.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION OPENER ===== -->
+  <section class="steps-open">
+    <div class="wrap">
+      <p class="eyebrow">How working with me works</p>
+      <h2>Three steps, and you only ever decide the next one</h2>
+      <p>Most people in your position get sold a rebrand before anyone has read their page. You're here because you'd rather find out what's wrong first.</p>
+      <p>Your free call decides whether there's enough here to work with. If there is, your MoonieView names what has to be built onto it, and your MoonieFit BrandKit is where my team and I build it. Nothing you pay at one step gets spent twice, because whatever you've already paid comes off the next one.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP ONE ===== -->
+  <section class="step">
+    <div class="wrap">
+      <p class="step-eyebrow">Step one, your free fit call</p>
+      <h2>Find out in 15 minutes whether Brand Fog is what's costing you work</h2>
+      <ul>
+        <li>I read your page cold before we meet, the same way a stranger reads it, so all 15 minutes go to your answer instead of your background.</li>
+        <li>I ask a handful of questions about your business, and wherever you can't answer in one clean sentence, your page can't either.</li>
+        <li>You leave with a straight yes or no on whether Brand Fog is costing you work, and if there isn't enough settled in your business yet to build on, I'll tell you that instead of selling you something.</li>
+      </ul>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">Free, 15 minutes, no payment required.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP TWO ===== -->
+  <section class="step step--alt">
+    <div class="wrap">
+      <p class="step-eyebrow">Step two, your MoonieView, $650</p>
+      <h2>See exactly what a stranger has to understand before they'll book you</h2>
+      <ul>
+        <li>A 60-minute session, one-on-one with me and recorded, so you keep every word of it. Your intake form reaches you the moment you book, and I've read your brand cold before we sit down together.</li>
+        <li>Your Fog Lifter Blueprint comes to you in writing afterward, naming where your fog is thickest, who your audience actually is and who shouldn't be your focus, the words you should be using, and what to fix first and in what order.</li>
+        <li>Most clients have their first fix live on their page within a week, and 14 days after your session you send me what you changed so I can tell you what cleared and what still needs a push.</li>
+      </ul>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">I'll offer you a MoonieView on your free call if it's the right next step, and you'll hear the $650 before anyone asks you to decide.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP THREE ===== -->
+  <section class="step">
+    <div class="wrap">
+      <p class="step-eyebrow">Step three, your MoonieFit BrandKit</p>
+      <h2>Have every offer you sell put on a page a stranger can book from</h2>
+      <p class="step-lead">Your Blueprint tells you what to build, and your BrandKit is where we build it. If what you sell needs packaging before a stranger can buy it, I structure your offer first, working from what you already sell rather than inventing a new business line for you.</p>
+      <ul>
+        <li>A landing page built and published for every offer you sell, with your booking system connected behind it. A stranger reads your page and lands on your calendar without ever having to email you first.</li>
+        <li>A script for your video, scripts for your social posts, and a grid of 25 content ideas, so you open Instagram already knowing what this week's post is.</li>
+        <li>Your Blueprint stops being a plan you're carrying around and becomes pages a stranger can read, book from and pay for. Whatever you paid for your MoonieView comes off your BrandKit price.</li>
+      </ul>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">We only talk about what your BrandKit costs once your Blueprint exists, because until I've read your brand I'd be guessing at what you need.</p>
+    </div>
+  </section>
+
+  <!-- 8B. QUESTIONS YOU MIGHT HAVE (new 2026-08-18: five safety objections, neither surface answered before)
+       Cream since 2026-08-24: step three above and "Before you book" below are both white,
+       so this band was running into both with no seam. -->
+  <section class="brief" style="background: var(--cream);">
+    <div class="wrap">
+      <h2>Questions you might have</h2>
+      <p><strong>What if you look at my page and there's nothing wrong with it?</strong></p>
+      <p>Then I tell you that, and it's a good call either way. Some owners leave a free call with nothing more to fix, and that confirmation is free too. Not every business has Brand Fog. Some just have a stranger who hasn't found them yet.</p>
+      <p style="margin-top: 16px;"><strong>Are you going to tell me my business is the problem?</strong></p>
+      <p>No. If a stranger loses the thread on your page, that's almost never because your work is bad. It's usually because your page explains things the way you'd explain them to someone who already trusts you, and a stranger showing up cold doesn't share that trust yet. That's a message problem, and it isn't a reflection on you. It's the one thing a MoonieView is built to find.</p>
+      <p style="margin-top: 16px;"><strong>I've had a designer tell me to start over before. Is a MoonieView the same thing?</strong></p>
+      <p>No, and this is exactly why I read before I redesign anything. A rebrand costs four figures and takes months, and a new logo can't rescue a sentence that doesn't explain what you sell. A MoonieView tells you whether your message is what's actually in the way, before you spend that money finding out. Most of the time, it is, and the fix is smaller than a rebrand.</p>
+      <p style="margin-top: 16px;"><strong>Do I have to show you anything I'm embarrassed by?</strong></p>
+      <p>No. I'm looking at what's already public: your website, the way you already talk about your business. Nothing behind the scenes, nothing you haven't already put out into the world.</p>
+      <p style="margin-top: 16px;"><strong>What if I can't afford the $650 after the call?</strong></p>
+      <p>Then you say so, and the free call stays free either way. You still leave with a straight answer about whether Brand Fog is your problem, which costs you nothing to know. If your timing's wrong, it's wrong, and there's no pressure either direction.</p>
+    </div>
+  </section>
+
+  <!-- 9. BEFORE YOU BOOK (Analytic/Driver FAQ, added 2026-07-19, extended 2026-08-18) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Before you book</h2>
+      <p style="margin-bottom: 16px;">Your free call stays free no matter what we find on it. Everything below is only about what happens if the fit is there.</p>
+      <p><strong>Is the call really free, or is there a pitch waiting at the end?</strong></p>
+      <p>Both, and I'd rather say so. Your call costs nothing and it stays that way whatever you decide. If I think the paid MoonieView would help you, I'll offer it before you hang up. You get my honest read on whether Brand Fog is your problem either way, so those 15 minutes are worth having even when my answer is no.</p>
+      <p style="margin-top: 16px;"><strong>What does the MoonieView cost?</strong></p>
+      <p>$650, for one 60-minute session, one-on-one with me. I'll offer it on your free call if it's the right next step, and you'll know the number before anyone asks you to decide.</p>
+      <p style="margin-top: 16px;"><strong>Is a MoonieView right for me?</strong></p>
+      <p>It's right for you if your clients and referrals already love what you do, and your page just hasn't caught up to what they already know. A MoonieView isn't right if you're still deciding what you sell, because I'd be reading a page you haven't settled, and you'd be paying me to tell you so.</p>
+    </div>
+  </section>
+
+  <!-- ===== B. TEXT REVIEWS, FOUR ===== -->
+  <section class="treviews">
+    <div class="wrap">
+      <h2>What clients say after working with me</h2>
+      <p class="tlead">Four reviews from my Google page. I picked these four because each one names a different part of how I work.</p>
+      <div class="t4">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/11-dd.png" alt="Review from D D: she took the time to listen to my concerns before showing me anything">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/02-matt-steinruck.png" alt="Review from Matt Steinruck: comes alongside business owners to identify with their journey">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/10-rochelle-suggs.png" alt="Review from Rochelle Suggs: the one on one conversation is amazing">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/08-victoria-lopez.png" alt="Review from Victoria Lopez: she is dependable and definitely worth any investment">
+      </div>
+      <p class="tclose">5.0 on Google. Every MoonieView ends the same way, with a written Fog Lifter Blueprint naming where your fog is and what to fix first.</p>
+    </div>
+  </section>
+
+  <!-- 10. FINAL CTA, scrolls to #booking -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Your call is 15 minutes. You leave knowing whether Brand Fog is your problem, and whether the MoonieView is worth booking.</h2>
+      <p class="sub">Book a free 15-minute call. If a full MoonieView is the right next move, you'll hear that, and if strangers are already getting your message, you'll hear that too.</p>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+    </div>
+  </section>
+
+  <script>
+  (function(){
+    var fs = document.querySelectorAll('#bac .vframe');
+    for (var i = 0; i < fs.length; i++) {
+      fs[i].addEventListener('click', function(){
+        var id = this.getAttribute('data-yt');
+        if (!id || id.indexOf('REPLACE_') === 0) { return; }
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('title', 'Video review');
+        this.innerHTML = '';
+        this.appendChild(f);
+      });
+    }
+  })();
+  </script>
+
+</div>
