@@ -367,6 +367,97 @@
   #bac .step li { padding-left: 28px; font-size: 16px; }
 }
 
+/* ===== FLOW CHART (added 2026-08-24, Miki's request) =====
+   A scannable summary of the same three steps, above the detailed sections.
+   It replaces nothing: the three .step sections and all three CTAs stay.
+   Icons are inline SVG (no ids, no defs) because Systeme renders this block
+   TWICE, desktop and mobile, and duplicated ids would collide.
+   Gold is flourish only here (star, crescent, window dot). Every stroke that
+   carries meaning is teal, because gold measures 1.87 on white. */
+#bac .flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 980px;
+  margin: 40px auto 0;
+}
+#bac .flow-node {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  padding: 26px 16px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+#bac .flow-icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+}
+/* EVERY paragraph rule below is compound ON PURPOSE. `#bac .steps-open p` is
+   (1,1,1) and silently beats a single-class rule like `#bac .flow-line` at
+   (1,1,0), which flattened all four text sizes to 18px and pinned a 62ch
+   max-width and a 1.1em bottom margin on each. Nothing in the CSS said a size
+   changed, and the rendered card still looked plausible, so this only showed up
+   by reading computed styles back. Same trap as `.section--teal p` in the
+   design skill. Do not "simplify" these selectors. */
+#bac .steps-open .flow-step {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  max-width: none;
+  margin: 0 0 8px;
+}
+#bac .steps-open .flow-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: none;
+  margin: 0 0 4px;
+}
+#bac .steps-open .flow-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  max-width: none;
+  margin: 0 0 10px;
+}
+#bac .steps-open .flow-line {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+  max-width: none;
+  margin: 0;
+}
+#bac .flow-arrow {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+}
+#bac .flow-arrow svg { width: 22px; height: 22px; display: block; }
+#bac .steps-open .flow-credit {
+  max-width: 980px;
+  margin: 22px auto 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  text-align: center;
+}
+/* Stack on narrow screens and turn the arrows a quarter turn, so the flow
+   still reads as a flow rather than three loose cards. */
+@media (max-width: 760px) {
+  #bac .flow { flex-direction: column; align-items: stretch; max-width: 420px; }
+  #bac .flow-arrow { flex: 0 0 34px; transform: rotate(90deg); }
+  #bac .flow-node { padding: 22px 18px 20px; }
+}
+
 /* ===== PROOF REBUILD (added 2026-08-24) ===== */
 /* ===== INDUSTRY STRIP (preserved 2026-08-24 from the retired 11-card grid) ===== */
 #bac .instrip {
@@ -704,6 +795,70 @@
       <h2>Three steps, and you only ever decide the next one</h2>
       <p>Most people in your position get sold a rebrand before anyone has read their page. You're here because you'd rather find out what's wrong first.</p>
       <p>Your free call decides whether there's enough here to work with. If there is, your MoonieView names what has to be built onto it, and your MoonieFit BrandKit is where my team and I build it. Nothing you pay at one step gets spent twice, because whatever you've already paid comes off the next one.</p>
+
+      <!-- Flow chart. Summary only: the three detailed .step sections below are unchanged. -->
+      <div class="flow">
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <path d="M6 46 H24" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M11 54 H33" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="29" cy="25" r="15" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M40 36 L54 50" stroke="#0E6B6B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M29 18 l2.1 5.1 5.1 2.1 -5.1 2.1 -2.1 5.1 -2.1 -5.1 -5.1 -2.1 5.1 -2.1 z" fill="#D4AF37"/>
+          </svg>
+          <p class="flow-step">Step one</p>
+          <p class="flow-name">Your free fit call</p>
+          <p class="flow-price">15 minutes, free</p>
+          <p class="flow-line">I read your page cold, then tell you straight whether Brand Fog is what's costing you work.</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="10" y="20" width="31" height="37" rx="3" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M17 32 H32" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M17 40 H34" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M17 48 H27" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M50 7 a11 11 0 1 0 0 21 a13.5 13.5 0 0 1 0 -21 z" fill="#D4AF37"/>
+          </svg>
+          <p class="flow-step">Step two</p>
+          <p class="flow-name">Your MoonieView</p>
+          <p class="flow-price">$650</p>
+          <p class="flow-line">A 60-minute session with me, then your Fog Lifter Blueprint in writing, naming what to fix first.</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="5" y="11" width="40" height="31" rx="3" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M5 20 H45" stroke="#0E6B6B" stroke-width="3" fill="none"/>
+            <circle cx="11" cy="15.5" r="1.7" fill="#D4AF37"/>
+            <circle cx="17" cy="15.5" r="1.7" fill="#A6D7D5"/>
+            <path d="M12 29 H30" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M12 36 H24" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <rect x="34" y="36" width="25" height="22" rx="3" fill="#FFFFFF" stroke="#0E6B6B" stroke-width="3.5"/>
+            <path d="M34 43 H59" stroke="#0E6B6B" stroke-width="3" fill="none"/>
+            <path d="M40 50.5 L44.5 55 L53 46.5" stroke="#0E6B6B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <p class="flow-step">Step three</p>
+          <p class="flow-name">Your MoonieFit BrandKit</p>
+          <p class="flow-price">Scoped on your call</p>
+          <p class="flow-line">My team and I build your pages, wire your booking system behind them, and write your scripts.</p>
+        </div>
+
+      </div>
+      <p class="flow-credit">Whatever you pay at one step comes off the next one.</p>
     </div>
   </section>
 
