@@ -74,7 +74,7 @@
 #bac .trust-strip {
   background: var(--cream);
   border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 12px 24px;
 }
 
 #bac .trust-strip .wrap {
@@ -238,6 +238,39 @@
   line-height: 1.75;
 }
 
+/* OBJECTION CARDS (added 2026-08-30 pm: replaces 5 stacked paragraphs with a
+   card grid, same white/border/radius language as .flow-node. Compound
+   selectors on purpose, .brief p is (0,1,1) and would otherwise win. */
+#bac .objection-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 28px auto 0;
+}
+#bac .objection-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: left;
+  flex: 0 1 300px;
+}
+#bac .objection-card .oc-quote {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+#bac .objection-card .oc-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+  margin: 0;
+}
+
 /*  FINAL CTA  */
 #bac .cta-final {
   padding: 72px 24px;
@@ -275,7 +308,8 @@
 
 @media (max-width: 520px) {
   #bac .wrap { padding: 0 20px; }
-  #bac .hero { padding: 48px 20px 40px; }
+  #bac .hero { padding: 32px 20px 28px; }
+  #bac .vsl-section { padding: 24px 0; }
   #bac .tgrid { grid-template-columns: 1fr; }
 }
 
@@ -638,8 +672,7 @@
   <section class="hero">
     <div class="wrap">
       <h1>I help business owners whose brand makes total sense in person but loses people the second a stranger opens their website.</h1>
-      <p class="hero-sub" style="margin-bottom: 12px; font-weight: 600;">Your clients and referrals love the work you do and instantly recognize the transformation. Strangers aren't seeing that when they find your brand.</p>
-      <p class="hero-sub">In one free 15-minute call, I'll tell you whether Brand Fog is what's costing you work. If it is, I'll offer you my paid MoonieView, which is where I show you exactly where your fog sits and what to fix first.</p>
+      <p class="hero-sub">I call it Brand Fog. Watch below to see what it's costing you.</p>
     </div>
   </section>
 
@@ -683,6 +716,37 @@
         style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- 3B. OBJECTION BLOCK (rewritten 2026-08-30 pm: cut from 7 vignettes to 5, nameless "If you've told yourself this" framing per Harry, laid out as a card grid instead of stacked paragraphs, explicit CTA transition into booking added. Belief-chain spec, beliefs 1-4 only, no price but $650. Nadia's rebrand vignette dropped as a direct duplicate of VSL v3 beat 2's rebrand-trap story; Dana's vignette dropped as the closest overlap with belief 3 flagged in the SDD review. -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>If you've told yourself this:</h2>
+      <div class="objection-grid">
+        <div class="objection-card">
+          <p class="oc-quote">"My clients already love me, so this isn't my problem."</p>
+          <p class="oc-body">Full classes and five-star reviews are real. They're also exactly why this stays invisible. The people who already love your work will never be the ones who tell you a stranger read your website and left. Your business only grows as fast as the people already talking about you, and a stranger who leaves in ten seconds never gets the chance to become one of them.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I just need more people finding my page."</p>
+          <p class="oc-body">More traffic just means more strangers reading the same page that's already losing them. Doubling your ad spend doesn't fix that. It just buys a bigger audience for the same problem.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I already know my messaging needs work."</p>
+          <p class="oc-body">Most business owners tell me that in the first five minutes, and they're usually right that something feels off. Knowing your messaging feels unclear isn't the same as knowing which line is actually costing you the work. Until you know that line, you're stuck guessing at everything else, the photos, the price, the niche, without ever touching what's really driving people away.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I've already rewritten my own homepage. Twice."</p>
+          <p class="oc-body">You can move the words around until you can't see the page anymore. You still know what you meant to say. A stranger only reads what you actually wrote, and a third rewrite on your own just repeats the same blind spot in different words.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I don't even know what this is costing me."</p>
+          <p class="oc-body">Every stranger who reads one confusing line and leaves without a word is a client you never knew you lost. That's not a one-time cost. It repeats every day your page stays the same.</p>
+        </div>
+      </div>
+      <p style="margin-top: 32px;">If any of that sounds like you, 15 minutes on a free call is enough to find out whether Brand Fog is the reason, plain yes or no. No walkthrough of your site, just five questions and a straight answer.</p>
+      <p style="margin-top: 20px; text-align: center;"><a href="#booking" class="btn">Book My Free 15-Minute Call</a></p>
     </div>
   </section>
 
