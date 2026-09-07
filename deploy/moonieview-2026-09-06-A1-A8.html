@@ -1,0 +1,1272 @@
+<!--
+  MOONIEVIEW, BOOK A CALL PAGE (Nabeel structure).
+  Light system repaint plus fit call claim correction, 2026 08 12.
+  The free fit call decides FIT. The paid MoonieView carries the findings.
+  Do not put "what to fix first" back on this page as a free promise.
+  Pure ASCII by design: delivered through atob(), which is latin 1.
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+#bac {
+  --ink: #243434;
+  --body: #3A4A4A;
+  --muted: #4A5C5C;
+  --cream: #F6F1E7;
+  --white: #FFFFFF;
+  --teal: #0E6B6B;
+  --teal-dark: #0E6B6B;
+  --teal-light: #E7F3F1;
+  --accent: #D4AF37;
+  --on-teal: #BFE2E1;
+  --border: #CFE0DE;
+  --serif: 'Shantell Sans', 'Comic Sans MS', cursive;
+  --sans: Arimo, Arial, sans-serif;
+
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--body);
+  background: var(--white);
+  width: 100%;
+}
+
+#bac *, #bac *::before, #bac *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#bac .wrap {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/*  HERO  */
+#bac .hero {
+  background: var(--teal-dark);
+  padding: 72px 24px 64px;
+  text-align: center;
+}
+
+#bac .hero .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--on-teal);
+  margin-bottom: 20px;
+}
+
+#bac .hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+#bac .hero .hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--on-teal);
+  line-height: 1.7;
+}
+
+/*  TRUST STRIP  */
+#bac .trust-strip {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+}
+
+#bac .trust-strip .wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+#bac .trust-strip .ts-stars { color: var(--teal); letter-spacing: 2px; }
+#bac .trust-strip .ts-div { color: var(--muted); }
+
+@media (max-width: 520px) {
+  #bac .trust-strip .ts-div { display: none; }
+  #bac .trust-strip .wrap { gap: 6px; flex-direction: column; }
+}
+
+/*  VSL  */
+#bac .vsl-section {
+  background: #111;
+  padding: 40px 0;
+}
+
+#bac .vsl-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+#bac .vsl-wrap iframe,
+#bac .vsl-wrap .vsl-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/*  BOOKING  */
+#bac .booking-section {
+  padding: 64px 24px;
+  background: var(--teal-light);
+  text-align: center;
+}
+
+#bac .booking-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+#bac .booking-section .sub {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+#bac .calendly-placeholder {
+  background: var(--white);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 48px 24px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/*  FEATURED QUOTE  */
+#bac .fq-section {
+  padding: 56px 24px;
+  background: var(--teal-dark);
+}
+
+#bac .fq-card {
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#bac .fq-stars {
+  color: var(--on-teal);
+  font-size: 18px;
+  letter-spacing: 5px;
+  margin-bottom: 24px;
+}
+
+#bac .fq-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 27px);
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-style: normal;
+}
+
+#bac .fq-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--on-teal);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-style: normal;
+}
+
+/*  TESTIMONIAL GRIDS  */
+#bac .testimonials {
+  padding: 56px 24px;
+  background: var(--cream);
+}
+
+#bac .testimonials h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#bac .tgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+#bac .tgrid .t-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+#bac .tgrid .t-item img {
+  width: 100%;
+  display: block;
+}
+
+
+/*  BRIEF SECTIONS (offer + how we work)  */
+#bac .brief {
+  padding: 64px 24px;
+  background: var(--white);
+}
+
+#bac .brief h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+#bac .brief p {
+  color: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/* OBJECTION CARDS (added 2026-08-30 pm: replaces 5 stacked paragraphs with a
+   card grid, same white/border/radius language as .flow-node. Compound
+   selectors on purpose, .brief p is (0,1,1) and would otherwise win. */
+#bac .objection-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 28px auto 0;
+}
+#bac .objection-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: left;
+  flex: 0 1 300px;
+}
+#bac .objection-card .oc-quote {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+#bac .objection-card .oc-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+  margin: 0;
+}
+
+/*  FINAL CTA  */
+#bac .cta-final {
+  padding: 72px 24px;
+  background: var(--teal-dark);
+  text-align: center;
+}
+
+#bac .cta-final h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 40px);
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+#bac .cta-final .sub {
+  color: var(--on-teal);
+  font-size: 17px;
+  margin-bottom: 36px;
+}
+
+#bac .btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+#bac .btn:hover { opacity: 0.9; }
+
+@media (max-width: 520px) {
+  #bac .wrap { padding: 0 20px; }
+  #bac .hero { padding: 32px 20px 28px; }
+  #bac .vsl-section { padding: 24px 0; }
+  #bac .tgrid { grid-template-columns: 1fr; }
+}
+
+/* ===== THREE-STEP PROCESS (added 2026-08-24) ===== */
+/* ===== THREE-STEP PROCESS ===== */
+#bac .steps-open {
+  padding: 64px 24px 48px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .step {
+  padding: 56px 24px;
+  background: var(--white);
+  text-align: center;
+}
+#bac .step--alt { background: var(--cream); }
+#bac .step-eyebrow,
+#bac .steps-open .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+#bac .steps-open h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+#bac .step h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+#bac .steps-open p,
+#bac .step .step-lead {
+  color: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 62ch;
+  margin: 0 auto 1.1em;
+}
+/* Bullets stay LEFT justified inside the centred block (Harry's rule). */
+#bac .step ul {
+  list-style: none;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: left;
+  padding: 0;
+}
+#bac .step li {
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 18px;
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+}
+#bac .step li:last-child { margin-bottom: 0; }
+#bac .step li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--teal);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+#bac .step-note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 16px auto 0;
+}
+@media (max-width: 520px) {
+  #bac .steps-open { padding: 48px 20px 36px; }
+  #bac .step { padding: 44px 20px; }
+  #bac .step li { padding-left: 28px; font-size: 16px; }
+}
+
+/* ===== FLOW CHART (added 2026-08-24, Miki's request) =====
+   A scannable summary of the same three steps, above the detailed sections.
+   It replaces nothing: the three .step sections and all three CTAs stay.
+   Icons are inline SVG (no ids, no defs) because Systeme renders this block
+   TWICE, desktop and mobile, and duplicated ids would collide.
+   Gold is flourish only here (star, crescent, window dot). Every stroke that
+   carries meaning is teal, because gold measures 1.87 on white. */
+#bac .flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 980px;
+  margin: 40px auto 0;
+}
+#bac .flow-node {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  padding: 26px 16px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+#bac .flow-icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+}
+/* EVERY paragraph rule below is compound ON PURPOSE. `#bac .steps-open p` is
+   (1,1,1) and silently beats a single-class rule like `#bac .flow-line` at
+   (1,1,0), which flattened all four text sizes to 18px and pinned a 62ch
+   max-width and a 1.1em bottom margin on each. Nothing in the CSS said a size
+   changed, and the rendered card still looked plausible, so this only showed up
+   by reading computed styles back. Same trap as `.section--teal p` in the
+   design skill. Do not "simplify" these selectors. */
+#bac .steps-open .flow-step {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  max-width: none;
+  margin: 0 0 8px;
+}
+#bac .steps-open .flow-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: none;
+  margin: 0 0 4px;
+}
+#bac .steps-open .flow-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  max-width: none;
+  margin: 0 0 10px;
+}
+#bac .steps-open .flow-line {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+  max-width: none;
+  margin: 0;
+}
+#bac .flow-arrow {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+}
+#bac .flow-arrow svg { width: 22px; height: 22px; display: block; }
+#bac .steps-open .flow-credit {
+  max-width: 980px;
+  margin: 22px auto 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  text-align: center;
+}
+/* Stack on narrow screens and turn the arrows a quarter turn, so the flow
+   still reads as a flow rather than three loose cards. */
+@media (max-width: 760px) {
+  #bac .flow { flex-direction: column; align-items: stretch; max-width: 420px; }
+  #bac .flow-arrow { flex: 0 0 34px; transform: rotate(90deg); }
+  #bac .flow-node { padding: 22px 18px 20px; }
+}
+
+/* ===== PROOF REBUILD (added 2026-08-24) ===== */
+/* ===== VIDEO REVIEWS ===== */
+#bac .vreviews {
+  padding: 64px 24px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .vreviews .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+#bac .vreviews h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 auto 18px;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+#bac .vreviews .vlead {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 60ch;
+  margin: 0 auto 40px;
+}
+#bac .vgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+#bac .vcard { text-align: left; }
+#bac .vframe {
+  position: relative;
+  padding-bottom: 177.78%; /* 9:16 vertical */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #000;
+  cursor: pointer;
+}
+#bac .vframe img,
+#bac .vframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+#bac .vplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+#bac .vplay::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-left: 20px solid #0E6B6B;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+#bac .vname {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 16px;
+}
+#bac .vbiz {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 2px;
+}
+#bac .vquote {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* ===== TEXT REVIEWS, FOUR ===== */
+#bac .treviews {
+  padding: 64px 24px;
+  background: var(--cream);
+  text-align: center;
+}
+#bac .treviews h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+#bac .treviews .tlead {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 0 auto 36px;
+}
+#bac .t4 {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+#bac .t4 img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+#bac .treviews .tclose {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 36px auto 0;
+}
+
+@media (max-width: 900px) {
+  #bac .vgrid { grid-template-columns: 1fr; max-width: 380px; gap: 36px; }
+}
+@media (max-width: 620px) {
+  #bac .t4 { grid-template-columns: 1fr; max-width: 460px; }
+  #bac .vreviews, #bac .treviews { padding: 48px 20px; }
+}
+
+/* Body prose reads left; headings, eyebrows, flow cards and CTAs stay centred. Ruling 2026-09-06. */
+#bac .steps-open > .wrap > p:not(.eyebrow),
+#bac .step .step-lead,
+#bac .step .step-note,
+#bac .vreviews .vlead {
+  text-align: left;
+}
+</style>
+
+<div id="bac">
+
+  <!-- 1. HEADLINE -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>I help business owners whose brand makes total sense in person but loses people the second a stranger opens their website.</h1>
+      <p class="hero-sub">I call it Brand Fog. Watch below to see what it's costing you.</p>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="wrap">
+      <span class="ts-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>5.0 on Google</span>
+      <span class="ts-div">&middot;</span>
+      <span>50+ clients helped across 200+ projects</span>
+      <span class="ts-div">&middot;</span>
+      <span>A straight yes or no in 15 minutes</span>
+    </div>
+  </div>
+
+  <!-- 2. VSL
+       REPLACE the .vsl-placeholder div with an iframe when the video is ready.
+       YouTube embed format:
+       iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
+               frameborder="0" allowfullscreen/iframe
+  -->
+  <section class="vsl-section">
+    <div class="vsl-wrap">
+      <div class="vsl-thumb" id="vsl-thumb" onclick="
+        document.getElementById('vsl-thumb').style.display='none';
+        var f=document.getElementById('vsl-frame');
+        f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&amp;rel=0';
+        f.style.display='block';
+      " style="cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
+             alt="Watch the MoonieView video"
+             style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;">
+          <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/>
+            <path d="M45 24 27 14v20" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+      <iframe id="vsl-frame"
+        style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- 4. BOOKING
+       REPLACE .calendly-placeholder with your Calendly inline embed or Typeform embed.
+       Calendly inline embed format:
+       div class="calendly-inline-widget"
+            data-url="https://calendly.com/moonieful/moonieful-connection-call-clone"
+            style="min-width:320px;height:700px;"/div
+       script src="https://assets.calendly.com/assets/external/widget.js" async/script
+       NOTE: Calendly does not publish SRI hashes for this script, integrity attribute
+       cannot be added. This is a known limitation of their embed approach.
+  -->
+  <section class="booking-section" id="booking">
+    <div class="wrap">
+      <h2>Book your free fit call</h2>
+      <p class="sub">Pick a time below. I read your brand before you arrive, so all 15 minutes go to whether we're a fit rather than to background questions.</p>
+      <p style="font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 8px;">Free &middot; 15 minutes &middot; no payment required</p>
+      <iframe src="https://calendly.com/moonieful/moonieful-connection-call-clone" width="100%" height="700" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <!-- 3. FEATURED QUOTE -->
+  <section class="fq-section">
+    <div class="fq-card">
+      <div class="fq-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote class="fq-text">"What an incredible experience! Miki dove head first into my ideas, tackled all of the obstacles with modern solutions, and came up with a step by step plan."</blockquote>
+      <cite class="fq-name">Allan Babas</cite>
+    </div>
+  </section>
+
+
+  <!-- ===== A. VIDEO REVIEWS ===== -->
+  <section class="vreviews">
+    <div class="wrap">
+      <p class="eyebrow">Filmed at Launch SA, 19 August</p>
+      <h2>Three business owners, minutes after they heard me speak</h2>
+      <p class="vlead">I presented to a room in San Antonio. Nobody there had hired me, nobody was reading from anything, and these three picked up a phone afterward on their own. They have nothing in common except the problem: a chef and interior designer, a company founder, and a marketing agency owner.</p>
+
+      <div class="vgrid">
+        <div class="vcard">
+          <div class="vframe" data-yt="4qyKEaePWys">
+            <img src="https://img.youtube.com/vi/4qyKEaePWys/maxresdefault.jpg" alt="Play the review from Cerissa LaToi Tate McKinnis">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Cerissa LaToi Tate McKinnis</p>
+          <p class="vbiz">Chef and interior designer, 15 years in business</p>
+          <p class="vquote">"I realized during her presentation that I am the blurry visionary."</p>
+        </div>
+
+        <div class="vcard">
+          <div class="vframe" data-yt="Un3jbzsUakA">
+            <img src="https://img.youtube.com/vi/Un3jbzsUakA/maxresdefault.jpg" alt="Play the review from Zach at Argus Labs">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Zach</p>
+          <p class="vbiz">Founder and CEO, Argus Labs</p>
+          <p class="vquote">"Removing that brand fog we might have as founders, so our customers understand exactly where we fit."</p>
+        </div>
+
+        <div class="vcard">
+          <div class="vframe" data-yt="704SDrrnXtY">
+            <img src="https://img.youtube.com/vi/704SDrrnXtY/maxresdefault.jpg" alt="Play the review from Audrey Trent at Calorico">
+            <span class="vplay"></span>
+          </div>
+          <p class="vname">Audrey Trent</p>
+          <p class="vbiz">Owner of Calorico, a marketing agency</p>
+          <p class="vquote">"Even though I'm in marketing, I got something out of it."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3B. OBJECTION BLOCK (rewritten 2026-08-30 pm: cut from 7 vignettes to 5, nameless "If you've told yourself this" framing per Harry, laid out as a card grid instead of stacked paragraphs, explicit CTA transition into booking added. Belief-chain spec, beliefs 1-4 only, no price but $650. Nadia's rebrand vignette dropped as a direct duplicate of VSL v3 beat 2's rebrand-trap story; Dana's vignette dropped as the closest overlap with belief 3 flagged in the SDD review. -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>If you've told yourself this:</h2>
+      <div class="objection-grid">
+        <div class="objection-card">
+          <p class="oc-quote">"My clients already love me, so this isn't my problem."</p>
+          <p class="oc-body">Full classes and five-star reviews are real. They're also exactly why this stays invisible. The people who already love your work will never be the ones who tell you a stranger read your website and left. Your business only grows as fast as the people already talking about you, and a stranger who leaves in ten seconds never gets the chance to become one of them.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I just need more people finding my page."</p>
+          <p class="oc-body">More traffic just means more strangers reading the same page that's already losing them. Doubling your ad spend doesn't fix that. It just buys a bigger audience for the same problem.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I already know my messaging needs work."</p>
+          <p class="oc-body">Most business owners tell me that in the first five minutes, and they're usually right that something feels off. Knowing your messaging feels unclear isn't the same as knowing which line is actually costing you the work. Until you know that line, you're stuck guessing at everything else, the photos, the price, the niche, without ever touching what's really driving people away.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I've already rewritten my own homepage. Twice."</p>
+          <p class="oc-body">You can move the words around until you can't see the page anymore. You still know what you meant to say. A stranger only reads what you actually wrote, and a third rewrite on your own just repeats the same blind spot in different words.</p>
+        </div>
+        <div class="objection-card">
+          <p class="oc-quote">"I don't even know what this is costing me."</p>
+          <p class="oc-body">Every stranger who reads one confusing line and leaves without a word is a client you never knew you lost. That's not a one-time cost. It repeats every day your page stays the same.</p>
+        </div>
+      </div>
+      <p style="margin-top: 32px;">If any of that sounds like you, 15 minutes on a free call is enough to find out whether Brand Fog is the reason, plain yes or no. No walkthrough of your site, just five questions and a straight answer.</p>
+    </div>
+  </section>
+
+  <!-- 7. WHAT BRAND FOG IS (preserved 2026-08-24 from the retired "Where your call
+       can lead" section, which otherwise took the diagnosis off the page with it) -->
+  <section class="brief" style="background: var(--teal-light);">
+    <div class="wrap">
+      <h2>What Brand Fog is</h2>
+      <p>Strangers meet a blurrier version of your business than the one you know. I call that Brand Fog: it's what happens when a stranger takes in only a fraction of how good your work is before they decide. Your free call tells you whether that's happening to you. A MoonieView is where it gets named and mapped.</p>
+    </div>
+  </section>
+
+  <!-- B. WRITTEN SUMMARY (for people who don't watch the video) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Your free call, start to finish</h2>
+      <p style="margin-top: 4px;"><strong>What it is.</strong> A free 15-minute call with me, Miki Roberts, founder of Moonieful.</p>
+      <p style="margin-top: 12px;"><strong>What happens.</strong> I ask you a handful of questions about your business. Wherever you can't answer in one clean sentence, your page can't either. That tells us both whether Brand Fog is your problem.</p>
+      <p style="margin-top: 12px;"><strong>What you prepare.</strong> Book a time and answer three quick questions. I read your brand before we meet, so all 15 minutes go to your answer instead of your background.</p>
+      <p style="margin-top: 12px;"><strong>What you leave with.</strong> A straight answer on whether Brand Fog is costing you work. If it is, I'll offer you the paid MoonieView, which is where I show you exactly where your fog sits and what to fix first. If your brand already reads clearly to strangers, I'll tell you that and we'll leave it there.</p>
+      <p style="margin-top: 12px;"><strong>What it costs.</strong> Your call is free and stays free. The MoonieView is $650, and if the fit is there I'll offer it to you before you hang up. That's the only thing I sell on this call, and you'll know whether it fits before anyone asks you to decide.</p>
+      <p style="margin-top: 26px; text-align: center;"><a href="#booking" class="btn">Book My Free 15-Minute Call</a></p>
+    </div>
+  </section>
+
+
+  <!-- ===== SECTION OPENER ===== -->
+  <section class="steps-open">
+    <div class="wrap">
+      <p class="eyebrow">How working with me works</p>
+      <h2>Three steps, and you only ever decide the next one</h2>
+      <p>Your free call decides whether there's enough here to work with. If there is, your MoonieView names what has to be built onto it, and your MoonieFit BrandKit is where my team and I build it. Nothing you pay at one step gets spent twice, because whatever you've already paid comes off the next one.</p>
+
+      <!-- Flow chart. Summary only: the three detailed .step sections below are unchanged. -->
+      <div class="flow">
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <path d="M6 46 H24" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M11 54 H33" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="29" cy="25" r="15" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M40 36 L54 50" stroke="#0E6B6B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M29 18 l2.1 5.1 5.1 2.1 -5.1 2.1 -2.1 5.1 -2.1 -5.1 -5.1 -2.1 5.1 -2.1 z" fill="#D4AF37"/>
+          </svg>
+          <p class="flow-step">Step one</p>
+          <p class="flow-name">Your free fit call</p>
+          <p class="flow-price">15 minutes, free</p>
+          <p class="flow-line">I read your page cold, then tell you straight whether Brand Fog is what's costing you work.</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="10" y="20" width="31" height="37" rx="3" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M17 32 H32" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M17 40 H34" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M17 48 H27" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M50 7 a11 11 0 1 0 0 21 a13.5 13.5 0 0 1 0 -21 z" fill="#D4AF37"/>
+          </svg>
+          <p class="flow-step">Step two</p>
+          <p class="flow-name">Your MoonieView</p>
+          <p class="flow-price">$650</p>
+          <p class="flow-line">A 60-minute session with me, then your Fog Lifter Blueprint in writing, naming what to fix first.</p>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="flow-node">
+          <svg class="flow-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="5" y="11" width="40" height="31" rx="3" stroke="#0E6B6B" stroke-width="3.5" fill="none"/>
+            <path d="M5 20 H45" stroke="#0E6B6B" stroke-width="3" fill="none"/>
+            <circle cx="11" cy="15.5" r="1.7" fill="#D4AF37"/>
+            <circle cx="17" cy="15.5" r="1.7" fill="#A6D7D5"/>
+            <path d="M12 29 H30" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M12 36 H24" stroke="#A6D7D5" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <rect x="34" y="36" width="25" height="22" rx="3" fill="#FFFFFF" stroke="#0E6B6B" stroke-width="3.5"/>
+            <path d="M34 43 H59" stroke="#0E6B6B" stroke-width="3" fill="none"/>
+            <path d="M40 50.5 L44.5 55 L53 46.5" stroke="#0E6B6B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <p class="flow-step">Step three</p>
+          <p class="flow-name">Your MoonieFit BrandKit</p>
+          <p class="flow-price">Scoped on your call</p>
+          <p class="flow-line">My team and I build your pages, wire your booking system behind them, and write your scripts.</p>
+        </div>
+
+      </div>
+      <p class="flow-credit">Whatever you pay at one step comes off the next one.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP ONE ===== -->
+  <section class="step">
+    <div class="wrap">
+      <p class="step-eyebrow">Step one, your free fit call</p>
+      <h2>Find out in 15 minutes whether Brand Fog is what's costing you work</h2>
+      <ul>
+        <li>I read your page cold before we meet, the same way a stranger reads it, so all 15 minutes go to your answer instead of your background.</li>
+        <li>I ask a handful of questions about your business, and wherever you can't answer in one clean sentence, your page can't either.</li>
+        <li>You leave with a straight yes or no on whether Brand Fog is costing you work, and if there isn't enough settled in your business yet to build on, I'll tell you that instead of selling you something.</li>
+      </ul>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">Free, 15 minutes, no payment required.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP TWO ===== -->
+  <section class="step step--alt">
+    <div class="wrap">
+      <p class="step-eyebrow">Step two, your MoonieView, $650</p>
+      <h2>See exactly what a stranger has to understand before they'll book you</h2>
+      <p class="step-lead">Your free call decided whether Brand Fog is your problem. Your MoonieView is where I go all the way into it. Nobody skips this step, because I won't build on a brand I haven't read properly, and you leave with a plan you can start using that week whether you ever hire me again or not.</p>
+<!-- MV STAGE TIMELINE. Four cards in a horizontal row, revealing one after another
+     left to right as the row scrolls into view.
+
+     This REPLACES the three item ul inside section.step.step-alt (Step two), it does
+     not sit alongside it. The old list said what you get, a separate timeline would
+     have said when you get it, and both named the session, the Blueprint and the
+     check back in the same order. One component carries what and when together.
+
+     Every claim from the old list survives: recorded session, intake form on booking,
+     the cold read, the four things the Blueprint names, first fix live within a week,
+     the Blueprint is yours to run with, and the build offer.
+
+     WIDTH. The row needs the section's full measure, so the block overrides the 640px
+     the step sections use for prose and runs to 1100px inside the page's own 1170px
+     wrap. Four cards then sit at roughly 260px each, which the body copy fits without
+     being cut.
+
+     WHY THE CARDS REVEAL IN SEQUENCE, NOT TOGETHER. A horizontal row crosses the
+     viewport's trigger line all at once, so a plain per element observer would fire
+     all four in the same frame and the sequence would be lost. The observer collects
+     everything entering in one callback, sorts it left to right, and gives each card
+     an incremental delay, so they arrive one at a time in reading order. A card that
+     enters alone, which is what happens once the row stacks on a phone, gets no extra
+     delay and moves as soon as it is reached.
+
+     Each card fires ONCE and is then unobserved. Re-firing on every scroll past would
+     loop, and a looping page element reads as a banner ad.
+
+     THE RAIL IS HORIZONTAL. A node sits above each card and a segment runs from that
+     node across the gap to the next one, drawn with scaleX from the left, so the line
+     travels left to right just ahead of each card arriving. The last card has no
+     segment, so the rail ends at the final node instead of trailing into space. Below
+     900px the row stops being a single line, so the connectors are hidden and each
+     card keeps its own node.
+
+     Motion is restrained: nothing loops, nothing bounces except a small settle on the
+     node, and prefers-reduced-motion shows the finished state with no movement.
+
+     Specificity is measured, not decorative. The live page carries "#bac .step li" at
+     (1,2,1) and "#bac .step li::before" at (1,2,2), which adds 34px of left padding,
+     18px of bottom margin and a checkmark to every li inside a step section. A plain
+     "#mv-tl .mv-tl-card" is only (1,1,0) and loses. The rules below use ul.class and
+     li.class to reach (1,2,2) and (1,2,3), so they win without depending on the page's
+     own root id being present. This only shows up by reading getComputedStyle back: an
+     earlier build rendered a gold dot with a checkmark sitting on top of it and looked
+     perfectly fine in a screenshot.
+
+     The script hooks on a CLASS, never getElementById, because Systeme renders each
+     source block twice and the id is not unique on the live page.
+
+     Pure ASCII on purpose: the delivery channel decodes with atob and any byte above
+     007F arrives as mojibake. -->
+<style>
+#mv-tl {
+  max-width: 1100px;
+  margin: 8px auto 34px;
+}
+/* max-width: none is load bearing. The page pins every ul inside a step section to
+   640px for prose measure ("#bac .step ul"), which squeezed this row to four 147px
+   columns and 533px tall cards. Selectors below carry the root class as well as the
+   id so they outrank that rule on specificity rather than relying on source order. */
+#mv-tl.mv-tl-root ul.mv-tl-row {
+  max-width: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 34px 0 0;
+  text-align: left;
+}
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card {
+  position: relative;
+  margin: 0;
+  padding: 22px 18px 20px;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 500ms ease, transform 560ms cubic-bezier(.22,.61,.36,1);
+  transition-delay: var(--mv-d, 0ms);
+}
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card.is-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* The node, sitting on the rail above its card. Overrides the page's own checkmark
+   marker on every count. */
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card::before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: 26px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--cream);
+  transform: scale(0);
+  transition: transform 400ms cubic-bezier(.34,1.56,.64,1);
+  transition-delay: calc(var(--mv-d, 0ms) + 120ms);
+  z-index: 1;
+}
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card.is-in::before { transform: scale(1); }
+
+/* The horizontal rail segment, running from this node across the gap to the next.
+   Colour is an explicit hex, not var(--teal-light). Measured: the page's own
+   --teal-light is 1.01:1 against the cream section background, which is invisible
+   rather than subtle, and an earlier build shipped a rail nobody could see. #A6D7D5
+   is Miki's light aqua from the Character Sheet and reads as a soft guide line at
+   2px while the gold nodes keep the emphasis. */
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card::after {
+  content: "";
+  position: absolute;
+  top: -29px;
+  left: 32px;
+  width: calc(100% + 18px);
+  height: 2px;
+  background: #A6D7D5;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms cubic-bezier(.22,.61,.36,1);
+  transition-delay: calc(var(--mv-d, 0ms) + 60ms);
+}
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card.is-in::after { transform: scaleX(1); }
+#mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card:last-child::after { display: none; }
+
+#mv-tl .mv-tl-when {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--teal);
+  max-width: none;
+  margin: 0 0 5px;
+}
+#mv-tl .mv-tl-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: none;
+  margin: 0 0 3px;
+}
+#mv-tl .mv-tl-meta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  max-width: none;
+  margin: 0 0 9px;
+}
+#mv-tl .mv-tl-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--body);
+  max-width: none;
+  margin: 0;
+}
+
+/* Two across. The row is no longer one straight line, so the connectors go and each
+   card keeps its own node. */
+@media (max-width: 900px) {
+  #mv-tl.mv-tl-root ul.mv-tl-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card::after { display: none; }
+}
+@media (max-width: 620px) {
+  #mv-tl.mv-tl-root ul.mv-tl-row { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 30px; }
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card { transform: translateX(-12px); }
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card.is-in { transform: translateX(0); }
+}
+/* Reduced motion gets the finished state with no movement at all. */
+@media (prefers-reduced-motion: reduce) {
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card { opacity: 1; transform: none; transition: none; }
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card::before { transform: scale(1); transition: none; }
+  #mv-tl.mv-tl-root ul.mv-tl-row > li.mv-tl-card::after { transform: scaleX(1); transition: none; }
+}
+</style>
+
+<div id="mv-tl" class="mv-tl-root">
+  <ul class="mv-tl-row">
+
+    <li class="mv-tl-card">
+      <p class="mv-tl-when">Day one</p>
+      <p class="mv-tl-name">Your session</p>
+      <p class="mv-tl-meta">60 minutes, one-on-one</p>
+      <p class="mv-tl-body">Recorded, so you keep every word of it. Your intake form reaches you the moment you book, and I've read your brand cold before we sit down together. You leave with one fix to start on, so you can begin the same day we talk.</p>
+    </li>
+
+    <li class="mv-tl-card">
+      <p class="mv-tl-when">Within 48 hours</p>
+      <p class="mv-tl-name">Your Fog Lifter Blueprint</p>
+      <p class="mv-tl-meta">In writing</p>
+      <p class="mv-tl-body">Where your fog is thickest, who your audience actually is and who shouldn't be your focus, the words you should be using, and what to fix first and in what order. My reasoning goes in writing too, so you can see why that first fix comes first.</p>
+    </li>
+
+    <li class="mv-tl-card">
+      <p class="mv-tl-when">Inside a week</p>
+      <p class="mv-tl-name">Your first fix, live</p>
+      <p class="mv-tl-meta">On your page</p>
+      <p class="mv-tl-body">I keep your first fix small on purpose, so most clients have theirs live within the week. Everything else your Blueprint names is a bigger build, and that's what your MoonieFit BrandKit is for.</p>
+    </li>
+
+    <li class="mv-tl-card">
+      <p class="mv-tl-when">Day 14</p>
+      <p class="mv-tl-name">I check back</p>
+      <p class="mv-tl-meta">No charge</p>
+      <p class="mv-tl-body">Your Blueprint is yours to run with, and plenty of people do exactly that. I ask how far you've got, and if you're moving on your own we leave it there. If you'd rather I built it for you, I'll tell you what that looks like and what it costs.</p>
+    </li>
+
+  </ul>
+</div>
+
+<script>
+(function () {
+  var cards = document.querySelectorAll('.mv-tl-root li.mv-tl-card');
+  if (!cards.length) return;
+  var i;
+  var reduce = false;
+  if (window.matchMedia) { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (i = 0; i < cards.length; i++) { cards[i].classList.add('is-in'); }
+    return;
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    var batch = [];
+    for (var j = 0; j < entries.length; j++) {
+      if (entries[j].isIntersecting) { batch.push(entries[j].target); }
+    }
+    if (!batch.length) return;
+    // Reading order: down the page first, then left to right across the row. A
+    // horizontal row shares one offsetTop, so without the offsetLeft tiebreak the
+    // four cards would land in DOM order by luck rather than by design.
+    batch.sort(function (a, b) {
+      if (a.offsetTop !== b.offsetTop) { return a.offsetTop - b.offsetTop; }
+      return a.offsetLeft - b.offsetLeft;
+    });
+    for (var b = 0; b < batch.length; b++) {
+      batch[b].style.setProperty('--mv-d', (b * 190) + 'ms');
+      batch[b].classList.add('is-in');
+      obs.unobserve(batch[b]);
+    }
+  }, { threshold: 0.15, rootMargin: '0px 0px -12% 0px' });
+  for (i = 0; i < cards.length; i++) { obs.observe(cards[i]); }
+})();
+</script>
+
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">I'll offer you a MoonieView on your free call if it's the right next step, and you'll hear the $650 before anyone asks you to decide.</p>
+    </div>
+  </section>
+
+  <!-- ===== STEP THREE ===== -->
+  <section class="step">
+    <div class="wrap">
+      <p class="step-eyebrow">Step three, your MoonieFit BrandKit</p>
+      <h2>Have every offer you sell put on a page a stranger can book from</h2>
+      <p class="step-lead">Your Blueprint tells you what to build, and your BrandKit is where we build it. If what you sell needs packaging before a stranger can buy it, I structure your offer first, working from what you already sell rather than inventing a new business line for you.</p>
+      <ul>
+        <li>A landing page built and published for every offer you sell, with your booking system connected behind it. A stranger reads your page and lands on your calendar without ever having to email you first.</li>
+        <li>A script for your video, scripts for your social posts, and a grid of 25 content ideas, so you open Instagram already knowing what this week's post is.</li>
+        <li>Your Blueprint stops being a plan you're carrying around and becomes pages a stranger can read, book from and pay for. Whatever you paid for your MoonieView comes off your BrandKit price.</li>
+      </ul>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+      <p class="step-note">We only talk about what your BrandKit costs once your Blueprint exists, because until I've read your brand I'd be guessing at what you need.</p>
+    </div>
+  </section>
+
+  <!-- 8B. QUESTIONS YOU MIGHT HAVE (new 2026-08-18: five safety objections, neither surface answered before)
+       Cream since 2026-08-24: step three above and "Before you book" below are both white,
+       so this band was running into both with no seam. -->
+  <section class="brief" style="background: var(--cream);">
+    <div class="wrap">
+      <h2>Questions you might have</h2>
+      <p><strong>What if you look at my page and there's nothing wrong with it?</strong></p>
+      <p>Then I tell you that, and it's a good call either way. Some owners leave a free call with nothing more to fix, and that confirmation is free too. Not every business has Brand Fog. Some just have a stranger who hasn't found them yet.</p>
+      <p style="margin-top: 16px;"><strong>Are you going to tell me my business is the problem?</strong></p>
+      <p>No. If a stranger loses the thread on your page, that's almost never because your work is bad. It's usually because your page explains things the way you'd explain them to someone who already trusts you, and a stranger showing up cold doesn't share that trust yet. That's a message problem, and it isn't a reflection on you. It's the one thing a MoonieView is built to find.</p>
+      <p style="margin-top: 16px;"><strong>I've had a designer tell me to start over before. Is a MoonieView the same thing?</strong></p>
+      <p>No. A rebrand takes months and runs into four figures, and a MoonieView tells you whether your message is what's actually in the way before you spend that. Most of the time it is, and your fix is smaller than a rebrand.</p>
+      <p style="margin-top: 16px;"><strong>Do I have to show you anything I'm embarrassed by?</strong></p>
+      <p>No. I'm looking at what's already public: your website, the way you already talk about your business. Nothing behind the scenes, nothing you haven't already put out into the world.</p>
+      <p style="margin-top: 16px;"><strong>What if I can't afford the $650 after the call?</strong></p>
+      <p>Then you say so, and the free call stays free either way. You still leave with a straight answer about whether Brand Fog is your problem, which costs you nothing to know. If your timing's wrong, it's wrong, and there's no pressure either direction.</p>
+    </div>
+  </section>
+
+  <!-- 9. BEFORE YOU BOOK (Analytic/Driver FAQ, added 2026-07-19, extended 2026-08-18) -->
+  <section class="brief">
+    <div class="wrap">
+      <h2>Before you book</h2>
+      <p style="margin-bottom: 16px;">Your free call stays free no matter what we find on it. Everything below is only about what happens if the fit is there.</p>
+      <p><strong>Is the call really free, or is there a pitch waiting at the end?</strong></p>
+      <p>Both, and I'd rather say so. Your call costs nothing and it stays that way whatever you decide. If I think the paid MoonieView would help you, I'll offer it before you hang up. You get my honest read on whether Brand Fog is your problem either way, so those 15 minutes are worth having even when my answer is no.</p>
+      <p style="margin-top: 16px;"><strong>What does the MoonieView cost?</strong></p>
+      <p>$650, for one 60-minute session, one-on-one with me. I'll offer it on your free call if it's the right next step, and you'll know the number before anyone asks you to decide.</p>
+      <p style="margin-top: 16px;"><strong>Is a MoonieView right for me?</strong></p>
+      <p>It's right for you if your clients and referrals already love what you do, and your page just hasn't caught up to what they already know. A MoonieView isn't right if you're still deciding what you sell, because I'd be reading a page you haven't settled, and you'd be paying me to tell you so.</p>
+    </div>
+  </section>
+
+  <!-- ===== B. TEXT REVIEWS, FOUR ===== -->
+  <section class="treviews">
+    <div class="wrap">
+      <h2>What clients say after working with me</h2>
+      <p class="tlead">Four reviews from my Google page. I picked these four because each one names a different part of how I work.</p>
+      <div class="t4">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/11-dd.png" alt="Review from D D: she took the time to listen to my concerns before showing me anything">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/02-matt-steinruck.png" alt="Review from Matt Steinruck: comes alongside business owners to identify with their journey">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/10-rochelle-suggs.png" alt="Review from Rochelle Suggs: the one on one conversation is amazing">
+        <img src="https://raw.githubusercontent.com/harry3rob-art/moonieful-assets/main/testimonials/08-victoria-lopez.png" alt="Review from Victoria Lopez: she is dependable and definitely worth any investment">
+      </div>
+      <p class="tclose">5.0 on Google. Every MoonieView ends the same way, with a written Fog Lifter Blueprint naming where your fog is and what to fix first.</p>
+    </div>
+  </section>
+
+  <!-- 10. FINAL CTA, scrolls to #booking -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Your call is 15 minutes. You leave knowing whether Brand Fog is your problem, and whether the MoonieView is worth booking.</h2>
+      <p class="sub">Book a free 15-minute call. If a full MoonieView is the right next move, you'll hear that, and if strangers are already getting your message, you'll hear that too.</p>
+      <a href="#booking" class="btn">Book My Free 15-Minute Call</a>
+    </div>
+  </section>
+
+  <script>
+  (function(){
+    var fs = document.querySelectorAll('#bac .vframe');
+    for (var i = 0; i < fs.length; i++) {
+      fs[i].addEventListener('click', function(){
+        var id = this.getAttribute('data-yt');
+        if (!id || id.indexOf('REPLACE_') === 0) { return; }
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('title', 'Video review');
+        this.innerHTML = '';
+        this.appendChild(f);
+      });
+    }
+  })();
+  </script>
+
+</div>
