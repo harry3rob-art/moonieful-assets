@@ -1,0 +1,130 @@
+<!-- MVB FIRST TWO WEEKS. Four stages, day one to day 14, for the post booking page.
+
+     WHY IT IS STATIC. The equivalent row on /moonieview reveals its cards left to right on
+     scroll. This page is built entirely from static .mf-card blocks, and matching the page
+     it lives on beats matching a different page, so this one does not animate. It also sits
+     in front of someone who has already paid, where motion earns nothing.
+
+     WHY IT REUSES .mf-card AND .mf-eyebrow. Those classes already carry this page's border,
+     radius, padding and colour, so the row inherits the design system instead of restating
+     it. Only the grid, the stage label and the list reset are new, and each is scoped under
+     .mvb-tl so nothing else on the page moves.
+
+     LIST RESET IS LOAD BEARING. The stages are an ordered list because they are a real
+     sequence, and the page styles ol and li for prose elsewhere, so padding, markers and
+     margins are all reset explicitly rather than assumed.
+
+     Pure ASCII on purpose: the delivery channel decodes with atob and any byte above 007F
+     arrives as mojibake. No double hyphens or angle brackets inside comments, because the
+     raw HTML validator rejects both and disables Save without saying why. -->
+<style>
+.mvb-tl .mvb-tl-row {
+  list-style: none;
+  margin: 26px auto 0;
+  padding: 0;
+  /* Load bearing. The page pins every ol to var(--mf-measure), 65ch, for prose measure,
+     which squeezed this row to four 151px columns and 476px tall cards. The row needs the
+     section's full wrap instead, so it restates max-width rather than inheriting one. */
+  max-width: var(--mf-wrap, 1120px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card {
+  list-style: none;
+  margin: 0;
+  padding: 20px 18px;
+  position: relative;
+  /* .mf-card centres its own contents, which is right for the short two line cards used
+     elsewhere on this page and wrong for three and four line stage copy. The equivalent row
+     on /moonieview reads left for the same reason, so the two components agree. */
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-when,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-label {
+  text-align: left;
+}
+/* The stage marker. An explicit block rather than a list marker, so it survives the reset
+   and can carry the gold the rest of the page uses for emphasis. */
+.mvb-tl .mvb-tl-when {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mf-teal-deep, #0E6B6B);
+  margin: 0 0 6px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3 {
+  margin: 0 0 4px;
+  font-size: 19px;
+  line-height: 1.25;
+  /* Without this "Your Fog Lifter Blueprint" breaks after "Fog" and splits the product
+     name across two lines. Balancing the wrap keeps "Fog Lifter" together. */
+  text-wrap: balance;
+}
+.mvb-tl .mvb-tl-label {
+  display: block;
+  font-size: 13px;
+  color: var(--mf-ink-soft, #3A4A4A);
+  margin: 0 0 10px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+/* A thin rule above each card stands in for the connecting rail without drawing one, which
+   would need absolute positioning the four column grid cannot keep honest when it collapses. */
+.mvb-tl .mvb-tl-row > li.mvb-tl-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--mf-gold, #D4AF37);
+}
+@media (max-width: 900px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="mf-section mvb-tl">
+  <span class="mf-eyebrow">Day one to day 14</span>
+  <h2>Your first two weeks</h2>
+  <ol class="mvb-tl-row">
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Day one</span>
+      <h3>Your session</h3>
+      <span class="mvb-tl-label">60 minutes, recorded</span>
+      <p>We spend your hour on your message, your offer, your page and your visuals, and you leave with one fix to start on, so you can begin the same day we talk.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Within 48 hours</span>
+      <h3>Your Fog Lifter Blueprint</h3>
+      <span class="mvb-tl-label">In writing</span>
+      <p>Your Blueprint names where your fog is thickest and why your first fix comes first, so you can see my reasoning as well as the instruction.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Inside a week</span>
+      <h3>Your first fix, live</h3>
+      <span class="mvb-tl-label">On your page</span>
+      <p>I keep your first fix small on purpose, so most clients have theirs live inside the week. Everything else your Blueprint names is a bigger build, and your MoonieFit BrandKit is where that work lives.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Day 14</span>
+      <h3>I check back</h3>
+      <span class="mvb-tl-label">No charge</span>
+      <p>I ask how far you got. If you're moving on your own, we leave it there and you keep going.</p>
+    </li>
+  </ol>
+</div>
