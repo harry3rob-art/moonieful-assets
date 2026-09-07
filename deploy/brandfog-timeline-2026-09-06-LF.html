@@ -1,0 +1,200 @@
+<!-- BF STAGE TIMELINE. Three cards in a horizontal row, revealing one after another
+     left to right as the row scrolls into view.
+
+     Insert inside the PRICE BLOCK section, between the h2 "One afternoon. One honest
+     read of your brand." and div.pricing-block, so the reader gets the two week
+     picture before the price and the button rather than after them.
+
+     Same component as the /moonieview timeline on purpose. The copy standard's
+     consistency rule wants one system across every surface she touches, and two
+     different timeline treatments across two pages of one funnel is the mismatch it
+     warns about.
+
+     First card says "Day one", not "This afternoon", because the h2 directly above it
+     already reads "One afternoon" and the echo was redundant.
+
+     The third card was rewritten off a verbatim lift of this page's own closing line,
+     a 14 way five gram match, so the closing CTA keeps that line to itself.
+
+     WHY THE CARDS REVEAL IN SEQUENCE, NOT TOGETHER. A horizontal row crosses the
+     viewport's trigger line all at once, so a plain per element observer would fire
+     all three in the same frame and the sequence would be lost. The observer collects
+     everything entering in one callback, sorts it left to right, and gives each card
+     an incremental delay. A card entering alone, which is what happens once the row
+     stacks on a phone, gets no extra delay and moves as soon as it is reached.
+
+     Each card fires ONCE and is then unobserved. Re-firing on every scroll past would
+     loop, and a looping page element reads as a banner ad.
+
+     THE RAIL IS HORIZONTAL. A node sits above each card and a segment runs from that
+     node across the gap to the next, drawn with scaleX from the left. The last card
+     has no segment. Below 820px the row stops being one line, so the connectors are
+     hidden and each card keeps its own node.
+
+     Section level li rules on this page carry their own padding and pseudo element
+     markers, so the rules below use ul.class and li.class rather than a single class,
+     which would lose to them and render a stray marker on every card.
+
+     The script hooks on a CLASS, never getElementById, because Systeme renders each
+     source block twice and the id is not unique on the live page.
+
+     Pure ASCII on purpose: the delivery channel decodes with atob and any byte above
+     007F arrives as mojibake. -->
+<style>
+#bf-tl {
+  max-width: 940px;
+  margin: 30px auto 0;
+}
+/* max-width: none is load bearing. The page pins every ul inside a step section to
+   640px for prose measure ("#bac .step ul"), which squeezed this row to four 147px
+   columns and 533px tall cards. Selectors below carry the root class as well as the
+   id so they outrank that rule on specificity rather than relying on source order. */
+#bf-tl.bf-tl-root ul.bf-tl-row {
+  max-width: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 34px 0 0;
+  text-align: left;
+}
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card {
+  position: relative;
+  margin: 0;
+  padding: 22px 18px 20px;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 500ms ease, transform 560ms cubic-bezier(.22,.61,.36,1);
+  transition-delay: var(--bf-d, 0ms);
+}
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card.is-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card::before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: 26px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--white);
+  transform: scale(0);
+  transition: transform 400ms cubic-bezier(.34,1.56,.64,1);
+  transition-delay: calc(var(--bf-d, 0ms) + 120ms);
+  z-index: 1;
+}
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card.is-in::before { transform: scale(1); }
+
+/* Rail colour is an explicit hex, not var(--teal-light). Measured: this page's own
+   --teal-light is 1.13:1 against the white section background, which is invisible
+   rather than subtle. #A6D7D5 is Miki's light aqua from the Character Sheet. */
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card::after {
+  content: "";
+  position: absolute;
+  top: -29px;
+  left: 32px;
+  width: calc(100% + 18px);
+  height: 2px;
+  background: #A6D7D5;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms cubic-bezier(.22,.61,.36,1);
+  transition-delay: calc(var(--bf-d, 0ms) + 60ms);
+}
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card.is-in::after { transform: scaleX(1); }
+#bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card:last-child::after { display: none; }
+
+#bf-tl .bf-tl-when {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--teal);
+  max-width: none;
+  margin: 0 0 6px;
+}
+#bf-tl .bf-tl-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--body);
+  max-width: none;
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  #bf-tl.bf-tl-root ul.bf-tl-row { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-top: 30px; }
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card { transform: translateX(-12px); }
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card.is-in { transform: translateX(0); }
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card { opacity: 1; transform: none; transition: none; }
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card::before { transform: scale(1); transition: none; }
+  #bf-tl.bf-tl-root ul.bf-tl-row > li.bf-tl-card::after { transform: scaleX(1); transition: none; }
+}
+</style>
+
+<div id="bf-tl" class="bf-tl-root">
+  <ul class="bf-tl-row">
+
+    <li class="bf-tl-card">
+      <p class="bf-tl-when">Day one</p>
+      <p class="bf-tl-body">You read all 88 pages in one sitting and finish knowing which of the four fog types is yours, and which of the three signals is doing the most damage.</p>
+    </li>
+
+    <li class="bf-tl-card">
+      <p class="bf-tl-when">This week</p>
+      <p class="bf-tl-body">You make your first fix, because the book names one place to start instead of handing you a list.</p>
+    </li>
+
+    <li class="bf-tl-card">
+      <p class="bf-tl-when">The week after</p>
+      <p class="bf-tl-body">A stranger lands on your page and gets what you do without you there to explain it.</p>
+    </li>
+
+  </ul>
+</div>
+
+<script>
+(function () {
+  var cards = document.querySelectorAll('.bf-tl-root li.bf-tl-card');
+  if (!cards.length) return;
+  var i;
+  var reduce = false;
+  if (window.matchMedia) { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (i = 0; i < cards.length; i++) { cards[i].classList.add('is-in'); }
+    return;
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    var batch = [];
+    for (var j = 0; j < entries.length; j++) {
+      if (entries[j].isIntersecting) { batch.push(entries[j].target); }
+    }
+    if (!batch.length) return;
+    // Reading order: down the page first, then left to right across the row. A
+    // horizontal row shares one offsetTop, so without the offsetLeft tiebreak the
+    // cards would land in DOM order by luck rather than by design.
+    batch.sort(function (a, b) {
+      if (a.offsetTop !== b.offsetTop) { return a.offsetTop - b.offsetTop; }
+      return a.offsetLeft - b.offsetLeft;
+    });
+    for (var b = 0; b < batch.length; b++) {
+      batch[b].style.setProperty('--bf-d', (b * 190) + 'ms');
+      batch[b].classList.add('is-in');
+      obs.unobserve(batch[b]);
+    }
+  }, { threshold: 0.15, rootMargin: '0px 0px -12% 0px' });
+  for (i = 0; i < cards.length; i++) { obs.observe(cards[i]); }
+})();
+</script>
