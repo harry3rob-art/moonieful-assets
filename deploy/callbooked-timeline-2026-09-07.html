@@ -1,0 +1,110 @@
+<style>
+.mvb-tl .mvb-tl-row {
+  list-style: none;
+  margin: 26px auto 0;
+  padding: 0;
+  /* Load bearing. The page pins every ol to var(--mf-measure), 65ch, for prose measure,
+     which squeezed this row to four 151px columns and 476px tall cards. The row needs the
+     section's full wrap instead, so it restates max-width rather than inheriting one. */
+  max-width: var(--mf-wrap, 1120px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card {
+  list-style: none;
+  margin: 0;
+  padding: 20px 18px;
+  position: relative;
+  /* .mf-card centres its own contents, which is right for the short two line cards used
+     elsewhere on this page and wrong for three and four line stage copy. The equivalent row
+     on /moonieview reads left for the same reason, so the two components agree. */
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-when,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-label {
+  text-align: left;
+}
+/* The stage marker. An explicit block rather than a list marker, so it survives the reset
+   and can carry the gold the rest of the page uses for emphasis. */
+.mvb-tl .mvb-tl-when {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mf-teal-deep, #0E6B6B);
+  margin: 0 0 6px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3 {
+  margin: 0 0 4px;
+  font-size: 19px;
+  line-height: 1.25;
+  /* Without this "Your Fog Lifter Blueprint" breaks after "Fog" and splits the product
+     name across two lines. Balancing the wrap keeps "Fog Lifter" together. */
+  text-wrap: balance;
+}
+.mvb-tl .mvb-tl-label {
+  display: block;
+  font-size: 13px;
+  color: var(--mf-ink-soft, #3A4A4A);
+  margin: 0 0 10px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+/* A thin rule above each card stands in for the connecting rail without drawing one, which
+   would need absolute positioning the four column grid cannot keep honest when it collapses. */
+.mvb-tl .mvb-tl-row > li.mvb-tl-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--mf-gold, #D4AF37);
+}
+@media (max-width: 900px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="mf-section mvb-tl">
+  <h2>What happens between now and the end of your call</h2>
+  <ol class="mvb-tl-row">
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Before your call</span>
+      <h3>I read your page first</h3>
+      <span class="mvb-tl-label">The way a stranger would</span>
+      <p>Before your call starts, I&rsquo;ve already looked at your website the way a stranger would, so your 15 minutes go to answers instead of background questions.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Whenever you like</span>
+      <h3>Reply with your one question</h3>
+      <span class="mvb-tl-label">One sentence is plenty</span>
+      <p>Reply to your confirmation email with the one thing you most want a clear answer on. Your pricing page, the line at the top of your homepage, why enquiries went quiet. One sentence is plenty, and your question gets answered first on the call.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">On the day</span>
+      <h3>Come as you are</h3>
+      <span class="mvb-tl-label">Nothing to prepare</span>
+      <p>There&rsquo;s nothing to prepare and nothing to tidy up before we talk. Your fog is the point, and I can only clear what I can see.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">By the end of your call</span>
+      <h3>You know where your message goes soft</h3>
+      <span class="mvb-tl-label">15 minutes</span>
+      <p>You&rsquo;ll leave knowing whether Brand Fog is what&rsquo;s costing you work, and which part of your message a stranger loses first.</p>
+    </li>
+  </ol>
+</div>
