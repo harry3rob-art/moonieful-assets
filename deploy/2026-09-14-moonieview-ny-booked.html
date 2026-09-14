@@ -367,7 +367,8 @@ body{
 <div class="mf" id="mvb">
 
   <!-- - Hero: confirmation left, Miki right, both in the fold - -->
-  <div class="mf-herosplit">
+  <!-- Video removed for the NY promo: it states the 650 price. Single column until the campaign ends. -->
+  <div class="mf-herosplit" style="grid-template-columns:1fr;">
 
     <div class="mf-herosplit__copy">
       <span class="mf-eyebrow">Your MoonieView is booked</span>
@@ -390,33 +391,6 @@ body{
       <p class="mf-note" style="margin-top:18px;">Your receipt is on its way to your inbox too. If anything gets in your way before then, email me at <a href="mailto:miki@moonieful.com">miki@moonieful.com</a> and I&rsquo;ll sort it out.</p>
     </div>
 
-    <div class="mf-herosplit__media">
-      <!-- Video rather than Miki's portrait, per Harry 2026-08-10. This is the VSL that
-           used to sit mid-page on the free fit-call confirmation; the paid page is where
-           it earns its place. Facade pattern: no iframe loads until someone clicks, so
-           the page stays fast and YouTube sets no cookie for anyone who never watches. -->
-      <div class="vsl-wrap" style="border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(36,52,52,.07),0 8px 56px rgba(14,107,107,.20);">
-        <button type="button"
-          style="display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative;line-height:0;"
-          aria-label="Play the video"
-          onclick="var w=this.parentNode;var f=w.querySelector('iframe');f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&amp;rel=0';f.style.display='block';this.style.display='none';">
-          <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
-               alt="Play the video where I explain what I look for on your page"
-               width="1280" height="720" style="width:100%;height:auto;display:block;">
-          <span style="position:absolute;inset:0;display:grid;place-items:center;">
-            <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-              <path d="M66.5 7.7a8.6 8.6 0 0 0-6-6.1C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6.1A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6.1C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6.1A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z" fill="#0E6B6B"/>
-              <path d="M27 34l18-10-18-10z" fill="#FFFFFF"/>
-            </svg>
-          </span>
-        </button>
-        <iframe style="display:none;width:100%;aspect-ratio:16/9;border:0;"
-          title="What I look for on your page"
-          src=""
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-    </div>
 
   </div>
 
