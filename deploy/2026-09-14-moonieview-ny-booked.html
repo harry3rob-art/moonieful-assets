@@ -1,0 +1,636 @@
+<!-- MOONIEFUL SYSTEME - SHARED STYLESHEET v2 (LIGHT-FIRST)
+     Created 2026-08-10. Replaces moonieful-systeme-styles.html, which is now stale:
+     it carried the retired dark palette (-bfc-deep:#091e24, despite a comment claiming
+     otherwise), Playfair Display and DM Sans.
+
+     WHY THIS EXISTS
+     The new homepage (claude-workspace/projects/moonieful-website-v2/index.html) settled the
+     open question in design-tokens.md section 3. Miki's six contain no dark background colour,
+     and the homepage answered that by going WHITE-first with teal bands as the contrast device
+     rather than near-black sections. Harry, 2026-08-10: match the rest of the funnel to it.
+     Every token below is copied from that homepage, not re-derived, so the two cannot drift.
+
+     WHERE IT GOES ON A REAL PAGE
+     Either at the TOP of the FIRST Raw HTML block, or in Page settings > Edit header code.
+     Both work (confirmed on /checkout, 2026-07-19). When editing a live page, check BOTH
+     locations before concluding the stylesheet is missing.
+
+     THREE SYSTEME RULES THAT BITE
+     1. Systeme renders each raw-HTML block TWICE, desktop and mobile. Any script must use
+        querySelectorAll, never getElementById.
+     2. Systeme's parent wrappers centre text. The alignment block below sets Miki's direction
+        deliberately rather than fighting it.
+     3. Each CLICK on a sidebar element appends a block, so a double-click appends two. The
+        editor API shows only SAVED state, so reload before saving to discard accidents.
+
+     CONTRAST RULES ARE MEASURED, NOT PREFERENCES. Do not improvise around them.
+     - Gold #D4AF37 is NEVER a word. 2.10 on white, 1.87 on cream. Divider, border, icon only.
+     - #1583B3 is large-text only (4.26 on white, 24px+) and NEVER on teal, where it hits 1.48.
+     - Small text on a teal band uses -on-teal #BFE2E1 (4.55), never -aqua-light (3.99, fails).
+     - Anything inside .band-teal needing its own colour MUST use a compound selector
+       (.band-teal .your-class). ".band-teal p" is (0,1,1) and beats any single-class rule.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,400;0,700;1,400&family=Arimo:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root{
+  /* Miki's six, from her Character Sheet */
+  --mf-teal-deep:#0E6B6B;   /* headings context, solid buttons, links, eyebrows, focus ring */
+  --mf-accent:#1583B3;      /* large text 24px+, icons, borders only */
+  --mf-aqua-light:#A6D7D5;  /* decoration only, fails as text everywhere */
+  --mf-cream:#F6F1E7;       /* kept as an occasional panel, no longer the page */
+  --mf-aqua-pale:#E7F3F1;   /* alternate section background */
+  --mf-gold:#D4AF37;        /* decorative only, never a word */
+  --mf-white:#FFFFFF;
+
+  /* Page. White per Miki 2026-08-09. Cream measured at hue 40deg, which made it a
+     desaturated tint of the gold accent rather than a neutral, fighting the six cool colours. */
+  --mf-page:#FFFFFF;
+
+  /* Derived neutrals, the same category as --on-teal. Not Miki's brand colours. */
+  --mf-ink:#243434;         /* body text, 13.00 on white */
+  --mf-ink-soft:#3A4A4A;    /* secondary text, 9.30 on white */
+  --mf-on-teal:#BFE2E1;     /* small text on a teal band, 4.55. Aqua-light mixed 28% to white. */
+
+  --mf-line:rgba(14,107,107,.22);
+  --mf-radius:14px;
+  --mf-measure:65ch;
+  --mf-wrap:1120px;
+
+  /* Aura, not drop shadow. Tight contact shadow grounds the card, wide low-alpha halo
+     tinted to teal rather than grey. Grey reads as lift; a tinted halo reads as glow. */
+  --mf-shadow:0 1px 2px rgba(36,52,52,.06), 0 4px 40px rgba(14,107,107,.13);
+  --mf-shadow-lift:0 2px 6px rgba(36,52,52,.07), 0 8px 56px rgba(14,107,107,.20);
+}
+
+/* Systeme sets its own body background. !important is required here and only here.
+
+   overflow-x is NOT cosmetic. The full-bleed .band below uses calc(50% - 50vw), and
+   100vw counts the vertical scrollbar while the content box does not. On a 1440px
+   window with a 15px scrollbar the band renders 1440px inside a 1425px viewport and
+   pushes a horizontal scrollbar onto every page. Measured, not theorised.
+   `clip` rather than `hidden` because hidden makes body a scroll container, which
+   would break any future sticky positioning. hidden is the fallback for older browsers. */
+html{overflow-x:hidden;overflow-x:clip}
+body{
+  overflow-x:hidden;
+  overflow-x:clip;
+  background:var(--mf-page) !important;
+  color:var(--mf-ink);
+  font-family:Arimo,Arial,Helvetica,sans-serif;
+  font-size:18px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.mf *,.mf *::before,.mf *::after{box-sizing:border-box}
+
+/* - Type -
+   Headings sit on --ink, not --teal-deep. Measured, the two are only seven points
+   apart on lightness, so using both as text colours gives the page no hierarchy.
+   Teal-deep is reserved for action and labels: buttons, links, eyebrows, focus rings. */
+.mf h1,.mf h2,.mf h3,.mf h4{
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;
+  font-weight:700;
+  color:var(--mf-ink);
+  line-height:1.18;
+  margin:0 0 .6em;
+  text-wrap:balance;
+}
+.mf h1{font-size:clamp(1.9rem,4.6vw,3rem)}
+.mf h2{font-size:clamp(1.5rem,3.2vw,2.2rem)}
+.mf h3{font-size:clamp(1.05rem,1.7vw,1.28rem)}
+.mf p{margin:0 auto 1.1em;max-width:var(--mf-measure)}
+.mf strong{font-weight:700;color:var(--mf-ink)}
+.mf a{color:var(--mf-teal-deep);text-underline-offset:.18em}
+.mf a:hover{text-decoration-thickness:2px}
+
+/* Eyebrow. Was gold; gold measures 1.87 on white and fails as text at any size. */
+.mf .mf-eyebrow{
+  display:block;
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;
+  font-size:16px;
+  color:var(--mf-teal-deep);
+  letter-spacing:.03em;
+  margin:0 0 12px;
+}
+.mf .mf-lede{font-size:1.12rem;color:var(--mf-ink-soft)}
+.mf .mf-note{font-size:.94rem;color:var(--mf-ink-soft)}
+
+/* - Alignment, Miki's direction 2026-08-09 -
+   Every section reads centred except the hero and About Miki. Set once with two
+   opt-outs, never a text-align on thirty component rules. p carries a measure cap,
+   so a centred paragraph narrower than its container needs auto side margins or it
+   still sits hard left. */
+.mf{text-align:center}
+.mf .mf-hero-inner,.mf .mf-about{text-align:left}
+.mf .mf-hero-inner p,.mf .mf-about p{margin-left:0;margin-right:0}
+
+/* Bullets are ALWAYS left justified, including inside a centred card (Harry's rule).
+   The card heading and prose centre; the list underneath does not. Never "fix" a ragged
+   centred list by deleting its markers. */
+.mf ul,.mf ol{text-align:left;max-width:var(--mf-measure);margin:0 auto 1.1em;padding-left:1.3em}
+.mf li{margin:0 0 .55em}
+.mf li::marker{color:var(--mf-teal-deep)}
+
+/* - Shell -
+   Systeme pages are narrower than the homepage: a wide headline over a 600-700px
+   reading column, per the layout standard. */
+.mf{max-width:var(--mf-wrap);margin:0 auto;padding:56px 24px 80px;position:relative}
+.mf-section{padding-top:52px;margin-top:52px}
+.mf-narrow{max-width:700px;margin-inline:auto}
+
+/* - .secbreak, the accent divider -
+   Gold crescent and two sparkles between two tapering rules, drawn from the icon row
+   on Miki's Character Sheet. Inline SVG data URI, so it costs no request.
+   Legitimate gold use: a rule, not a word. */
+.mf .mf-secbreak{
+  border:0;height:22px;margin:0 auto 44px;width:min(420px,80%);
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='22' viewBox='0 0 60 22'><path d='M32 4a7 7 0 1 0 0 14 8.6 8.6 0 0 1 0-14z' fill='%23D4AF37'/><path d='M17 8l1.1 2.6L20.7 12l-2.6 1.1L17 15.7l-1.1-2.6L13.3 12l2.6-1.1z' fill='%23D4AF37'/><path d='M45 9l.8 1.9 1.9.8-1.9.8L45 14.4l-.8-1.9-1.9-.8 1.9-.8z' fill='%23D4AF37'/></svg>") center/60px 22px no-repeat,
+    linear-gradient(90deg,transparent,rgba(212,175,55,.55) 30%,transparent 42%),
+    linear-gradient(90deg,transparent 58%,rgba(212,175,55,.55) 70%,transparent);
+}
+/* On teal, run the gold at .8 rather than .55; at .55 it sits too close to #0E6B6B
+   in value to register at all. */
+.mf .band--teal .mf-secbreak{
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='22' viewBox='0 0 60 22'><path d='M32 4a7 7 0 1 0 0 14 8.6 8.6 0 0 1 0-14z' fill='%23D4AF37'/><path d='M17 8l1.1 2.6L20.7 12l-2.6 1.1L17 15.7l-1.1-2.6L13.3 12l2.6-1.1z' fill='%23D4AF37'/><path d='M45 9l.8 1.9 1.9.8-1.9.8L45 14.4l-.8-1.9-1.9-.8 1.9-.8z' fill='%23D4AF37'/></svg>") center/60px 22px no-repeat,
+    linear-gradient(90deg,transparent,rgba(212,175,55,.8) 30%,transparent 42%),
+    linear-gradient(90deg,transparent 58%,rgba(212,175,55,.8) 70%,transparent);
+}
+
+/* - Bands -
+   Full-bleed inside a centred wrapper. The teal band is the contrast device that
+   replaces the retired near-black sections. */
+.mf .band{
+  margin:64px calc(50% - 50vw);
+  padding:56px calc(50vw - 50% + 24px);
+}
+.mf .band--pale{background:var(--mf-aqua-pale)}
+.mf .band--cream{background:var(--mf-cream)}
+.mf .band--teal{background:var(--mf-teal-deep);color:var(--mf-white)}
+
+/* EVERY rule below is compound on purpose. ".band--teal p" is (0,1,1) and silently
+   beats any single-class rule, which is how a near-white label ended up on a pale
+   aqua pill at 1.51 on moonieful.com. */
+.mf .band--teal h1,.mf .band--teal h2,.mf .band--teal h3{color:var(--mf-white)}
+.mf .band--teal p{color:var(--mf-on-teal)}
+.mf .band--teal .mf-eyebrow{color:var(--mf-on-teal)}
+.mf .band--teal .mf-note{color:var(--mf-on-teal)}
+.mf .band--teal li{color:var(--mf-on-teal)}
+.mf .band--teal li::marker{color:var(--mf-aqua-light)}
+.mf .band--teal a{color:var(--mf-white)}
+.mf .band--teal .mf-card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}
+.mf .band--teal .mf-card p{color:var(--mf-on-teal)}
+
+/* - Buttons -
+   44px minimum target, per the accessibility pass on the homepage. */
+.mf .mf-btn{
+  display:inline-block;
+  background:var(--mf-teal-deep);
+  color:var(--mf-white);
+  font-family:Arimo,Arial,sans-serif;
+  font-weight:700;
+  font-size:1.02rem;
+  line-height:1.3;
+  text-decoration:none;
+  padding:16px 30px;
+  min-height:44px;
+  border-radius:999px;
+  border:2px solid var(--mf-teal-deep);
+  box-shadow:var(--mf-shadow);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.mf .mf-btn:hover{transform:translateY(-1px);box-shadow:var(--mf-shadow-lift)}
+.mf .mf-btn--ghost{background:transparent;color:var(--mf-teal-deep);box-shadow:none}
+/* On teal, the solid teal button would vanish, so it inverts. */
+.mf .band--teal .mf-btn{background:var(--mf-white);color:var(--mf-teal-deep);border-color:var(--mf-white)}
+.mf .band--teal .mf-btn--ghost{background:transparent;color:var(--mf-white);border-color:var(--mf-white)}
+.mf a:focus-visible,.mf button:focus-visible{
+  outline:3px solid var(--mf-teal-deep);outline-offset:3px;border-radius:4px;
+}
+.mf .band--teal a:focus-visible{outline-color:var(--mf-white)}
+
+/* - Cards -
+   Card surfaces match the page now that it is white, so the edge carries the
+   separation. Border and shadow are a step stronger than the cream build was. */
+.mf .mf-card{
+  background:var(--mf-white);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  box-shadow:var(--mf-shadow);
+  padding:28px 26px;
+  text-align:center;
+}
+.mf .mf-card h3{margin-bottom:.45em}
+.mf .mf-card p:last-child{margin-bottom:0}
+.mf .mf-grid{display:grid;gap:22px;margin:0 auto;max-width:var(--mf-wrap)}
+@media (min-width:760px){
+  .mf .mf-grid--2{grid-template-columns:repeat(2,1fr)}
+  .mf .mf-grid--3{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Definition box, for naming Brand Fog or the Blueprint */
+.mf .mf-define{
+  background:var(--mf-aqua-pale);
+  border-left:4px solid var(--mf-gold);
+  border-radius:var(--mf-radius);
+  padding:24px 26px;
+  max-width:760px;margin:0 auto 28px;
+}
+
+/* Signal chips */
+.mf .mf-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0;margin:0 auto 24px;list-style:none;max-width:760px}
+.mf .mf-chip{
+  background:var(--mf-aqua-pale);
+  color:var(--mf-teal-deep);
+  border:1px solid var(--mf-line);
+  border-radius:999px;
+  font-size:.94rem;font-weight:700;
+  padding:8px 16px;
+}
+.mf .band--teal .mf-chip{background:rgba(255,255,255,.12);color:var(--mf-white);border-color:rgba(255,255,255,.28)}
+
+/* Price block */
+.mf .mf-price{font-family:'Shantell Sans','Trebuchet MS',sans-serif;font-weight:700;font-size:clamp(2.1rem,5vw,3rem);color:var(--mf-ink);line-height:1.05;margin:0 0 .2em}
+.mf .mf-price-qual{font-size:1rem;color:var(--mf-ink-soft);max-width:52ch;margin:0 auto 1.2em}
+
+/* Testimonial */
+.mf .mf-quote{
+  background:var(--mf-white);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  box-shadow:var(--mf-shadow);
+  padding:28px 26px;max-width:720px;margin:0 auto 22px;
+}
+.mf .mf-quote blockquote{margin:0 0 14px;font-size:1.06rem}
+.mf .mf-quote cite{font-style:normal;font-weight:700;color:var(--mf-teal-deep);font-size:.95rem}
+
+/* Guarantee */
+.mf .mf-guarantee{
+  background:var(--mf-cream);
+  border:1px solid var(--mf-line);
+  border-radius:var(--mf-radius);
+  padding:28px 26px;max-width:760px;margin:0 auto;
+}
+
+/* FAQ. Native <details> so it survives JavaScript being off. */
+.mf .mf-faq{max-width:760px;margin:0 auto;text-align:left}
+.mf .mf-faq details{border-bottom:1px solid var(--mf-line);padding:4px 0}
+.mf .mf-faq summary{
+  cursor:pointer;list-style:none;
+  font-family:'Shantell Sans','Trebuchet MS',sans-serif;font-weight:700;
+  color:var(--mf-ink);font-size:1.05rem;
+  padding:16px 34px 16px 0;min-height:44px;position:relative;
+}
+.mf .mf-faq summary::-webkit-details-marker{display:none}
+.mf .mf-faq summary::after{content:'+';position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--mf-teal-deep);font-size:1.4rem;line-height:1}
+.mf .mf-faq details[open] summary::after{content:'\2013'}
+.mf .mf-faq details p{margin-left:0;margin-right:0;padding-bottom:14px}
+
+/* Images */
+.mf img{max-width:100%;height:auto;display:block}
+.mf .mf-figure{border-radius:var(--mf-radius);overflow:hidden;box-shadow:var(--mf-shadow);margin:0 auto 24px;max-width:760px}
+
+/* - Hero split -
+   Confirmation copy one side, video the other, so BOTH sit in the fold. Harry,
+   2026-08-10: the confirmation belongs above the fold, and left justification makes
+   sense once the two can sit side by side. That is the whole rule. A centred hero is
+   correct when it stands alone; the moment it shares the fold with a second element,
+   centring makes the pair read as two unrelated things.
+
+   On narrow screens the grid collapses to one column in DOM order, so the confirmation
+   still comes first and the video follows it. */
+.mf .mf-herosplit{display:grid;gap:28px;align-items:center;max-width:var(--mf-wrap);margin:0 auto}
+.mf .mf-herosplit__copy{text-align:left}
+.mf .mf-herosplit__copy p,.mf .mf-herosplit__copy ul{margin-left:0;margin-right:0}
+.mf .mf-herosplit__media{text-align:left}
+.mf .mf-herosplit__media p{margin-left:0;margin-right:0}
+@media (min-width:880px){
+  .mf .mf-herosplit{grid-template-columns:1.02fr 1fr;gap:48px}
+}
+
+/* Two-column split. Copy on a solid brand panel one side, photograph the other, and
+   text NEVER overlaid on the photo, so legibility holds whatever the image does.
+   Narrow screens stack photo-then-copy, so the image reads as a banner rather than
+   shrinking back into an orphan product shot. */
+.mf .mf-split{display:grid;gap:0;border-radius:var(--mf-radius);overflow:hidden;box-shadow:var(--mf-shadow);margin:0 auto 32px;max-width:var(--mf-wrap)}
+.mf .mf-split__copy{background:var(--mf-teal-deep);color:var(--mf-white);padding:40px 32px;text-align:left;order:2}
+.mf .mf-split__copy h1,.mf .mf-split__copy h2{color:var(--mf-white)}
+.mf .mf-split__copy p{color:var(--mf-on-teal);margin-left:0;margin-right:0}
+.mf .mf-split__img{order:1}
+.mf .mf-split__img img{width:100%;height:100%;object-fit:cover}
+@media (min-width:860px){
+  .mf .mf-split{grid-template-columns:1fr 1fr}
+  .mf .mf-split__copy{order:1;padding:56px 44px}
+  .mf .mf-split__img{order:2}
+}
+
+@media (max-width:600px){
+  .mf{padding:40px 20px 64px}
+  .mf-section{padding-top:40px;margin-top:40px}
+  .mf .band{padding:44px calc(50vw - 50% + 20px);margin:48px calc(50% - 50vw)}
+  .mf .mf-card{padding:24px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .mf *,.mf *::before,.mf *::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
+
+<!-- ============================================================
+     MOONIEVIEW NY BOOKED - PROMO 350 CONFIRMATION, cloned 2026-09-14 from live page 43438848 v2
+     Live at: clarity.moonieful.com/moonieview-booked  (page 43438848, step 25028188)
+     -
+     REPAINT, 2026-08-10. Every line of visible copy is carried over verbatim from the
+     live page, including Miki's two moon-and-sparkles emoji pairs. Nothing rewritten.
+     What changed is the visual system, matched to the new homepage:
+
+       - White page instead of near-black teal, and Miki's six brand colours
+       - Shantell Sans headings, Arimo body
+       - Teal band as the contrast device, replacing dark sections
+       - Side-by-side hero, per Harry 2026-08-10: the confirmation and Miki's portrait
+         share the fold, so the copy goes left. A paid $650 booking earns that weight.
+         The free fit-call page deliberately does NOT get it.
+
+     PRESERVED EXACTLY, do not refactor:
+       - The final script block, verbatim, including its 60-minute default duration
+       - Its class hooks: .mvb-when, .mvb-when-time, .mvb-gcal
+       - Miki's portrait URL and both miki@moonieful.com contact lines
+
+     PASTE ORDER: stylesheet (moonieful-systeme-styles-v2.html) into header code or the
+     top of the first block, this file as the main Raw HTML block, universal-footer-v2.html
+     as its own block at the bottom, and the final script into the page custom-footer slot.
+
+     Systeme renders every raw-HTML block TWICE, so the script uses querySelectorAll.
+     ============================================================ -->
+
+<div class="mf" id="mvb">
+
+  <!-- - Hero: confirmation left, Miki right, both in the fold - -->
+  <div class="mf-herosplit">
+
+    <div class="mf-herosplit__copy">
+      <span class="mf-eyebrow">Your MoonieView is booked</span>
+      <h1>You&rsquo;re booked! Your MoonieView is officially on the calendar. &#127769;&#10024;</h1>
+      <p class="mf-lede">I have your session in front of me, and your confirmation email is on its way with your meeting link and your calendar invite.</p>
+
+      <!-- Date chip. Hidden until the script finds Calendly's params, which is what made
+           it safe to publish this page before the redirect existed. -->
+      <div class="mvb-when" style="display:none;margin:22px 0 18px;">
+        <div class="mf-card" style="text-align:left;padding:18px 20px;display:inline-block;">
+          <span class="mf-eyebrow" style="margin-bottom:4px;">Your session</span>
+          <strong class="mvb-when-time" style="font-size:1.1rem;"></strong>
+        </div>
+      </div>
+
+      <p style="margin-top:8px;">
+        <a class="mf-btn mvb-gcal" href="#" target="_blank" rel="noopener">Add your session to Google Calendar</a>
+      </p>
+
+      <p class="mf-note" style="margin-top:18px;">Your receipt is on its way to your inbox too. If anything gets in your way before then, email me at <a href="mailto:miki@moonieful.com">miki@moonieful.com</a> and I&rsquo;ll sort it out.</p>
+    </div>
+
+    <div class="mf-herosplit__media">
+      <!-- Video rather than Miki's portrait, per Harry 2026-08-10. This is the VSL that
+           used to sit mid-page on the free fit-call confirmation; the paid page is where
+           it earns its place. Facade pattern: no iframe loads until someone clicks, so
+           the page stays fast and YouTube sets no cookie for anyone who never watches. -->
+      <div class="vsl-wrap" style="border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(36,52,52,.07),0 8px 56px rgba(14,107,107,.20);">
+        <button type="button"
+          style="display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative;line-height:0;"
+          aria-label="Play the video"
+          onclick="var w=this.parentNode;var f=w.querySelector('iframe');f.src='https://www.youtube.com/embed/9OwbNAB6iCI?autoplay=1&amp;rel=0';f.style.display='block';this.style.display='none';">
+          <img src="https://img.youtube.com/vi/9OwbNAB6iCI/maxresdefault.jpg"
+               alt="Play the video where I explain what I look for on your page"
+               width="1280" height="720" style="width:100%;height:auto;display:block;">
+          <span style="position:absolute;inset:0;display:grid;place-items:center;">
+            <svg viewBox="0 0 68 48" width="86" height="60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M66.5 7.7a8.6 8.6 0 0 0-6-6.1C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6.1A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6.1C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6.1A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z" fill="#0E6B6B"/>
+              <path d="M27 34l18-10-18-10z" fill="#FFFFFF"/>
+            </svg>
+          </span>
+        </button>
+        <iframe style="display:none;width:100%;aspect-ratio:16/9;border:0;"
+          title="What I look for on your page"
+          src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- NY PROMO BOOK DELIVERY. Added 2026-09-14 for the Get us to NY campaign page
+       moonieview-ny-booked only. Reuses the V8 Drive file already live on brandfog-thankyou.
+       The expo name is embargoed, so the copy uses city plus cause only. -->
+  <div class="mf-section" id="mvb-book">
+    <span class="mf-eyebrow">A thank-you from me</span>
+    <h2>Your free copy of Brand Fog is ready to download</h2>
+    <p>Your booking is helping me get to a small business and youth empowerment expo in New York this October. As my thank-you, your MoonieView comes with a copy of my book, Brand Fog.</p>
+    <p>You don&rsquo;t have to read Brand Fog before your session, since there&rsquo;s still nothing to prepare. If you&rsquo;ve got an afternoon, though, my book walks you through where Brand Fog shows up on a page, and you&rsquo;ll recognize yours the moment we start looking together.</p>
+    <p style="margin-top:24px;"><a class="mf-btn" href="https://drive.google.com/file/d/1mcO-cseFpDVDSFdlPFDPu9E87Zm8OtSp/view?usp=sharing" target="_blank" rel="noopener">Download your copy of Brand Fog</a></p>
+  </div>
+  <!-- - What to expect - -->
+  <div class="mf-section">
+    <span class="mf-eyebrow">What to expect</span>
+    <h2>60 minutes, one-on-one with me</h2>
+    <p>Your MoonieView is a 60-minute brand clarity session, just you and me. I&rsquo;ll ask in-depth questions about your business, your process, your products or services, and how you&rsquo;re communicating your value right now.</p>
+    <p>My goal is to diagnose exactly where Brand Fog is showing up in your business, and to define the clearest next path for you to take.</p>
+
+    <h3 style="margin-top:36px;">What you&rsquo;ll cover together</h3>
+    <div class="mf-grid mf-grid--3" style="margin-top:24px;">
+      <div class="mf-card"><h3>Your message</h3><p>What you say, and what a stranger hears instead.</p></div>
+      <div class="mf-card"><h3>Your offer</h3><p>What you&rsquo;re selling and how clearly it comes across.</p></div>
+      <div class="mf-card"><h3>Your page and customer experience</h3><p>What it feels like to find you and decide.</p></div>
+      <div class="mf-card"><h3>Your visuals</h3><p>Whether the way your brand looks matches what you charge.</p></div>
+      <div class="mf-card"><h3>Your positioning</h3><p>Why someone would choose your business over another.</p></div>
+      <div class="mf-card"><h3>Where people are getting confused</h3><p>The exact moments buyers hesitate or drop away.</p></div>
+    </div>
+  </div>
+
+  <!-- - Nothing to prepare - -->
+  <div class="mf-section">
+    <span class="mf-eyebrow">Before your session</span>
+    <h2>There&rsquo;s nothing to prepare</h2>
+    <p>No presentation, no documents, nothing to tidy up first. Come ready to talk openly and answer honestly, because the clearer your conversation is, the more specific your diagnosis will be.</p>
+  </div>
+
+  <!-- - The Blueprint, on the teal band - -->
+  <div class="band band--teal">
+    <span class="mf-eyebrow">After your session</span>
+    <h2>What you&rsquo;ll receive: your Fog Lifter Blueprint</h2>
+    <p>MoonieView is your session. Your Fog Lifter Blueprint is the written plan that follows it, and it reaches you within 48 hours.</p>
+    <p>Your Blueprint documents where your Brand Fog is living, names the one signal that needs your attention first, and gives you a clear direction to move in. You&rsquo;ll know what to fix and in what order before you touch a word of your message or a single visual.</p>
+
+    <!-- .mf-card inside .band-teal already inverts via a compound selector in the
+         stylesheet. The <strong> needs its own colour because .band-teal p sets the
+         paragraph to -on-teal and strong would otherwise inherit it. -->
+    <div class="mf-card" style="max-width:640px;margin:28px auto 0;text-align:left;">
+      <p style="margin-bottom:.8em;"><strong style="color:#FFFFFF;">Your Blueprint is built so that, over time, the right people:</strong></p>
+      <ul>
+        <li>understand what you do faster</li>
+        <li>recognize why your business is different</li>
+        <li>feel more confident your offer is right for them</li>
+        <li>trust your business sooner</li>
+        <li>know what next step to take</li>
+        <li>have fewer questions before they decide</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- - Practical details - -->
+  <!-- MVB FIRST TWO WEEKS. Four stages, day one to day 14, for the post booking page.
+
+     WHY IT IS STATIC. The equivalent row on /moonieview reveals its cards left to right on
+     scroll. This page is built entirely from static .mf-card blocks, and matching the page
+     it lives on beats matching a different page, so this one does not animate. It also sits
+     in front of someone who has already paid, where motion earns nothing.
+
+     WHY IT REUSES .mf-card AND .mf-eyebrow. Those classes already carry this page's border,
+     radius, padding and colour, so the row inherits the design system instead of restating
+     it. Only the grid, the stage label and the list reset are new, and each is scoped under
+     .mvb-tl so nothing else on the page moves.
+
+     LIST RESET IS LOAD BEARING. The stages are an ordered list because they are a real
+     sequence, and the page styles ol and li for prose elsewhere, so padding, markers and
+     margins are all reset explicitly rather than assumed.
+
+     Pure ASCII on purpose: the delivery channel decodes with atob and any byte above 007F
+     arrives as mojibake. No double hyphens or angle brackets inside comments, because the
+     raw HTML validator rejects both and disables Save without saying why. -->
+<style>
+.mvb-tl .mvb-tl-row {
+  list-style: none;
+  margin: 26px auto 0;
+  padding: 0;
+  /* Load bearing. The page pins every ol to var(--mf-measure), 65ch, for prose measure,
+     which squeezed this row to four 151px columns and 476px tall cards. The row needs the
+     section's full wrap instead, so it restates max-width rather than inheriting one. */
+  max-width: var(--mf-wrap, 1120px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card {
+  list-style: none;
+  margin: 0;
+  padding: 20px 18px;
+  position: relative;
+  /* .mf-card centres its own contents, which is right for the short two line cards used
+     elsewhere on this page and wrong for three and four line stage copy. The equivalent row
+     on /moonieview reads left for the same reason, so the two components agree. */
+  text-align: left;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-when,
+.mvb-tl .mvb-tl-row > li.mvb-tl-card .mvb-tl-label {
+  text-align: left;
+}
+/* The stage marker. An explicit block rather than a list marker, so it survives the reset
+   and can carry the gold the rest of the page uses for emphasis. */
+.mvb-tl .mvb-tl-when {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mf-teal-deep, #0E6B6B);
+  margin: 0 0 6px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card h3 {
+  margin: 0 0 4px;
+  font-size: 19px;
+  line-height: 1.25;
+  /* Without this "Your Fog Lifter Blueprint" breaks after "Fog" and splits the product
+     name across two lines. Balancing the wrap keeps "Fog Lifter" together. */
+  text-wrap: balance;
+}
+.mvb-tl .mvb-tl-label {
+  display: block;
+  font-size: 13px;
+  color: var(--mf-ink-soft, #3A4A4A);
+  margin: 0 0 10px;
+}
+.mvb-tl .mvb-tl-row > li.mvb-tl-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+/* A thin rule above each card stands in for the connecting rail without drawing one, which
+   would need absolute positioning the four column grid cannot keep honest when it collapses. */
+.mvb-tl .mvb-tl-row > li.mvb-tl-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--mf-gold, #D4AF37);
+}
+@media (max-width: 900px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .mvb-tl .mvb-tl-row { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="mf-section mvb-tl">
+  <span class="mf-eyebrow">Day one to day 14</span>
+  <h2>Your first two weeks</h2>
+  <ol class="mvb-tl-row">
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Day one</span>
+      <h3>Your session</h3>
+      <span class="mvb-tl-label">60 minutes, recorded</span>
+      <p>We spend your hour on your message, your offer, your page and your visuals, and you leave with one fix to start on, so you can begin the same day we talk.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Within 48 hours</span>
+      <h3>Your Blueprint</h3>
+      <span class="mvb-tl-label">In writing</span>
+      <p>Your Blueprint names where your fog is thickest and why your first fix comes first, so you can see my reasoning as well as the instruction.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Inside a week</span>
+      <h3>Your first fix, live</h3>
+      <span class="mvb-tl-label">On your page</span>
+      <p>I keep your first fix small on purpose, so most clients have theirs live inside the week. Everything else your Blueprint names is a bigger build, and your MoonieFit BrandKit is where that work lives.</p>
+    </li>
+    <li class="mf-card mvb-tl-card">
+      <span class="mvb-tl-when">Day 14</span>
+      <h3>I check back</h3>
+      <span class="mvb-tl-label">No charge</span>
+      <p>I ask how far you got. If you're moving on your own, we leave it there and you keep going.</p>
+    </li>
+  </ol>
+</div>
+
+
+<div class="mf-section">
+    <span class="mf-eyebrow">The practical part</span>
+    <h2>Your session details</h2>
+    <div class="mf-grid mf-grid--2" style="margin-top:28px;">
+      <div class="mf-card"><h3>Your session is recorded</h3><p>I record every MoonieView for internal review and analysis, so nothing you say in your 60 minutes gets lost before your Blueprint is written.</p></div>
+      <div class="mf-card"><h3>Calendly sends your reminders</h3><p>Reminder emails arrive before your session, so the date stays where you can see it and nothing sneaks up on you.</p></div>
+      <div class="mf-card"><h3>If you need to move your time</h3><p>Use the reschedule link in your Calendly confirmation email, and give me at least 24 hours&rsquo; notice where you can.</p></div>
+      <div class="mf-card"><h3>If you need a hand with any of it</h3><p>Email me at <a href="mailto:miki@moonieful.com">miki@moonieful.com</a> and I&rsquo;ll help you cancel or reschedule.</p></div>
+    </div>
+  </div>
+
+  <hr class="mf-secbreak" style="margin-top:56px;">
+
+  <!-- - Miki's close - -->
+  <div class="mf-section">
+    <h2>I&rsquo;m looking forward to this</h2>
+    <p>I&rsquo;m excited to help you get clearer on your brand, and to show you what has been hard to spot from inside your own business.</p>
+    <p>Your MoonieView gives you a clearer foundation to keep building on, one that holds up well past any single page or handful of words. &#127769;&#10024;</p>
+  </div>
+
+</div>
