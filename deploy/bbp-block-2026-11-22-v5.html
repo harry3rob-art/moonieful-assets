@@ -1,0 +1,610 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap');
+#bbp{
+  --navy:#173A4A; --teal:#16849A; --teal-text:#126F82; --teal-pale:#EAF7F8; --gold:#C9A24F;
+  --ink:#1F2B31; --ink-soft:#44535A; --line:#D5E4E6; --white:#FFFFFF; --cream:#FAF8F4;
+  --plum:#4B1734; --charcoal:#2D2833; --peach:#D79281; --blush:#F4E3DE;
+  --endura:#092942; --endura-green:#087B87; --mint:#F3F7F9; --sand:#E1B45E;
+}
+#bbp, #bbp *{box-sizing:border-box}
+#bbp{margin:0;font-family:Arimo,Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65;color:var(--ink);background:var(--white)}
+#bbp img{max-width:100%;display:block}
+#bbp h1,#bbp h2,#bbp h3{font-family:Arimo,Arial,sans-serif;color:var(--navy);line-height:1.2;margin:0 0 .5em;font-weight:700}
+#bbp h1{font-size:clamp(1.9rem,3.8vw,2.75rem);letter-spacing:-.01em}
+#bbp h2{font-size:clamp(1.6rem,3.2vw,2.25rem);text-align:center}
+#bbp h3{font-size:1.25rem}
+#bbp p{margin:0 0 1.1em}
+#bbp a{color:var(--teal-text);text-decoration:underline}
+#bbp .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+#bbp .narrow{max-width:720px;margin:0 auto}
+#bbp section{padding:72px 0}
+#bbp .eyebrow{display:block;text-align:center;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-text);margin-bottom:12px}
+#bbp .lead{text-align:center;color:var(--ink-soft);max-width:640px;margin:0 auto 32px}
+#bbp ul.list{padding-left:1.25em;margin:0 0 1.2em;text-align:left}
+#bbp ul.list li{margin-bottom:.55em}
+#bbp .btn{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;font-size:1.05rem;text-decoration:none;padding:17px 30px;border-radius:999px;box-shadow:0 6px 18px rgba(23,58,74,.18);transition:transform .15s ease,box-shadow .15s ease}
+#bbp .btn:hover,#bbp .btn:focus-visible{transform:translateY(-2px);box-shadow:0 10px 24px rgba(23,58,74,.24)}
+#bbp .btn:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
+#bbp .cta{text-align:center;margin-top:28px}
+#bbp .micro{font-size:.92rem;color:var(--ink-soft);margin:12px auto 0;max-width:460px}
+#bbp .secondary{display:inline-block;margin-top:14px;font-weight:600;font-size:.98rem}
+#bbp /* header */
+.topbar{border-bottom:1px solid var(--line);background:var(--white)}
+#bbp .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+#bbp .wordmark{font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:1.05rem}
+#bbp .wordmark span{color:var(--teal-text)}
+#bbp .partners{font-size:.85rem;color:var(--ink-soft)}
+#bbp /* hero */
+.hero{padding:56px 0 64px;background:linear-gradient(180deg,var(--teal-pale),var(--white))}
+#bbp .hero .wrap{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center;max-width:1280px}
+#bbp .hero .eyebrow{text-align:left}
+#bbp .hero .sub{font-size:1.1rem;color:var(--ink-soft)}
+#bbp .hero .kicker{font-size:1.25rem;font-weight:700;color:var(--teal-text);margin:-4px 0 14px;line-height:1.4}
+#bbp .hero .cta{text-align:left}
+#bbp .hero .micro{margin-left:0}
+#bbp .team-visual{display:flex;align-items:flex-start;padding-bottom:20px}
+#bbp .tv{flex:0 0 225px;width:225px;position:relative;z-index:1}
+#bbp .tv+.tv{margin-left:-36px}
+#bbp .tv.m{margin-top:80px;z-index:2}
+#bbp .tv.e{margin-top:160px;z-index:3}
+#bbp .tv{text-align:center;margin:0}
+#bbp .tv img{border-radius:18px;aspect-ratio:4/5;object-fit:cover;width:100%;height:auto;border:4px solid var(--white);box-shadow:0 10px 26px rgba(23,58,74,.16)}
+#bbp .tv b{display:block;margin-top:10px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+#bbp .tv small{display:block;font-size:.85rem;color:var(--ink-soft);line-height:1.35}
+#bbp .tv.c b{color:var(--plum)}
+#bbp .tv.m b{color:var(--teal-text)}
+#bbp .tv.e b{color:var(--endura-green)}
+#bbp /* qualify strip */
+.qualify{background:var(--navy);color:var(--white);padding:18px 0}
+#bbp .qualify ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;font-weight:600;font-size:.98rem}
+#bbp .qualify li::before{content:"\2713";color:var(--gold);margin-right:8px}
+#bbp /* skimmer */
+.skim{padding:48px 0 8px}
+#bbp .skimbox{max-width:820px;margin:0 auto;border:2px solid var(--line);border-radius:18px;padding:26px 30px;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;background:var(--cream)}
+#bbp .skimbox p{margin:0;font-size:1rem}
+#bbp .skimbox strong{display:block;color:var(--navy);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+#bbp /* prose */
+.prose p{text-align:left}
+#bbp .prose h2{margin-bottom:24px}
+#bbp .wrongorder{max-width:720px;margin:0 auto}
+#bbp .wrongorder ul{list-style:none;padding:0;margin:22px 0}
+#bbp .wrongorder li{background:var(--cream);border-left:4px solid var(--gold);border-radius:10px;padding:14px 18px;margin-bottom:12px;text-align:left}
+#bbp .question{font-weight:700;color:var(--navy);text-align:center!important;font-size:1.15rem}
+#bbp /* three experts */
+.why{background:var(--cream)}
+#bbp .steps3{list-style:none;padding:0;margin:28px auto;max-width:760px;counter-reset:s}
+#bbp .steps3 li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;text-align:left;margin-bottom:14px;background:var(--white);border-radius:14px;padding:14px 18px;border:1px solid var(--line)}
+#bbp .steps3 li::before{content:counter(s);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--white)}
+#bbp .steps3 li:nth-child(1)::before{background:var(--plum)}
+#bbp .steps3 li:nth-child(2)::before{background:var(--navy)}
+#bbp .steps3 li:nth-child(3)::before{background:var(--endura)}
+#bbp /* phases */
+.phase{padding:64px 0}
+#bbp .phase .wrap{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center}
+#bbp .phase.flip .wrap{grid-template-columns:1fr 300px}
+#bbp .phase.flip .ph-photo{order:2}
+#bbp .ph-photo img{border-radius:20px;aspect-ratio:4/5;object-fit:cover;width:100%;height:auto}
+#bbp .ph-body .eyebrow{text-align:left}
+#bbp .ph-body h2{text-align:left}
+#bbp .ph-body p{text-align:left}
+#bbp .ph-build{background:var(--blush)}
+#bbp .ph-build .eyebrow{color:var(--plum)}
+#bbp .ph-build h2{font-family:"Playfair Display",Georgia,serif;color:var(--plum)}
+#bbp .ph-build .ph-photo img{border:5px solid var(--white);box-shadow:0 0 0 2px var(--peach)}
+#bbp .ph-brand{background:var(--teal-pale)}
+#bbp .ph-brand .ph-photo img{border:5px solid var(--white);box-shadow:0 0 0 2px var(--teal)}
+#bbp .ph-brand .note{background:var(--white);border-radius:12px;padding:14px 18px;font-size:.98rem;border-left:4px solid var(--teal)}
+#bbp .ph-prep{background:var(--mint)}
+#bbp .ph-prep .eyebrow{color:var(--endura-green)}
+#bbp .ph-prep h2{color:var(--endura)}
+#bbp .ph-prep .ph-photo img{border:5px solid var(--white);box-shadow:0 0 0 2px var(--sand)}
+#bbp .ph-prep .note{background:var(--white);border-radius:12px;padding:14px 18px;font-size:.96rem;margin-top:12px;border-left:4px solid var(--endura-green)}
+#bbp .ph-prep .note strong{color:var(--endura)}
+#bbp .after-phases{padding:36px 0 8px;text-align:center}
+#bbp /* big line */
+.bigline{background:var(--navy);color:var(--white);text-align:center;padding:64px 0}
+#bbp .bigline blockquote{margin:0 auto 18px;max-width:820px;font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.6rem,3.6vw,2.4rem);line-height:1.3;color:var(--white)}
+#bbp .bigline blockquote::before{content:"";display:block;width:64px;height:3px;background:var(--gold);margin:0 auto 22px}
+#bbp .bigline p{max-width:680px;margin:0 auto;color:var(--teal-pale);text-align:left}
+#bbp /* included */
+.included .intro{max-width:720px;margin:0 auto}
+#bbp .inc-sum{max-width:1080px;margin:8px auto 30px;text-align:center;font-weight:700;color:var(--navy);font-size:1.05rem;line-height:1.5}
+#bbp .inc-sum span{display:inline-block;background:var(--teal-pale);border-radius:999px;padding:5px 14px;margin:4px 3px;font-size:.95rem}
+#bbp .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start;max-width:1080px;margin:0 auto}
+#bbp .inc{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px 22px 18px;border-top:6px solid var(--navy);box-shadow:0 8px 22px rgba(23,58,74,.07)}
+#bbp .inc-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+#bbp .inc-head svg{flex:0 0 44px;width:44px;height:44px;border-radius:12px;padding:10px;color:var(--white)}
+#bbp .inc-head b{display:block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+#bbp .inc-head h3{margin:0;font-size:1.12rem}
+#bbp .inc ul{list-style:none;padding:0;margin:0}
+#bbp .inc li{position:relative;padding:8px 0 8px 28px;border-top:1px solid var(--line);font-size:.97rem;line-height:1.45;text-align:left}
+#bbp .inc li:first-child{border-top:0}
+#bbp .inc li::before{content:"\2713";position:absolute;left:2px;top:8px;font-weight:700}
+#bbp .inc.c{border-top-color:var(--plum)}
+#bbp .inc.c svg{background:var(--plum)}
+#bbp .inc.c b,#bbp .inc.c li::before{color:var(--plum)}
+#bbp .inc.m{border-top-color:var(--teal)}
+#bbp .inc.m svg{background:var(--teal-text)}
+#bbp .inc.m b,#bbp .inc.m li::before{color:var(--teal-text)}
+#bbp .inc.e{border-top-color:var(--endura-green)}
+#bbp .inc.e svg{background:var(--endura)}
+#bbp .inc.e b,#bbp .inc.e li::before{color:var(--endura-green)}
+#bbp .inc-hand{max-width:1080px;margin:22px auto 0;background:var(--navy);color:var(--white);border-radius:18px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+#bbp .inc-hand svg{width:52px;height:52px;color:var(--gold)}
+#bbp .inc-hand h3{color:var(--white);margin:0 0 6px;font-size:1.12rem}
+#bbp .inc-hand p{margin:0;color:var(--teal-pale);font-size:.97rem;text-align:left}
+#bbp /* timeline */
+.timeline{background:var(--cream)}
+#bbp .tl{list-style:none;padding:0;margin:32px auto 0;max-width:760px;position:relative}
+#bbp .tl::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:#A6D7D5}
+#bbp .tl li{position:relative;padding:0 0 22px 64px;text-align:left}
+#bbp .tl li span{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--white);border:2px solid var(--teal);display:grid;place-items:center;font-weight:700;color:var(--navy)}
+#bbp .tl li strong{display:block;color:var(--navy)}
+#bbp /* team */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+#bbp .card{border-radius:18px;padding:26px 22px;background:var(--white);border:1px solid var(--line);border-top:6px solid var(--navy)}
+#bbp .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:50% 22%;margin:0 auto 14px}
+#bbp .card h3{text-align:center;margin-bottom:4px}
+#bbp .card .role{text-align:center;font-size:.92rem;color:var(--ink-soft);margin-bottom:14px}
+#bbp .card ul{font-size:.96rem}
+#bbp .card.c{border-top-color:var(--plum)}
+#bbp .card.m{border-top-color:var(--teal)}
+#bbp .card.e{border-top-color:var(--endura-green)}
+#bbp /* honest */
+.honest .narrow{background:var(--cream);border-radius:18px;padding:32px 34px;border:1px dashed var(--gold)}
+#bbp .honest p{text-align:left}
+#bbp /* fit */
+.fit .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px}
+#bbp .fit .col{border-radius:16px;padding:24px 26px}
+#bbp .fit .yes{background:var(--teal-pale)}
+#bbp .fit .no{background:#F3F1EE}
+#bbp .fit h3{text-align:center}
+#bbp /* price */
+.price{background:var(--teal-pale)}
+#bbp .pricecard{max-width:640px;margin:0 auto;background:var(--white);border-radius:22px;padding:36px 34px;box-shadow:0 14px 34px rgba(23,58,74,.12);text-align:center}
+#bbp .amount{font-size:3rem;font-weight:700;color:var(--navy);line-height:1}
+#bbp .amount small{display:block;font-size:1rem;font-weight:600;color:var(--ink-soft);margin-top:8px}
+#bbp .pricecard p{text-align:left;font-size:1rem}
+#bbp .cards{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+#bbp .cards span{border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:.85rem;font-weight:700;color:var(--navy)}
+#bbp /* faq */
+.faq details{max-width:760px;margin:0 auto 12px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+#bbp .faq summary{cursor:pointer;font-weight:700;color:var(--navy);padding:16px 20px;list-style:none;position:relative;padding-right:48px}
+#bbp .faq summary::-webkit-details-marker{display:none}
+#bbp .faq summary::after{content:"+";position:absolute;right:20px;top:12px;font-size:1.4rem;color:var(--teal-text)}
+#bbp .faq details[open] summary::after{content:"\2212"}
+#bbp .faq details p{padding:0 20px 6px;text-align:left}
+#bbp /* final */
+.final{background:var(--navy);color:var(--white);text-align:center}
+#bbp .final h2{color:var(--white)}
+#bbp .final p{color:var(--teal-pale);max-width:600px;margin:0 auto}
+#bbp .final .micro{color:#BFE2E1}
+#bbp .recap{background:var(--cream);padding:22px 0;text-align:center;font-size:.95rem;color:var(--ink-soft)}
+#bbp footer{padding:28px 0 40px;text-align:center;font-size:.85rem;color:var(--ink-soft)}
+#bbp footer p{max-width:720px;margin:0 auto 8px}
+@media (max-width:1180px){
+#bbp .tv{flex-basis:170px;width:170px}
+#bbp .tv+.tv{margin-left:-28px}
+#bbp .tv.m{margin-top:60px}
+#bbp .tv.e{margin-top:120px}
+}
+@media (max-width:860px){
+#bbp .team-visual{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+#bbp .tv{width:auto;flex:none}
+#bbp .tv+.tv{margin-left:0}
+#bbp section{padding:56px 0}
+#bbp .hero{padding:28px 0 48px}
+#bbp .hero .sub{font-size:1rem;line-height:1.55}
+#bbp .hero h1{font-size:1.6rem}
+#bbp .tv b{margin-top:6px}
+#bbp .tv.m{margin-top:24px}
+#bbp .tv.e{margin-top:48px}
+#bbp .hero .wrap{display:flex;flex-direction:column;gap:0}
+#bbp .hero .copy{display:contents}
+#bbp .hero .eyebrow{order:1}
+#bbp .hero h1{order:2}
+#bbp .hero .kicker{order:3;font-size:1.05rem}
+#bbp .team-visual{order:4;margin:6px 0 20px}
+#bbp .hero .cta{order:5;margin-top:0}
+#bbp .hero .sub{order:6;margin-top:22px}
+#bbp .phase .wrap,#bbp .phase.flip .wrap{grid-template-columns:1fr;gap:24px}
+#bbp .phase.flip .ph-photo{order:0}
+#bbp .ph-photo{max-width:260px}
+#bbp .team-grid,#bbp .fit .cols,#bbp .skimbox{grid-template-columns:1fr}
+#bbp .inc-grid{grid-template-columns:1fr}
+#bbp .inc-hand{grid-template-columns:1fr;gap:10px}
+#bbp .partners{display:none}
+}
+#bbp /* tabs + marquee (Miki 11-22) */
+body{padding-top:46px;padding-bottom:48px}
+#bbp section[id]{scroll-margin-top:58px}
+#bbp .tabs{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.18)}
+#bbp .tabs-in{max-width:1080px;margin:0 auto;display:flex;justify-content:center;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 12px}
+#bbp .tabs-in::-webkit-scrollbar{display:none}
+#bbp .tabs a{flex:none;color:var(--white);text-decoration:none;font-size:.88rem;font-weight:600;letter-spacing:.02em;padding:12px 14px;line-height:22px;border-bottom:2px solid transparent}
+#bbp .tabs a:hover,#bbp .tabs a:focus-visible{color:var(--gold);border-bottom-color:var(--gold)}
+#bbp .marquee{position:fixed;left:0;right:0;bottom:0;z-index:9999;display:block;overflow:hidden;background:var(--gold);color:var(--navy);text-decoration:none;font-weight:700;font-size:.95rem;line-height:48px;height:48px;white-space:nowrap;box-shadow:0 -2px 10px rgba(0,0,0,.15)}
+#bbp .marquee:hover,#bbp .marquee:focus-visible{background:#D8B565}
+#bbp .mq-track{display:inline-flex;animation:bbpmarq 28s linear infinite}
+#bbp .marquee:hover .mq-track{animation-play-state:paused}
+#bbp .mq-set{display:inline-flex;flex:none}
+#bbp .mq-set span{padding:0 18px}
+#bbp .mq-set i{font-style:normal;color:var(--teal-text)}
+@media (max-width:860px){
+#bbp .tabs-in{justify-content:flex-start;-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+#bbp .tabs a{padding:12px 11px;font-size:.84rem}
+}
+@media (prefers-reduced-motion:reduce){
+#bbp .mq-track{animation:none}
+}
+html,body{overflow-x:hidden}
+#bbp{width:100vw;margin-left:calc(50% - 50vw);margin-top:-50px;margin-bottom:-50px;text-align:left;font-family:Arimo,Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65;color:var(--ink);background:var(--white)}
+#bbp p,#bbp li{font-family:Arimo,Arial,Helvetica,sans-serif}
+@media (max-width:800px){#bbp{margin-top:-10px;margin-bottom:-10px}}
+html{scroll-behavior:smooth}
+@keyframes bbpmarq{to{transform:translateX(-50%)}}
+</style>
+<div id="bbp">
+<nav class="tabs" aria-label="Jump to a section">
+  <div class="tabs-in">
+    <a href="#build">Build</a><a href="#brand">Brand</a><a href="#prepare">Prepare</a><a href="#included">What's included</a><a href="#team">Team</a><a href="#price">Price</a><a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="wordmark">Build. <span>Brand.</span> Prepare.</div>
+    <div class="partners">Courtney Wilson Enterprises &#183; Moonieful &#183; Endura Consulting, Inc.</div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="copy">
+      <span class="eyebrow">For idea-stage and early-stage founders</span>
+      <h1>Go from a business idea to a roadmap, a sales page and a funding-readiness plan in about two weeks.</h1>
+      <p class="kicker">Before you pay for a logo, a website or a loan, find out which one comes first.</p>
+      <p class="sub">Build. Brand. Prepare. puts three specialists on your business in one coordinated project. Courtney Wilson turns your idea into a 30/60/90-day roadmap, Miki Roberts builds your brand message and sales page around that roadmap, and Dr. Rochelle Fields shows you what to strengthen before you ask anyone for funding. Two weeks is our target when calendars line up and you get your answers back to us on time.</p>
+      <div class="cta">
+        <a class="btn" href="https://calendly.com/moonieful/buildbrandpreparefitcall?utm_source=build-brand-prepare&amp;utm_medium=sales-page&amp;utm_content=hero">Book your 15-minute fit call</a>
+        <p class="micro">We'll confirm Build. Brand. Prepare. fits where your business is right now before you pay anything.</p>
+        <a class="secondary" href="#phases">See how the three phases work &darr;</a>
+      </div>
+    </div>
+    <div class="team-visual" aria-label="Your three specialists, in the order you'll work with them">
+      <figure class="tv c"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd29.76369895_bbp2-courtney-wilson.jpg" width="480" height="600" alt="Courtney Wilson, who leads the Build phase"><b>Build</b><small>Courtney Wilson</small></figure>
+      <figure class="tv m"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743b709d0.98871719_bbp2-miki-roberts.jpg" width="480" height="600" alt="Miki Roberts, founder of Moonieful, who leads the Brand phase"><b>Brand</b><small>Miki Roberts</small></figure>
+      <figure class="tv e"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd26.51162587_bbp2-rochelle-fields.jpg" width="480" height="600" alt="Dr. Rochelle Fields, who leads the Prepare phase"><b>Prepare</b><small>Dr. Rochelle Fields</small></figure>
+    </div>
+  </div>
+</section>
+
+<div class="qualify" role="note">
+  <div class="wrap">
+    <ul>
+      <li>Idea-stage or early-stage</li>
+      <li>No revenue required</li>
+      <li>No business credit required</li>
+      <li>Ready to show up and make decisions</li>
+    </ul>
+  </div>
+</div>
+
+<section class="skim">
+  <div class="wrap">
+    <div class="skimbox">
+      <p><strong>What you get</strong>A business roadmap, a brand and sales page, and a funding-readiness plan from three independent experts, coordinated through one portal.</p>
+      <p><strong>Made for</strong>Founders with a real idea, or an LLC and a few scattered pieces, who don't know what to build first.</p>
+      <p><strong>Investment</strong>$2,997 + applicable sales tax.</p>
+      <p><strong>First step</strong>A free 15-minute fit call with Miki at Moonieful, who coordinates your project.</p>
+    </div>
+  </div>
+</section>
+
+<section class="prose">
+  <div class="wrap narrow">
+    <h2>You've got the business idea, so why is the first step so hard to pick?</h2>
+    <p>You've got your idea, and maybe more than an idea. Maybe you've already filed your LLC, bought your domain and sketched a logo on the back of a receipt. But every time you sit down to move forward, the same list stares back at you. Do you need a website first? A business plan? Funding? An offer? A price?</p>
+    <p>So you open another tab. Then another. Somebody on Instagram says you need a brand before anything else, and somebody on YouTube says you need customers before you spend a dime, and both sound right.</p>
+    <p>Here's what Courtney, Miki and Dr. Rochelle see over and over with new founders: the idea is good, and the founder is ready to work. What's missing is the order.</p>
+  </div>
+</section>
+
+<section class="prose" style="padding-top:0">
+  <div class="wrongorder">
+    <div class="wrap">
+      <h2>What happens when your business pieces go in the wrong order</h2>
+      <p>Most new founders run out of starting money long before they run out of ideas, because the money went to the right things at the wrong time:</p>
+      <ul>
+        <li>A logo, paid for before the offer was clear, that gets redone six months later.</li>
+        <li>A full website built before anyone knew what the business sells or who buys it.</li>
+        <li>A loan application sent before the founder knew which records and credit factors a lender looks at first.</li>
+      </ul>
+      <p>None of those purchases is a bad one. Each just came too early.</p>
+      <p class="question">So what would change if you knew the order before you spent another dollar?</p>
+    </div>
+  </div>
+</section>
+
+<section class="why prose" id="phases">
+  <div class="wrap narrow">
+    <h2>Why three experts instead of one</h2>
+    <p>One person can't be great at business planning, brand messaging and funding readiness all at once, and most founders end up hiring three separate people who never talk to each other. Build. Brand. Prepare. keeps the three jobs separate and puts them in order, so each expert picks up exactly where the last one stopped:</p>
+    <ol class="steps3">
+      <li><span><strong>Build</strong> with Courtney Wilson organizes your idea into a plan.</span></li>
+      <li><span><strong>Brand</strong> with Miki Roberts turns that plan into a message and a sales page people understand.</span></li>
+      <li><span><strong>Prepare</strong> with Dr. Rochelle Fields shows you what to strengthen before any funding conversation.</span></li>
+    </ol>
+    <p>You get one project, one portal and one point of contact (Miki at Moonieful), and three people who each know their part.</p>
+  </div>
+</section>
+
+<section class="phase ph-build" id="build">
+  <div class="wrap">
+    <div class="ph-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd29.76369895_bbp2-courtney-wilson.jpg" width="480" height="600" alt="Courtney Wilson" loading="lazy"></div>
+    <div class="ph-body">
+      <span class="eyebrow">Phase one &#183; Build &#183; Concept to Creation</span>
+      <h2>Get your idea out of your head and into a 30/60/90-day roadmap</h2>
+      <ul class="list">
+        <li>You fill out Courtney's Concept to Creation questionnaire, so your 90-minute session starts on your real situation from the first minute.</li>
+        <li>Courtney works through your idea with you in a private 90-minute intensive: what you're building, what comes first and what can wait.</li>
+        <li>Within two business days you get your personalized 30/60/90-Day Roadmap, followed by a 30-minute Roadmap Review to walk through it together.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="phase ph-brand flip" id="brand">
+  <div class="wrap">
+    <div class="ph-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743b709d0.98871719_bbp2-miki-roberts.jpg" width="480" height="600" alt="Miki Roberts" loading="lazy"></div>
+    <div class="ph-body">
+      <span class="eyebrow">Phase two &#183; Brand &#183; Brand clarity</span>
+      <h2>Turn your roadmap into a message strangers understand, and a sales page that says it</h2>
+      <ul class="list">
+        <li>Miki reads your roadmap from Courtney first, then spends 90 minutes with you on who your business serves, how it should sound and what it needs to say first.</li>
+        <li>Miki researches your market and audience, then writes your positioning, your tone, messaging and voice notes, your founder story and your 10-, 30- and 60-second pitches, so you can explain your business the same way every time someone asks.</li>
+        <li>Miki plans, writes, designs and builds one focused sales page with one clear next step for your visitors, plus a guide to using the page and a personalized QR code that points to it.</li>
+        <li>Your finished brand assets and handoff files arrive in your Moonieful Client Portal, so everything lives in one place.</li>
+      </ul>
+      <p class="note">Target is a 72-hour turnaround for your approved build once your roadmap, payment, written scope, required assets and approvals are in, and you get one consolidated round of revisions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="phase ph-prep" id="prepare">
+  <div class="wrap">
+    <div class="ph-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd26.51162587_bbp2-rochelle-fields.jpg" width="480" height="600" alt="Dr. Rochelle Fields" loading="lazy"></div>
+    <div class="ph-body">
+      <span class="eyebrow">Phase three &#183; Prepare &#183; Funding readiness</span>
+      <h2>Know what a funder will look at before you ever fill out an application</h2>
+      <ul class="list">
+        <li>You take Endura's 10-question Funding Readiness Assessment before your consultation.</li>
+        <li>Dr. Rochelle personally meets with you for up to 60 minutes to go through your readiness: credit, repayment capacity, capital, collateral, business records, reserves and what you'd need the money for.</li>
+        <li>You leave with verbal next steps, and within 48 hours your Funding Readiness Workbook is waiting in your portal.</li>
+      </ul>
+      <p class="note"><strong>About funding:</strong> Endura provides funding-readiness education and guidance. No one can promise funding, because lenders and other funding sources make their own decisions.</p>
+      <p class="note"><strong>Your privacy:</strong> Your detailed financial records, credit reports and bank statements stay with Endura unless you say otherwise. Courtney and Miki only see the status updates they need to keep your project moving.</p>
+    </div>
+  </div>
+</section>
+
+<div class="after-phases">
+  <a class="btn" href="https://calendly.com/moonieful/buildbrandpreparefitcall?utm_source=build-brand-prepare&amp;utm_medium=sales-page&amp;utm_content=phases">Book your 15-minute fit call</a>
+</div>
+
+<section class="bigline" style="margin-top:56px">
+  <div class="wrap">
+    <blockquote>Courtney's roadmap becomes the brief for your sales page.</blockquote>
+    <p>Every phase hands its work to the next one. Miki builds your message and sales page straight from the roadmap you made with Courtney, and Dr. Rochelle's workbook picks up where both leave off, so you finish with a roadmap, a sales page and a workbook you can use the same week you get them.</p>
+  </div>
+</section>
+
+<section class="included prose" id="included">
+  <div class="wrap narrow">
+    <h2>What you leave with</h2>
+    <p>Picture your next networking event. Someone asks what you do, and you answer in one clean sentence, then hand them a QR code that opens a sales page that says the same thing. You know what you're working on this month and what can wait until spring. And when you do sit down with a lender, you already know which parts of your file they'll look at first, because you've been working on them for weeks.</p>
+    <p>So what does your $2,997 cover? Here's everything, phase by phase:</p>
+  </div>
+  <div class="wrap">
+    <p class="inc-sum"><span>Three specialists</span><span>Four working sessions</span><span>One 30/60/90-Day Roadmap</span><span>One finished sales page</span><span>One Funding Readiness Workbook</span></p>
+    <div class="inc-grid">
+      <article class="inc c">
+        <div class="inc-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg><div><b>Build</b><h3>Your business direction</h3></div></div>
+        <ul>
+          <li>Concept to Creation Intake Questionnaire</li>
+          <li>A 90-minute private working intensive with Courtney</li>
+          <li>Your personalized 30/60/90-Day Roadmap</li>
+          <li>A 30-minute Roadmap Review to walk through your roadmap together</li>
+        </ul>
+      </article>
+      <article class="inc m">
+        <div class="inc-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg><div><b>Brand</b><h3>Your message and sales page</h3></div></div>
+        <ul>
+          <li>A 90-minute brand clarity working session with Miki</li>
+          <li>Market and audience research for your agreed priorities</li>
+          <li>Your positioning</li>
+          <li>Brand tone, messaging and voice notes</li>
+          <li>Your founder story</li>
+          <li>Personalized 10-, 30- and 60-second pitches</li>
+          <li>One focused sales page, planned, written, designed and built, with one clear next step for visitors</li>
+          <li>A sales page usage guide</li>
+          <li>One personalized QR code that opens your sales page</li>
+          <li>One consolidated round of revisions</li>
+        </ul>
+      </article>
+      <article class="inc e">
+        <div class="inc-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><div><b>Prepare</b><h3>Your funding readiness</h3></div></div>
+        <ul>
+          <li>Endura's free 10-question Funding Readiness Assessment</li>
+          <li>A review of your assessment</li>
+          <li>An up-to-60-minute Funding Readiness consultation with Dr. Rochelle</li>
+          <li>Guidance on the readiness needs your consultation turns up, with verbal next-step recommendations</li>
+          <li>Your digital Endura Funding Readiness Workbook</li>
+        </ul>
+      </article>
+    </div>
+    <div class="inc-hand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 13l2 2 4-4"/></svg>
+      <div><h3>Your coordinated handoff, in your Moonieful Client Portal</h3><p>Your Start Here guide, your brand assets, a designer brief, handover notes, a README and a work summary, all organized in one portal so you always know where every file lives.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline prose">
+  <div class="wrap narrow">
+    <h2>How long Build. Brand. Prepare. takes</h2>
+    <p>Most founders move from a scattered idea to a roadmap, a brand and a funding-readiness plan in about two weeks, as long as calendars line up and you get your answers back to us on time. Two weeks is our target, and here's how the time breaks down:</p>
+    <ol class="tl">
+      <li><span>1</span><strong>Day one</strong>Your fit call, then your agreement, payment and portal access.</li>
+      <li><span>2</span><strong>Build</strong>Courtney's 90-minute intensive, your roadmap within two business days, then your 30-minute Roadmap Review.</li>
+      <li><span>3</span><strong>Brand</strong>Your 90-minute clarity session with Miki, then your sales page within about 72 hours of Miki having everything she needs.</li>
+      <li><span>4</span><strong>Prepare</strong>Your assessment, your consultation with Dr. Rochelle and your workbook within 48 hours.</li>
+      <li><span>5</span><strong>Handoff</strong>Miki confirms all three phases are done and organizes your final files in your portal.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="team" id="team">
+  <div class="wrap">
+    <h2>Meet your team</h2>
+    <p class="lead">Three independent businesses, one coordinated project, in the same order you'll meet them.</p>
+    <div class="team-grid">
+      <article class="card c">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd29.76369895_bbp2-courtney-wilson.jpg" width="120" height="120" alt="Courtney Wilson" loading="lazy">
+        <h3>Courtney Wilson</h3>
+        <p class="role">Coach &#183; Founder &amp; CEO, Courtney Wilson Enterprises</p>
+        <ul class="list">
+          <li>Creator and lead coach of Concept to Creation; personally leads your 90-minute intensive and writes your roadmap</li>
+          <li>Influential Women 2026 Honoree</li>
+          <li>Founder &amp; President of SINCERRA Kids&#8482; and creator of the Small Business &amp; Youth Empowerment Expo</li>
+          <li><a href="https://thecourtneywilson.com" target="_blank" rel="noopener">thecourtneywilson.com</a></li>
+        </ul>
+      </article>
+      <article class="card m">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743b709d0.98871719_bbp2-miki-roberts.jpg" width="120" height="120" alt="Miki Roberts" loading="lazy">
+        <h3>Miki Roberts</h3>
+        <p class="role">Project Manager, Founder &amp; CEO, Moonieful</p>
+        <ul class="list">
+          <li>Author of Brand Fog and app developer</li>
+          <li>20+ years in process improvement, customer experience and creative design; personally leads your 90-minute Brand intensive and writes your messaging, pitches and sales page</li>
+          <li>200+ projects and 50+ clients, rated <a href="https://www.google.com/search?q=Moonieful+Branding+%26+Marketing#lrd=0x806e8d799a984f43:0xf4233079e5d7a28b,1,,,," target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">5.0 on Google</a></li>
+          <li><a href="https://moonieful.com" target="_blank" rel="noopener">moonieful.com</a></li>
+        </ul>
+      </article>
+      <article class="card e">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/16796469/6b033743d4fd26.51162587_bbp2-rochelle-fields.jpg" width="120" height="120" alt="Dr. Rochelle Fields" loading="lazy">
+        <h3>Dr. Rochelle Fields</h3>
+        <p class="role">Coach &#183; Founder &amp; Principal, Endura Consulting, Inc.</p>
+        <ul class="list">
+          <li>Funding Readiness Coach who personally leads your consultation</li>
+          <li>25+ years in business banking</li>
+          <li>Guides founders through credit readiness, repayment capacity, capital, collateral, records and reserves</li>
+          <li><a href="https://enduraconsultinginc.com" target="_blank" rel="noopener">enduraconsultinginc.com</a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="honest" style="padding-top:0">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>One honest thing before you decide</h2>
+      <p>Build. Brand. Prepare. is new. Courtney, Miki and Dr. Rochelle each have their own track record, but you'd be one of the first founders to go through all three phases together, so there aren't Build. Brand. Prepare. reviews to show you yet. What the team can show you is exactly what you get, who does each part and what it costs, which is all on this page. And the fit call is there so you can ask anything before you commit.</p>
+    </div>
+  </div>
+</section>
+
+<section class="fit" style="padding-top:0">
+  <div class="wrap">
+    <h2>Is Build. Brand. Prepare. right for you?</h2>
+    <div class="cols">
+      <div class="col yes">
+        <h3>A good fit if you:</h3>
+        <ul class="list">
+          <li>Have a real business idea, even if nothing is official yet</li>
+          <li>Have an LLC, an early offer or a few scattered pieces and need them in order</li>
+          <li>Haven't made revenue yet, or have only just started (revenue isn't required)</li>
+          <li>Don't have business credit or tax returns yet (also not required)</li>
+          <li>Are ready to fill out your intake, show up to your sessions and make decisions</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3>Probably not a fit if you:</h3>
+        <ul class="list">
+          <li>Already run an established business with a working brand and funding plan, and only need growth help</li>
+          <li>Want guaranteed funding, grant approval or quick access to capital</li>
+          <li>Only want a logo or a website without first working out what your business needs</li>
+          <li>Need legal formation, tax prep, accounting, credit repair or someone to talk to lenders for you</li>
+          <li>Want only one of the three phases (Courtney, Miki and Dr. Rochelle each offer their services separately, outside this package)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta"><a class="btn" href="https://calendly.com/moonieful/buildbrandpreparefitcall?utm_source=build-brand-prepare&amp;utm_medium=sales-page&amp;utm_content=fit">Book your 15-minute fit call</a></div>
+  </div>
+</section>
+
+<section class="price" id="price">
+  <div class="wrap">
+    <h2>What Build. Brand. Prepare. costs</h2>
+    <div class="pricecard">
+      <div class="amount">$2,997<small>+ applicable sales tax</small></div>
+      <p style="margin-top:22px">One price for all three phases. You pay in full before intake and scheduling start, and only after the fit call confirms the package fits and you've signed your agreement.</p>
+      <div class="cards" aria-label="Cards we accept"><span>Visa</span><span>Mastercard</span><span>American Express</span><span>Discover</span></div>
+      <p>We accept major credit and debit cards, including Visa, Mastercard, American Express and Discover. You may also see PayPal or eligible third-party payment options, such as Klarna, at checkout, depending on the payment provider and your eligibility. Applicable sales tax is added where required.</p>
+    </div>
+  </div>
+</section>
+
+<section class="prose">
+  <div class="wrap narrow">
+    <h2>How your fit call works</h2>
+    <p>The fit call is 15 minutes with Miki at Moonieful, and it's free. You pick a time on the calendar, and on the call Miki asks where your business is right now, what you've already built and what you're stuck on. If Build. Brand. Prepare. fits, you'll get your service agreement, payment instructions and onboarding steps after the call. If it doesn't fit, Miki will tell you that too, and point you to what would help instead.</p>
+  </div>
+</section>
+
+<section class="faq" style="padding-top:0" id="faq">
+  <div class="wrap">
+    <h2>Questions founders ask us</h2>
+    <details><summary>Do I need an LLC already?</summary><p>No. Build. Brand. Prepare. works for idea-stage and early-stage founders, and Courtney's phase helps you work out what your business needs to get started.</p></details>
+    <details><summary>Do I need revenue?</summary><p>No. Dr. Rochelle's phase doesn't require existing revenue.</p></details>
+    <details><summary>Do I need business credit?</summary><p>No. Dr. Rochelle can focus on your personal credit readiness, your resources, how much funding you'd need, your entity status and what lenders will expect later.</p></details>
+    <details><summary>Will Build. Brand. Prepare. get me funded?</summary><p>No one can promise that. Endura gives you funding-readiness education and guidance, and lenders and other funding sources make their own decisions.</p></details>
+    <details><summary>Do I get a full website or a logo?</summary><p>No. Your Brand phase includes one focused sales page, built around your roadmap, plus your messaging, founder story and pitches. A full website or new logo can be added as separate work.</p></details>
+    <details><summary>How many revisions do I get?</summary><p>One consolidated round of revisions on your Brand work. You send one list of changes within five business days of delivery, and Miki makes them.</p></details>
+    <details><summary>How long does your whole project take?</summary><p>About two weeks from your first appointment, as long as scheduling, payment, intake and your feedback stay on track. Two weeks is our target, not a guarantee.</p></details>
+    <details><summary>What happens first?</summary><p>Your free 15-minute fit call. If the package fits, you move into your agreement, payment and onboarding.</p></details>
+    <details><summary>Can I buy just one phase?</summary><p>Build. Brand. Prepare. follows all three phases in order. Courtney, Miki and Dr. Rochelle each offer standalone services separately.</p></details>
+    <details><summary>What if I change my mind?</summary><p>You can cancel in writing before your 90-minute intensive with Courtney. If we get your cancellation at least 48 hours before that session, you get $2,747 back and we keep a $250 administrative fee. Inside 48 hours, the package isn't refundable unless the law says otherwise. Your agreement spells out every detail before you sign.</p></details>
+    <details><summary>Who sees my financial information?</summary><p>Only Endura. Your detailed financial records stay with Dr. Rochelle's team unless you give permission to share them.</p></details>
+    <details><summary>What if I need more than what's included?</summary><p>Build. Brand. Prepare. is designed to give an early-stage founder the core pieces needed to move forward: a clear business roadmap, a focused brand direction, a sales page and a funding-readiness plan.</p><p>After the program is complete, you can keep working individually with Courtney Wilson Enterprises, Moonieful or Endura Consulting when more coaching, brand work, implementation or funding-readiness support makes sense.</p><p>The $2,997 scope stays focused on purpose, so a new founder can start with the pieces needed first and add more support as the business grows.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Find out if Build. Brand. Prepare. fits your business in 15 minutes</h2>
+    <p>You'll leave the call knowing whether the package fits where you are right now, and if it doesn't, what to do next instead.</p>
+    <div class="cta"><a class="btn" href="https://calendly.com/moonieful/buildbrandpreparefitcall?utm_source=build-brand-prepare&amp;utm_medium=sales-page&amp;utm_content=final">Book your 15-minute fit call</a></div>
+  </div>
+</section>
+
+<div class="recap">
+  <div class="wrap">Build. Brand. Prepare. &#183; Roadmap with Courtney Wilson &#183; Brand and sales page with Miki &#183; Funding readiness with Dr. Rochelle Fields &#183; About two weeks &#183; $2,997 + applicable sales tax &#183; Starts with a free 15-minute fit call</div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Courtney Wilson Enterprises, Moonieful Designs, LLC and Endura Consulting, Inc. are independent businesses working together on this package. None of us is a lender, and nothing on this page is legal, tax or financial advice.</p>
+    <p>&copy; 2026 Moonieful Designs, LLC &#183; <a href="https://moonieful.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<a class="marquee" href="https://calendly.com/moonieful/buildbrandpreparefitcall?utm_source=build-brand-prepare&amp;utm_medium=sales-page&amp;utm_content=marquee" aria-label="Book your 15-minute fit call">
+  <span class="mq-track" aria-hidden="true"><span class="mq-set"><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i></span><span class="mq-set"><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i><span>Book your 15-minute fit call</span><i>&#10022;</i></span></span>
+</a>
+</div>
