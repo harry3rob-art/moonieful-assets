@@ -1,0 +1,80 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap');
+#bbp{
+  --navy:#173A4A; --teal:#16849A; --teal-text:#126F82; --teal-pale:#EAF7F8; --gold:#C9A24F;
+  --ink:#1F2B31; --ink-soft:#44535A; --line:#D5E4E6; --white:#FFFFFF; --cream:#FAF8F4;
+  --plum:#4B1734; --endura-green:#087B87;
+}
+#bbp, #bbp *{box-sizing:border-box}
+#bbp{margin:0;font-family:Arimo,Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65;color:var(--ink);background:var(--white)}
+#bbp h1,#bbp h2{font-family:Arimo,Arial,sans-serif;color:var(--navy);line-height:1.2;margin:0 0 .5em;font-weight:700}
+#bbp h1{font-size:clamp(1.8rem,3.6vw,2.5rem);text-align:center}
+#bbp h2{font-size:1.3rem}
+#bbp p{margin:0 0 1.1em}
+#bbp a{color:var(--teal-text)}
+#bbp .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+#bbp .topbar{border-bottom:1px solid var(--line)}
+#bbp .topbar .wrap{max-width:1080px;padding-top:14px;padding-bottom:14px}
+#bbp .wordmark{font-weight:700;color:var(--navy);letter-spacing:.02em;font-size:1.05rem}
+#bbp .wordmark span{color:var(--teal-text)}
+#bbp .hero{padding:56px 0 36px;background:linear-gradient(180deg,var(--teal-pale),var(--white));text-align:center}
+#bbp .tick{width:64px;height:64px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;margin:0 auto 20px}
+#bbp .tick svg{width:32px;height:32px}
+#bbp .hero p{color:var(--ink-soft);font-size:1.1rem;max-width:600px;margin:0 auto}
+#bbp .before{padding:12px 0 24px}
+#bbp .box{background:var(--cream);border-radius:18px;padding:28px 30px;border:1px solid var(--line)}
+#bbp .box ul{list-style:none;padding:0;margin:0}
+#bbp .box li{position:relative;padding:10px 0 10px 34px;border-top:1px solid var(--line)}
+#bbp .box li:first-child{border-top:0}
+#bbp .box li::before{content:"";position:absolute;left:0;top:14px;width:20px;height:20px;border-radius:50%;background:var(--teal-pale);border:2px solid var(--teal)}
+#bbp .box li:nth-child(1)::before{border-color:var(--plum)}
+#bbp .box li:nth-child(3)::before{border-color:var(--endura-green)}
+#bbp .next{padding:20px 0 56px}
+#bbp .next .card{border-left:4px solid var(--gold);background:var(--white);border-radius:12px;padding:18px 22px;box-shadow:0 8px 22px rgba(23,58,74,.08)}
+#bbp .next .card p{margin:0}
+#bbp footer{padding:28px 0 40px;text-align:center;font-size:.85rem;color:var(--ink-soft);border-top:1px solid var(--line)}
+#bbp footer p{margin:0 auto 8px}
+html,body{overflow-x:hidden}
+#bbp{width:100vw;margin-left:calc(50% - 50vw);margin-top:-50px;margin-bottom:-50px;text-align:left;font-family:Arimo,Arial,Helvetica,sans-serif;font-size:18px;line-height:1.65;color:var(--ink);background:var(--white)}
+#bbp p,#bbp li{font-family:Arimo,Arial,Helvetica,sans-serif}
+@media (max-width:800px){#bbp{margin-top:-10px;margin-bottom:-10px}}
+</style>
+<div id="bbp">
+<header class="topbar"><div class="wrap"><div class="wordmark">Build. <span>Brand.</span> Prepare.</div></div></header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h1>Your Build. Brand. Prepare. fit call is booked.</h1>
+    <p>We&#8217;ll use these 15 minutes to understand where your business is right now and whether Build. Brand. Prepare. is the right next step.</p>
+  </div>
+</section>
+
+<section class="before">
+  <div class="wrap">
+    <div class="box">
+      <h2>Before your call</h2>
+      <ul>
+        <li>Think about the business or offer you&#8217;re trying to build.</li>
+        <li>Bring any current website, page, notes or business materials you already have.</li>
+        <li>Write down the biggest question you want answered about what should come next.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <div class="card"><p>If the program is a fit, you&#8217;ll receive the service agreement, payment instructions and onboarding steps after the call.</p></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Courtney Wilson Enterprises, Moonieful Designs, LLC and Endura Consulting, Inc. are independent businesses working together on Build. Brand. Prepare.</p>
+    <p>&copy; 2026 Moonieful Designs, LLC &#183; <a href="https://moonieful.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p>
+  </div>
+</footer>
+</div>
